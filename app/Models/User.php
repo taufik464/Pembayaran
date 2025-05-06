@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
@@ -32,6 +32,28 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function staff()
+    {
+        return $this->hasOne(Staff::class);
+    }
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class);
+    }
+
+    public function isStaff()
+    {
+        return $this->role === 'staff';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
+    }
+
+
+
 
     /**
      * Get the attributes that should be cast.

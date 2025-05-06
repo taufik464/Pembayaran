@@ -13,7 +13,7 @@
 
                 <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24">
                     <x-application-logo class="h-9 me-3" />
-                    <span class="ml-3 self-center text-xs font-semibold sm:text-2xl whitespace-nowrap text-white ">SMA AL HIKMAH MUNCAR</span>
+                    <span class="ml-3 self-center text-xs font-semibold sm:text-2xl whitespace-nowrap text-white ">Administrasi Pembayaran</span>
                 </a>
 
             </div>

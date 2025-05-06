@@ -25,6 +25,10 @@ export default {
                 'success': '#36d399',
                 'warning': '#fbbd23',
                 'error': '#f87272',
+                'Gray-300': '#D1D5DB',
+                'Gray-200': '#E5E7EB',
+                'creme': '#FFF8DE',
+
             },
         },
     },
