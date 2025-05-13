@@ -15,9 +15,10 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-gray-200">
 
     @include('layouts.navigation')
 
@@ -28,7 +29,7 @@
     <div class="p-4 mt-10 sm:ml-64">
         <!-- Page Heading -->
         @isset($header)
-        <header class="bg-Gray-200 mt-4 dark:bg-gray-800 shadow rounded-lg">
+        <header class="bg-white mt-4 dark:bg-gray-800 shadow rounded-lg">
             <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
@@ -38,7 +39,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="">
+        <main class="bg-white dark:bg-gray-800 shadow rounded-lg mt-4">
 
             {{ $slot }}
         </main>

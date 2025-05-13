@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('periodes', function (Blueprint $table) {
+        Schema::create('Jenis_pembayarans', function (Blueprint $table) {
             $table->id();
-
-            $table->year('tahun_awal');
-            $table->year('tahun_akhir');
+            $table->string('nama');
+            $table->foreignId('periode_id')->constrained()->onDelete('cascade');
+            $table->enum('tipe_pembayaran', ['Bulanan', 'Tahunan']);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('periode');
+        Schema::dropIfExists('jenis_pembayarans');
     }
 };

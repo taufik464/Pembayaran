@@ -53,7 +53,7 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                        <x-sidebar-link :href="route('kelas.index')" :active="request()->routeIs('kelas.index')"
                             icon=" <svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path d='M3 4.92857C3 3.90506 3.80497 3 4.88889 3H19.1111C20.195 3 21 3.90506 21 4.92857V13h-3v-2c0-.5523-.4477-1-1-1h-4c-.5523 0-1 .4477-1 1v2H3V4.92857ZM3 15v1.0714C3 17.0949 3.80497 18 4.88889 18h3.47608L7.2318 19.3598c-.35356.4243-.29624 1.0548.12804 1.4084.42428.3536 1.05484.2962 1.40841-.128L10.9684 18h2.0632l2.2002 2.6402c.3535.4242.9841.4816 1.4084.128.4242-.3536.4816-.9841.128-1.4084L15.635 18h3.4761C20.195 18 21 17.0949 21 16.0714V15H3Z' />
                             <path d='M16 12v1h-2v-1h2Z' />
@@ -63,7 +63,7 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link :href="route('siswa.index')" :active="request()->routeIs('siswa')"
+                        <x-sidebar-link :href="route('siswa.index')" :active="request()->routeIs('siswa.index')"
                             icon=" <svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path d='M12.4472 2.10557c-.2815-.14076-.6129-.14076-.8944 0L5.90482 4.92956l.37762.11119c.01131.00333.02257.00687.03376.0106L12 6.94594l5.6808-1.89361.3927-.13363-5.6263-2.81313ZM5 10V6.74803l.70053.20628L7 7.38747V10c0 .5523-.44772 1-1 1s-1-.4477-1-1Zm3-1c0-.42413.06601-.83285.18832-1.21643l3.49538 1.16514c.2053.06842.4272.06842.6325 0l3.4955-1.16514C15.934 8.16715 16 8.57587 16 9c0 2.2091-1.7909 4-4 4-2.20914 0-4-1.7909-4-4Z' />
                             <path d='M14.2996 13.2767c.2332-.2289.5636-.3294.8847-.2692C17.379 13.4191 19 15.4884 19 17.6488v2.1525c0 1.2289-1.0315 2.1428-2.2 2.1428H7.2c-1.16849 0-2.2-.9139-2.2-2.1428v-2.1525c0-2.1409 1.59079-4.1893 3.75163-4.6288.32214-.0655.65589.0315.89274.2595l2.34883 2.2606 2.3064-2.2634Z' />
@@ -72,7 +72,7 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                        <x-sidebar-link :href="route('naik_kelas.index')" :active="request()->routeIs('naik_kelas.index')"
                             icon=" <svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'>
                             <path stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207' />
                             </svg>
@@ -112,7 +112,7 @@
                 </button>
                 <ul id="pengaturan-pembayaran" class="hidden ml-8 py-2 space-y-2">
                     <li>
-                        <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                        <x-sidebar-link :href="route('pembayaran.index')" :active="request()->routeIs('pembayaran.index')"
                             icon=" <svg class='w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path d='M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm2 0v14h14V5H5Zm2 3h10v2H7V8Zm0 4h10v2H7v-2Zm0 4h6v2H7v-2Z' />
                             </svg>
@@ -139,7 +139,7 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                        <x-sidebar-link :href="route('bulan.index')" :active="request()->routeIs('bulan.index')"
                             icon=" <svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path fill-rule='evenodd' d='M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z' clip-rule='evenodd' />
                             </svg>
