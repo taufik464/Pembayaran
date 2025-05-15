@@ -82,7 +82,7 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                        <x-sidebar-link :href="route('staff.index')" :active="request()->routeIs('staff.index')"
                             icon="<svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path d='M16 10c0-.55228-.4477-1-1-1h-3v2h3c.5523 0 1-.4477 1-1Z' />
                             <path d='M13 15v-2h2c1.6569 0 3-1.3431 3-3 0-1.65685-1.3431-3-3-3h-2.256c.1658-.46917.256-.97405.256-1.5 0-.51464-.0864-1.0091-.2454-1.46967C12.8331 4.01052 12.9153 4 13 4h7c.5523 0 1 .44772 1 1v9c0 .5523-.4477 1-1 1h-2.5l1.9231 4.6154c.2124.5098-.0287 1.0953-.5385 1.3077-.5098.2124-1.0953-.0287-1.3077-.5385L15.75 16l-1.827 4.3846c-.1825.438-.6403.6776-1.0889.6018.1075-.3089.1659-.6408.1659-.9864v-2.6002L14 15h-1ZM6 5.5C6 4.11929 7.11929 3 8.5 3S11 4.11929 11 5.5 9.88071 8 8.5 8 6 6.88071 6 5.5Z' />
@@ -112,7 +112,7 @@
                 </button>
                 <ul id="pengaturan-pembayaran" class="hidden ml-8 py-2 space-y-2">
                     <li>
-                        <x-sidebar-link :href="route('pembayaran.index')" :active="request()->routeIs('pembayaran.index')"
+                        <x-sidebar-link :href="route('jenis-pembayaran.index')" :active="request()->routeIs('pembayaran.index')"
                             icon=" <svg class='w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path d='M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm2 0v14h14V5H5Zm2 3h10v2H7V8Zm0 4h10v2H7v-2Zm0 4h6v2H7v-2Z' />
                             </svg>

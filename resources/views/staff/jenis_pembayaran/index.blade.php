@@ -18,7 +18,7 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="{{  route('pembayaran.index')}}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Data Jenis Pembayaran</a>
+                        <a href="{{  route('jenis-pembayaran.index')}}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Data Jenis Pembayaran</a>
                     </div>
                 </li>
             </ol>
@@ -35,7 +35,7 @@
                     </svg>
                 </button>
             </div>
-            <a href="#" class="bg-blue-100 text-blue-600 px-4 py-2 rounded">Tambah Data</a>
+            <a href="{{  route('jenis-pembayaran.create')}}" class="bg-blue-100 text-blue-600 px-4 py-2 rounded">Tambah Data</a>
         </div>
 
         <table class="w-full text-left border border-gray-200 rounded">
@@ -50,24 +50,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pembayaran as $index => $item)
+                @foreach ($jenis_pembayaran as $index => $item)
                 <tr class="border-t">
-                    <td class="px-4 py-2">{{ $loop->iteration + ($pembayaran->currentPage() - 1) * $pembayaran->perPage() }}</td>
-                    <td class="px-4 py-2">{{ $item->nama }}</td>
-                    <td class="px-4 py-2">{{ $item->periode->tahun_awal }}-{{ $item->periode->tahun_akhir }} </td>
-                    <td class="px-4 py-2">{{ $item->tipe_pembayaran }}</td>
-                    <td class="px-4 py-2">
-                        <a href="#" class="bg-blue-600 text-white px-3 py-1 rounded">Setting Tarif</a>
+                    <td class="px-2 py-2">{{ $loop->iteration + ($jenis_pembayaran->currentPage() - 1) * $jenis_pembayaran->perPage() }}</td>
+                    <td class="px-2 py-2">{{ $item->nama }}</td>
+                    <td class="px-2 py-2">{{ $item->periode->tahun_awal }}-{{ $item->periode->tahun_akhir }} </td>
+                    <td class="px-2 py-2">{{ $item->tipe_pembayaran }}</td>
+                    <td class="px-2 py-2">
+                        <a type="button" href="{{ route('jenis-pembayaran.setting-tarif', $item->id) }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm text-center leading-tight w-fit block">
+                            <span class="block sm:inline">Setting</span>
+                            <span class="block sm:inline">Tarif</span>
+                        </a>
                     </td>
-                    <td class="px-4 py-2 relative" x-data="{ open: false }">
+                    <td class="px-2 py-2 relative" x-data="{ open: false }">
                         <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
                             &#8942; <!-- Tiga titik vertikal -->
                         </button>
 
                         <div x-show="open" @click.away="open = false" class="absolute right-0 z-10 mt-2 w-36 bg-white border rounded shadow-md">
-                            <a href="{{ route('pembayaran.show', $item->id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Detail</a>
-                            <a href="{{ route('pembayaran.edit', $item->id) }}" class="block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100">Edit</a>
-                            <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                            <a href="{{ route('jenis-pembayaran.show', ['id' => $item->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Detail</a>
+                            <a href="{{ route('jenis-pembayaran.edit', $item->id) }}" class="block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100">Edit</a>
+                            <form action="{{ route('jenis-pembayaran.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Hapus</button>
@@ -79,8 +82,6 @@
             </tbody>
         </table>
 
-        <div class="mt-4">
-            {{ $pembayaran->links() }}
-        </div>
+
     </div>
 </x-app-layout>
