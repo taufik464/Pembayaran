@@ -38,21 +38,48 @@ class SettingTahunanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_pembayaran_id' => 'required|exists:jenis_pembayaran,id',
-            'nominal' => 'required|numeric',
+            'jenis_pembayaran_id' => 'required|exists:jenis_pembayarans,id',
+            'tarif' => 'required|decimal:0,2',
             'siswa' => 'required|array|min:1',
         ]);
 
         foreach ($request->siswa as $siswaId) {
-            // Simpan tarif per siswa
             PTahunan::updateOrCreate([
                 'jenis_pembayaran_id' => $request->jenis_pembayaran_id,
                 'siswa_id' => $siswaId,
             ], [
-                'harga' => $request->nominal,
+                'harga' => $request->tarif,
             ]);
         }
 
         return redirect()->route('jenis-pembayaran.index')->with('success', 'Tarif berhasil disimpan.');
+    }
+
+    public function destroy($id)
+    {
+        $pembayaran = PTahunan::findOrFail($id);
+        $pembayaran->delete();
+
+        return redirect()->route('jenis-pembayaran.index')->with('success', 'Data berhasil dihapus.');
+    }
+    public function edit($id)
+    {
+        $pembayaran = PTahunan::findOrFail($id);
+        return view('staff.setting_pembayaran.edit_tahunan', compact('pembayaran'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'jenis_pembayaran_id' => 'required|exists:jenis_pembayarans,id',
+            'tarif' => 'required|decimal:0,2',
+        ]);
+
+        $pembayaran = PTahunan::findOrFail($id);
+        $pembayaran->update([
+            'jenis_pembayaran_id' => $request->jenis_pembayaran_id,
+            'harga' => $request->tarif,
+        ]);
+
+        return redirect()->route('jenis-pembayaran.index')->with('success', 'Data berhasil diubah.');
     }
 }

@@ -1,7 +1,11 @@
 @props(['active' => false])
 
-<aside id="logo-sidebar" class="fixed mt-4 top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-creme border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-creme dark:bg-gray-800">
+<aside id="logo-sidebar" class="fixed  top-0 left-0 z-40 w-64 h-screen  transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+    <a href="{{ route('dashboard') }}" class="flex ms-2 py-3 md:me-24">
+        <x-application-logo class="h-9 me-3" />
+        <span class="ml-3 self-center text-ms font-semibold sm:text-2 whitespace-nowrap text-black ">Administrasi Pembayaran</span>
+    </a>
+    <div class="h-full mt- px-3 pb-4 overflow-y-auto bg-white ">
         <ul class="space-y-2 font-medium">
 
             <li>
@@ -14,7 +18,7 @@
                 </x-sidebar-link>
             </li>
             <li>
-                <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                <x-sidebar-link :href="route('kelola-pembayaran.index')" :active="request()->routeIs('kelola-pembayaran.index')"
                     icon=" <svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                     <path fill-rule='evenodd' d='M4 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4Zm0 6h16v6H4v-6Z' clip-rule='evenodd' />
                     <path fill-rule='evenodd' d='M5 14a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Zm5 0a1 1 0 0 1 1-1h5a1 1 0 1 1 0 2h-5a1 1 0 0 1-1-1Z' clip-rule='evenodd' />
@@ -73,10 +77,10 @@
                     </li>
                     <li>
                         <x-sidebar-link :href="route('naik_kelas.index')" :active="request()->routeIs('naik_kelas.index')"
-                            icon=" <svg class=' w-6 h-6 text-gray-800 dark:text-white' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'>
-                            <path stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207' />
+                            icon="
+                            <svg class='w-6 h-6 transition duration-75 {{ request()->routeIs('naik_kelas.index') ? 'text-white' : 'text-gray-800 dark:text-white' }}' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'>
+                                <path stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207' />
                             </svg>
-
                             ">
                             {{ __('Naik Kelas') }}
                         </x-sidebar-link>

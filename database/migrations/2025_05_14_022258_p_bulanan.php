@@ -18,8 +18,6 @@ return new class extends Migration
             $table->foreignId('bulan_id')->constrained('bulan',)->onDelete('cascade');
             $table->foreignId('transaksi_id')->nullable()->constrained('transaksi',)->onDelete('set null');
 
-            // Kolom lainnya
-            $table->enum('status', ['belum lunas', 'lunas'])->default('belum lunas');
             $table->integer('harga')->default(0);
 
             $table->timestamps();

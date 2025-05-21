@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
+
+
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Naik Kelas') }}
         </h2>
+
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">

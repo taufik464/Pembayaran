@@ -7,15 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class PBulanan extends Model
 {
     protected $table = 'p_bulanan';
+    protected $appends = ['status'];
 
     protected $fillable = [
         'jenis_pembayaran_id',
         'siswa_id',
         'bulan_id',
         'transaksi_id',
-        'status',
         'harga',
     ];
+
+
+    public function getStatusAttribute()
+    {
+        return $this->transaksi_id === null ? 'Belum Lunas' : 'Lunas';
+    }
 
     public function jenisPembayaran()
     {
@@ -25,7 +31,7 @@ class PBulanan extends Model
 
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class, 'siswa_id');
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'nis');
     }
     public function bulan()
     {
