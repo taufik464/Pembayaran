@@ -25,7 +25,7 @@
         </nav>
     </x-slot>
 
-    <div class="p-4 text-gray-900 dark:text-gray-100">
+    <div class="bg-white rounded-lg text-gray-900 dark:text-gray-100">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
             <div class="flex items-center justify-between">
                 <div class="pb-4 bg-white dark:bg-gray-900">
@@ -67,7 +67,7 @@
                 <tbody>
                     @foreach($staffs as $staff)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $staff->nama }}
                         </td>
                         <td class="px-6 py-2">
@@ -76,10 +76,10 @@
                         <td class="px-6 py-2">
                             {{ $staff->no_hp }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-2">
                             {{ $staff->jabatan }}
                         </td>
-                        <td class="px-6 py-8 text-right">
+                        <td class="px-6 py-2 text-right">
                             <div class="flex justify-end space-x-2 rtl:space-x-reverse">
                                 <a href="{{ route('staff.edit', $staff->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

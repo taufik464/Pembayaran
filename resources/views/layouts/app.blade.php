@@ -16,6 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="font-sans antialiased bg-gray-200">
@@ -91,7 +92,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="bg-white shadow rounded-lg mt-4">
+        <main class="  rounded-lg mt-4">
 
             {{ $slot }}
         </main>

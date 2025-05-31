@@ -25,7 +25,7 @@
         </nav>
     </x-slot>
 
-    <div class="p-6 mt-4 bg-white rounded shadow">
+    <div class="p-6 mt-4 bg-white rounded-lg rounded shadow">
         <div class="flex justify-between items-center mb-4">
             <div class="flex items-center space-x-2">
                 <input type="text" placeholder="Search..." class="border p-2 rounded w-64">

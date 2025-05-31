@@ -25,7 +25,7 @@
         </nav>
     </x-slot>
 
-    <div class="bg-white p-4 my-4">
+    <div class="bg-white rounded-lg p-4 my-4">
         <div class="flex items-center justify-between mb-4">
             <h1 class="text-lg font-semibold">
                 Biaya - {{ $pembayaran->nama }} - {{ $pembayaran->periode->tahun_awal }}-{{ $pembayaran->periode->tahun_akhir }}

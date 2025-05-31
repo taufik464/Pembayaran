@@ -14,9 +14,9 @@
         <tbody>
             @foreach($bulanan as $item)
             <tr class="border-t">
-                <td class="px-2 py-2">{{ $item->siswa->nis }}</td>
-                <td class="px-2 py-2">{{ $item->siswa->kelas->nama }}</td>
-                <td class="px-2 py-2">{{ $item->siswa->nama }}</td>
+                <td class="px-2 py-2">{{ $item->siswa_id }}</td>
+                <td class="px-2 py-2">{{ $item->kelas }}</td>
+                <td class="px-2 py-2">{{ $item->nama }}</td>
                 <td class="px-2 py-2">{{ $item->harga }}</td>
                 <td class="px-2 py-2">{{ $item->status }}</td>
                 <td class="px-2 py-2 relative" x-data="{ open: false }">

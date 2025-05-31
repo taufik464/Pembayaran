@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Data Bulan') }}
+            {{ __('Pembayaran Lain') }}
         </h2>
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -18,14 +18,18 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="{{  route('bulan.index')}}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Data Bulan</a>
+                        <a href="route('p-tambahan.index')" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Pembayaran lain</a>
                     </div>
                 </li>
+
             </ol>
         </nav>
     </x-slot>
 
-    <div class="p-4 text-gray-900 dark:text-gray-100">
+
+
+
+    <div class="bg-white rounded-lg text-gray-900 dark:text-gray-100">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4 ">
             <div class="flex items-center justify-between">
                 <div class="pb-4 bg-white dark:bg-gray-900">
@@ -40,10 +44,8 @@
                     </div>
 
                 </div>
-                <button data-modal-target="tambahBulanModal" data-modal-toggle="tambahBulanModal" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-600 focus:outline-none dark:focus:ring-green-800">
-                    Tambah Data
-                </button>
-                @include('staff.bulan.modal_create_bulan')
+                <a href="{{  route('p-tambahan.create')}}" class="bg-blue-100 text-blue-600 px-4 py-2 rounded">Tambah Data</a>
+
             </div>
             <table class="w-full mt-2 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -55,44 +57,53 @@
                             Nama
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            harga
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Deskripsi
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($bulans as $bulan)
+                    @foreach($lain as $l)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="NIS" class="px-6 py-1 font-xs text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $loop->iteration }}
                         </th>
                         <td class="px-6 py-1">
-                            {{ $bulan->nama }}
+                            {{ $l->nama }}
                         </td>
-                        <td class="px-6 py-1 text-right">
-                            <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-                                <button data-modal-target="editBulanModal-{{ $bulan->id }}" data-modal-toggle="editBulanModal-{{ $bulan->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.414 2.586a2 2 0 0 1 0 2.828l-12.5 12.5a2 2 0 0 1-1.414.586H2a1 1 0 0 1-1-1v-1.586a2 2 0 0 1 .586-1.414l12.5-12.5a2 2 0 0 1 2.828 0zM15.414 4l-10.5 10.5V16h1.586L16.414 6.586A2 2 0 0 0 15.414 4z" />
-                                    </svg>
-                                </button>
-                                @include('staff.bulan.modal_update_bulan', ['bulan' => $bulan])
-                                |
-                                <form action="{{ route('bulan.destroy', $bulan->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                        <td class="px-6 py-1">
+                            {{ $l->harga }}
+                        </td>
+                        <td class="px-6 py-1">
+                            {{ $l->deskripsi }}
+                        </td>
+
+                        <td class="px-2 py-2 relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
+                                &#8942; <!-- Tiga titik vertikal -->
+                            </button>
+
+                            <div x-show="open" @click.away="open = false" class="absolute right-0 z-10 mt-2 w-36 bg-white border rounded shadow-md">
+                                <a href="{{ route('p-tambahan.edit', $l->id) }}" class="block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100">Edit</a>
+                                <form action="{{ route('p-tambahan.destroy', $l->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 1a1 1 0 0 1 1 1v2h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4V2a1 1 0 0 1 1-1zm3.5 4h-7l-.5.5v11l.5.5h7l.5-.5V5.5l-.5-.5z" />
-                                        </svg>
-                                    </button>
+                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Hapus</button>
                                 </form>
+                            </div>
                         </td>
                     </tr>
 
                     @endforeach
                 </tbody>
             </table>
+
+
         </div>
     </div>
-
 </x-app-layout>

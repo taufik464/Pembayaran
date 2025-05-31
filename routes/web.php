@@ -1,16 +1,18 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\dashboard;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\bulanController;
+
 use App\Http\Controllers\naik_kelasController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\SettingBulananController;
 use App\Http\Controllers\SettingTahunanController;
 use App\Http\Controllers\transaksiController;
+use App\Http\Controllers\PLainController;
 use App\Models\transaksi;
 
 Route::get('/', function () {
@@ -22,6 +24,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [dashboard::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -48,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::put('kelas/update/{id}', [KelasController::class, 'update'])->name('kelas.update');
     Route::delete('kelas/destroy/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
-    Route::resource('bulan', bulanController::class)->names('bulan');
+
 
     Route::get('/naik-kelas', [naik_KelasController::class, 'index'])->name('naik_kelas.index');
     Route::get('/naik-kelas/siswa/{id}', [naik_KelasController::class, 'getSiswaByKelas']);
@@ -62,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::put('jenis-pembayaran/update/{id}', [JenisPembayaranController::class, 'update'])->name('jenis-pembayaran.update');
     Route::delete('jenis-pembayaran/destroy/{id}', [JenisPembayaranController::class, 'destroy'])->name('jenis-pembayaran.destroy');
     Route::get('jenis-pembayaran/show/{id}', [JenisPembayaranController::class, 'show'])->name('jenis-pembayaran.show');
+
+    Route::resource('P-tambahan', PLainController::class)->names('p-tambahan');
 
 
 

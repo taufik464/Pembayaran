@@ -29,7 +29,7 @@
 
 
 
-    <div class="p-4 text-gray-900 dark:text-gray-100">
+    <div class="bg-white rounded-lg text-gray-900 dark:text-gray-100">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4 ">
             <div class="flex items-center justify-between">
                 <div class="pb-4 bg-white dark:bg-gray-900">

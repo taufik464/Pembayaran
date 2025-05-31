@@ -33,7 +33,7 @@
         </nav>
     </x-slot>
 
-    <div class="p-6 mt-4 bg-white rounded shadow">
+    <div class="p-6 mt-4 bg-white rounded-lg rounded shadow">
         <h2 class="text-xl font-semibold mb-4">Edit Jenis Pembayaran</h2>
         <form action="{{ route('jenis-pembayaran.update', ['jenis_pembayaran' => $jenis_pembayaran->id]) }}" method="POST" class="grid gap-4 mb-4 grid-cols-2">
             @csrf

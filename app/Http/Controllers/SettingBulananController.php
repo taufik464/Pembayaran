@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\PBulanan;
 use App\Models\JenisPembayaran;
-use App\Models\Bulan;
+
 use App\Models\Siswa;
 
 
@@ -20,7 +20,20 @@ class SettingBulananController extends Controller
     {
 
         $pembayaran = JenisPembayaran::with('periode')->findOrFail($Id);
-        $bulan = bulan::all();
+        $bulan = [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
 
         // Kelas bisa kamu filter jika perlu berdasarkan tahun ajaran
         $kelas = Kelas::all();
@@ -73,7 +86,7 @@ class SettingBulananController extends Controller
                 // Cek apakah pembayaran sudah ada untuk siswa, jenis pembayaran, dan bulan yang sama
                 $existingPayment = PBulanan::where('siswa_id', $siswa->nis)
                     ->where('jenis_pembayaran_id', $request->jenis_pembayaran)
-                    ->where('bulan_id', $bulan)
+                    ->where('bulan', $bulan)
                     ->first();
 
                 // Jika sudah ada, lewati penyimpanan data ini
@@ -85,7 +98,7 @@ class SettingBulananController extends Controller
                 PBulanan::create([
                     'siswa_id' => $siswa->nis, // Gunakan NIS sebagai ID
                     'jenis_pembayaran_id' => $request->jenis_pembayaran,
-                    'bulan_id' => $bulan,
+                    'bulan' => $bulan,
                     'harga' => $nominal,
                 ]);
             }
@@ -138,7 +151,20 @@ class SettingBulananController extends Controller
     {
         $settingBulanan = PBulanan::findOrFail($id);
         $pembayaran = JenisPembayaran::with('periode')->findOrFail($settingBulanan->jenis_pembayaran_id);
-        $bulan = bulan::all();
+        $bulan = [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
         $kelas = Kelas::all();
 
         return view('staff.setting_pembayaran.edit_S_Bulanan', compact('settingBulanan', 'pembayaran', 'kelas', 'bulan'));
@@ -187,7 +213,7 @@ class SettingBulananController extends Controller
                 // Cek apakah pembayaran sudah ada untuk siswa, jenis pembayaran, dan bulan yang sama
                 $existingPayment = PBulanan::where('siswa_id', $siswa->nis)
                     ->where('jenis_pembayaran_id', $request->jenis_pembayaran)
-                    ->where('bulan_id', $bulan)
+                    ->where('bulan', $bulan)
                     ->first();
 
                 // Jika sudah ada, lewati penyimpanan data ini
@@ -201,7 +227,7 @@ class SettingBulananController extends Controller
                         'siswa_id'
                         => $siswa->nis, // Gunakan NIS sebagai ID
                         'jenis_pembayaran_id' => $request->jenis_pembayaran,
-                        'bulan_id' => $bulan,
+                        'bulan' => $bulan,
                     ],
                     [
                         'harga' => $nominal,
