@@ -10,8 +10,11 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\SettingBulananController;
 use App\Http\Controllers\SettingTahunanController;
+use App\Http\Controllers\LandingController;
 
-
+//Rebuild Web
+Route::get('/', [LandingController::class, 'index']); // Landing page utama
+Route::get('/landing', [LandingController::class, 'index']); // Alternatif
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
+//Siswa
     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa.index');
     Route::get('siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
     Route::post('siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
@@ -34,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::put('siswa/update/{id}', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
+//Staff
     Route::get('staff', [StaffController::class, 'index'])->name('staff.index');
     Route::get('staff/create', [StaffController::class, 'create'])->name('staff.create');
     Route::post('staff/store', [StaffController::class, 'store'])->name('staff.store');
@@ -41,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff.update');
     Route::delete('staff/destroy/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
+//Kelas
     Route::get('kelas', [KelasController::class, 'index'])->name('kelas.index');
     Route::post('kelas/store', [KelasController::class, 'store'])->name('kelas.store');
     Route::get('kelas/create', [KelasController::class, 'create'])->name('kelas.create');
@@ -50,11 +55,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('bulan', bulanController::class)->names('bulan');
 
+//Naik Kelas
     Route::get('/naik-kelas', [naik_KelasController::class, 'index'])->name('naik_kelas.index');
     Route::get('/naik-kelas/siswa/{id}', [naik_KelasController::class, 'getSiswaByKelas']);
     Route::post('/naik-kelas/simpan', [naik_KelasController::class, 'simpan'])->name('naik_kelas.simpan');
 
-
+//Jenis Pembayaran
     Route::get('jenis-pembayaran', [JenisPembayaranController::class, 'index'])->name('jenis-pembayaran.index');
     Route::get('jenis-pembayaran/create', [JenisPembayaranController::class, 'create'])->name('jenis-pembayaran.create');
     Route::post('jenis-pembayaran/store', [JenisPembayaranController::class, 'store'])->name('jenis-pembayaran.store');
