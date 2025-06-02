@@ -29,7 +29,7 @@
         </nav>
     </x-slot>
 
-    <div class=" text-gray-50 dark:text-gray-100">
+    <div class="bg-white rounded-lg text-gray-50 dark:text-gray-100">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
             <form method="POST" action="{{ route('naik_kelas.simpan') }}">
                 @csrf

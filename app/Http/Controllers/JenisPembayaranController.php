@@ -67,9 +67,17 @@ class JenisPembayaranController extends Controller
             $bulanan = PBulanan::with(['siswa.kelas'])
                 ->where('jenis_pembayaran_id', $id)
                 ->get()
-                ->groupBy('nis')
+                ->groupBy('siswa_id')
                 ->map(function ($items) {
-                    return $items->first();
+                    $first = $items->first();
+                    $semuaLunas = $items->every(fn($item) => $item->status === 'Lunas');
+                    return (object) [
+                        'siswa_id' => $first->siswa_id,
+                        'nama' => $first->siswa->nama ?? '-',
+                        'kelas' => $first->siswa->kelas->nama_kelas ?? '-',
+                        'harga' => $items->sum('harga'),
+                        'status' => $semuaLunas ? 'Lunas' : 'Belum Lunas',
+                    ];
                 })
                 ->values();
         } elseif ($pembayaran->tipe_pembayaran === 'Tahunan') {

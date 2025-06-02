@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('p_bulanan', function (Blueprint $table) {
+        Schema::create('p_tambahan', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pembayaran_lain_id')->constrained('pembayaran_lain')->onDelete('cascade');
             $table->foreignId('siswa_id')->constrained('siswa', 'nis')->onDelete('cascade');
-            $table->foreignId('jenis_pembayaran_id')->constrained('jenis_pembayarans',)->onDelete('cascade');
-            $table->tinyInteger('bulan')->unsigned()->comment('1=Januari, 2=Februari, ..., 12=Desember');
-            $table->foreignId('transaksi_id')->nullable()->constrained('transaksi',)->onDelete('set null');
-
-            $table->integer('harga')->default(0);
-
+            $table->foreignId('transaksi_id')->constrained('transaksi')->onDelete('cascade')->nullable();
+            $table->string('keterangan');
+            $table->decimal('harga', 10, 2);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('p_bulanan');
+        Schema::dropIfExists('p_tahunan');
     }
 };

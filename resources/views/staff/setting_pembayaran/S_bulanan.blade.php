@@ -103,11 +103,11 @@
                             @foreach($bulan as $b)
                             <div class="flex items-center gap-4">
                                 <!-- Label di kiri -->
-                                <label class="w-32 text-sm font-medium">{{ $b->nama }}</label>
+                                <label class="w-32 text-sm font-medium">{{ $b }}</label>
 
                                 <!-- Input di kanan -->
                                 <div class="flex-1">
-                                    <input type="hidden" name="bulan[]" value="{{ $b->id }}">
+                                    <input type="hidden" name="bulan[]" value="{{ $loop->iteration }}">
                                     <input
                                         type="number"
                                         name="nominal[]"
