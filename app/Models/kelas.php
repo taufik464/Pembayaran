@@ -9,7 +9,7 @@ class kelas extends Model
     protected $table = 'kelas';
 
     protected $fillable = [
-        'nama',
+        'nama'
     ];
 
     public function siswa()

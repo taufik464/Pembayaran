@@ -25,15 +25,11 @@
         </nav>
     </x-slot>
 
-    <div class="p-6 mt-4 bg-white rounded shadow">
+    <div class="p-6 mt-4 bg-white rounded-lg rounded shadow">
         <div class="flex justify-between items-center mb-4">
             <div class="flex items-center space-x-2">
                 <input type="text" placeholder="Search..." class="border p-2 rounded w-64">
-                <button class="p-2 border rounded">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" />
-                    </svg>
-                </button>
+
             </div>
             <a href="{{  route('jenis-pembayaran.create')}}" class="bg-blue-100 text-blue-600 px-4 py-2 rounded">Tambah Data</a>
         </div>

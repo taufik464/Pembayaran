@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('p_tahunans', function (Blueprint $table) {
+        Schema::create('pembayaran_lain', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jenis_pembayaran_id')->constrained()->onDelete('cascade');
-            $table->foreignId('siswa_id')->constrained('siswa', 'nis')->onDelete('cascade');
-            $table->decimal('harga', 10, 2);
+            $table->string('nama');
+            $table->integer('harga');
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('pembayaran_lain');
     }
 };

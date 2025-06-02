@@ -10,7 +10,7 @@ class PTahunan extends Model
 
     protected $fillable = [
         'jenis_pembayaran_id',
-        'kelas_id',
+        'siswa_id',
         'harga',
     ];
 
@@ -25,6 +25,6 @@ class PTahunan extends Model
     }
     public function siswa()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'nis');
     }
 }

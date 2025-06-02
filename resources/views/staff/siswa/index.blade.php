@@ -31,7 +31,7 @@
 
 
 
-    <div class="p-4 text-gray-900 dark:text-gray-100">
+    <div class="bg-white rounded-lg text-gray-900 dark:text-gray-100">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4 ">
             <div class="flex items-center justify-between">
                 <div class="pb-4 bg-white dark:bg-gray-900">
@@ -82,10 +82,10 @@
                         <td class="px-6 py-2">
                             {{ $siswa->nama }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-2">
                             {{ $siswa->kelas->nama }}
                         </td>
-                        <td class="px-6 py-8 text-right">
+                        <td class="px-6 py-2 text-right">
                             <div class="flex justify-end space-x-2 rtl:space-x-reverse">
                                 <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

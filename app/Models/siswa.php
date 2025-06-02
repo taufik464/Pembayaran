@@ -28,4 +28,13 @@ class siswa extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function pBulanan()
+    {
+        return $this->hasMany(PBulanan::class, 'siswa_id', 'nis');
+    }
+    public function pTahunan()
+    {
+        return $this->hasMany(PTahunan::class, 'siswa_id', 'nis');
+    }
 }

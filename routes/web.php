@@ -1,16 +1,20 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\dashboard;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\bulanController;
+
 use App\Http\Controllers\naik_kelasController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\SettingBulananController;
 use App\Http\Controllers\SettingTahunanController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PLainController;
 
 //Rebuild Web
 Route::get('/', [LandingController::class, 'index']); // Landing page utama
@@ -25,6 +29,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [dashboard::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -53,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::put('kelas/update/{id}', [KelasController::class, 'update'])->name('kelas.update');
     Route::delete('kelas/destroy/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
-    Route::resource('bulan', bulanController::class)->names('bulan');
+
 
 //Naik Kelas
     Route::get('/naik-kelas', [naik_KelasController::class, 'index'])->name('naik_kelas.index');
@@ -69,17 +75,38 @@ Route::middleware('auth')->group(function () {
     Route::delete('jenis-pembayaran/destroy/{id}', [JenisPembayaranController::class, 'destroy'])->name('jenis-pembayaran.destroy');
     Route::get('jenis-pembayaran/show/{id}', [JenisPembayaranController::class, 'show'])->name('jenis-pembayaran.show');
 
+    Route::resource('P-tambahan', PLainController::class)->names('p-tambahan');
+
+
+
     Route::get('jenis-pembayaran/{id}/setting-tarif', [JenisPembayaranController::class, 'redirectSettingTarif'])->name('jenis-pembayaran.setting-tarif');
 
     //Route::get('/setting-bulanan/{id}', SettingBulananForm::class)->name('setting-bulanan.form');
 
     Route::get('setting-bulanan/{id}', [SettingBulananController::class, 'index'])->name('setting-bulanan.index');
-
     Route::post('setting-bulanan/store', [SettingBulananController::class, 'store'])->name('setting-bulanan.store');
+    Route::get('setting-bulanan/edit/{id}', [SettingBulananController::class, 'edit'])->name('setting-bulanan.edit');
+    Route::put('setting-bulanan/update/{id}', [SettingBulananController::class, 'update'])->name('setting-bulanan.update');
+    Route::delete('setting-bulanan/destroy/{nis}/{id}', [SettingBulananController::class, 'destroy'])->name('setting-bulanan.destroy');
+    Route::get('/setting-bulanan/show/{nis}', [SettingBulananController::class, 'show'])->name('setting-bulanan.show');
+
 
     Route::get('/setting-tahunan/{id}', [SettingTahunanController::class, 'index'])->name('setting-tahunan.index');
-    Route::get('/setting-tahunan/get-data/{kelasId}', [SettingTahunanController::class, 'getData']);
-    Route::post('/setting-tahunan/store', [SettingTahunanController::class, 'store'])->name('setting-tahunan.store');
+    Route::get('/setting-tahunan/get-data/{kelasId}', [SettingTahunanController::class, 'getData'])->name('setting-tahunan.get-data');
+    Route::post('/setting-tahunan', [SettingTahunanController::class, 'store'])->name('setting-tahunan.store');
+    Route::get('/setting-tahunan/edit/{id}', [SettingTahunanController::class, 'edit'])->name('setting-tahunan.edit');
+    Route::put('/setting-tahunan/update/{id}', [SettingTahunanController::class, 'update'])->name('setting-tahunan.update');
+    Route::delete('/setting-tahunan/destroy/{id}', [SettingTahunanController::class, 'destroy'])->name('setting-tahunan.destroy');
+    Route::get('/setting-tahunan/show/{id}', [SettingTahunanController::class, 'show'])->name('setting-tahunan.show');
+
+    Route::get('/kelola-pembayaran', [transaksiController::class, 'index'])->name('kelola-pembayaran.index');
+
+    Route::get ('/tahun_ajaran', [TahunAjaranController::class, 'index'])->name('tahun_ajaran.index');
+    Route::post('tahun_ajaran/store', [TahunAjaranController::class, 'store'])->name('tahun_ajaran.store');
+    Route::get('tahun_ajaran/create', [TahunAjaranController::class, 'create'])->name('tahun_ajaran.create');
+    Route::get('tahun_ajaran/edit/{id}', [TahunAjaranController::class, 'edit'])->name('tahun_ajaran.edit');
+    Route::put('tahun_ajaran/update/{id}', [TahunAjaranController::class, 'update'])->name('tahunajaran.update');
+    Route::delete('tahun_ajaran/destroy/{id}', [TahunAjaranController::class, 'destroy'])->name('tahun_ajaran.destroy');
 });
 
 require __DIR__ . '/auth.php';

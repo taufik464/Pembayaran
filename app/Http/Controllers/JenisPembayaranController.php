@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\JenisPembayaran;
 use App\Models\Periode;
 use Illuminate\Http\Request;
+use App\Models\PBulanan;
+use App\Models\PTahunan;
 
 class JenisPembayaranController extends Controller
 {
@@ -52,10 +54,42 @@ class JenisPembayaranController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(JenisPembayaran $jenisPembayaran)
+    public function show($id)
     {
-        //
+        // Ambil data jenis pembayaran beserta relasi periode-nya
+        $pembayaran = JenisPembayaran::with('periode')->findOrFail($id);
+
+        // Inisialisasi variabel collection kosong supaya selalu ada
+        $bulanan = collect();
+        $tahunan = collect();
+
+        if ($pembayaran->tipe_pembayaran === 'Bulanan') {
+            $bulanan = PBulanan::with(['siswa.kelas'])
+                ->where('jenis_pembayaran_id', $id)
+                ->get()
+                ->groupBy('siswa_id')
+                ->map(function ($items) {
+                    $first = $items->first();
+                    $semuaLunas = $items->every(fn($item) => $item->status === 'Lunas');
+                    return (object) [
+                        'siswa_id' => $first->siswa_id,
+                        'nama' => $first->siswa->nama ?? '-',
+                        'kelas' => $first->siswa->kelas->nama_kelas ?? '-',
+                        'harga' => $items->sum('harga'),
+                        'status' => $semuaLunas ? 'Lunas' : 'Belum Lunas',
+                    ];
+                })
+                ->values();
+        } elseif ($pembayaran->tipe_pembayaran === 'Tahunan') {
+            $tahunan = PTahunan::with(['siswa.kelas'])
+                ->where('jenis_pembayaran_id', $id)
+                ->get();
+        }
+
+        // Kirim data ke view, termasuk bulanan dan tahunan
+        return view('staff.jenis_pembayaran.show', compact('pembayaran', 'bulanan', 'tahunan'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -86,6 +86,7 @@
                     <div class="bg-gray-100 p-4 rounded-lg">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal</label>
                         <input type="number" name="nominal_sama" id="nominal-sama" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <p class="text-xs text-red-500">* Hanya menggunakan format angka!</p>
                     </div>
                 </div>
 
@@ -102,11 +103,11 @@
                             @foreach($bulan as $b)
                             <div class="flex items-center gap-4">
                                 <!-- Label di kiri -->
-                                <label class="w-32 text-sm font-medium">{{ $b->nama }}</label>
+                                <label class="w-32 text-sm font-medium">{{ $b }}</label>
 
                                 <!-- Input di kanan -->
                                 <div class="flex-1">
-                                    <input type="hidden" name="bulan[]" value="{{ $b->id }}">
+                                    <input type="hidden" name="bulan[]" value="{{ $loop->iteration }}">
                                     <input
                                         type="number"
                                         name="nominal[]"
