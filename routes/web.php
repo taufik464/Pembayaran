@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingBulananController;
 use App\Http\Controllers\SettingTahunanController;
 use App\Http\Controllers\transaksiController;
 use App\Models\transaksi;
+use App\http\Controllers\TahunAjaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -86,6 +87,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/setting-tahunan/show/{id}', [SettingTahunanController::class, 'show'])->name('setting-tahunan.show');
 
     Route::get('/kelola-pembayaran', [transaksiController::class, 'index'])->name('kelola-pembayaran.index');
+
+    Route::get ('/tahun_ajaran', [TahunAjaranController::class, 'index'])->name('tahun_ajaran.index');
+    Route::post('tahun_ajaran/store', [TahunAjaranController::class, 'store'])->name('tahun_ajaran.store');
+    Route::get('tahun_ajaran/create', [TahunAjaranController::class, 'create'])->name('tahun_ajaran.create');
+    Route::get('tahun_ajaran/edit/{id}', [TahunAjaranController::class, 'edit'])->name('tahun_ajaran.edit');
+    Route::put('tahun_ajaran/update/{id}', [TahunAjaranController::class, 'update'])->name('tahunajaran.update');
+    Route::delete('tahun_ajaran/destroy/{id}', [TahunAjaranController::class, 'destroy'])->name('tahun_ajaran.destroy');
 });
 
 require __DIR__ . '/auth.php';
