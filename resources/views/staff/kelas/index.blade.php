@@ -59,47 +59,55 @@
                             Nama
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Angkatan
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Kode Kelas
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Aksi
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($kelass as $kelas)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="NIS" class="px-6 py-1 font-xs text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="NIS" class="px-6 py-3 font-xs text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $loop->iteration }}
                         </th>
-                        <td class="px-6 py-1">
+                        <td class="px-6 py-3">
                             {{ $kelas->nama }}
                         </td>
-                        <td class="px-6 py-1">
+                        <td class="px-6 py-3">
+                            {{ $kelas->tingkatan }}
+                        </td>
+                        <td class="px-6 py-3">
+                            {{ $kelas->status }}
+                        </td>
+                        <td class="px-6 py-3">
                             {{ $kelas->id }}
                         </td>
+                        <td class="px-2 py-2 relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
+                                &#8942; <!-- Tiga titik vertikal -->
+                            </button>
 
-                        <td class="px-6 py-1 text-right">
-                            <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-                                <button data-modal-target="editKelasModal-{{ $kelas->id }}" data-modal-toggle="editKelasModal-{{ $kelas->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.414 2.586a2 2 0 0 1 0 2.828l-12.5 12.5a2 2 0 0 1-1.414.586H2a1 1 0 0 1-1-1v-1.586a2 2 0 0 1 .586-1.414l12.5-12.5a2 2 0 0 1 2.828 0zM15.414 4l-10.5 10.5V16h1.586L16.414 6.586A2 2 0 0 0 15.414 4z" />
-                                    </svg>
-                                </button>
-                                @include('staff.kelas.modal_update_kelas', ['kelas' => $kelas])
-                                |
-                                <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                            <div x-show="open" @click.away="open = false" class="absolute right-0 z-10 mt-2 w-36 bg-white border rounded shadow-md">
+                                <button data-modal-target="editKelasModal-{{ $kelas->id }}" data-modal-toggle="editKelasModal-{{ $kelas->id }}" class="w-full text-left block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100">Edit</button>
+
+
+                                <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 1a1 1 0 0 1 1 1v2h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4V2a1 1 0 0 1 1-1zm3.5 4h-7l-.5.5v11l.5.5h7l.5-.5V5.5l-.5-.5z" />
-                                        </svg>
-                                    </button>
+                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Hapus</button>
                                 </form>
+                            </div>
                         </td>
                     </tr>
-
+                    @include('staff.kelas.modal_update_kelas', ['kelas' => $kelas])
                     @endforeach
                 </tbody>
             </table>

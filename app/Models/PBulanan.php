@@ -53,10 +53,7 @@ class PBulanan extends Model
     {
         return $this->belongsTo(Siswa::class, 'siswa_id', 'nis');
     }
-    public function bulan()
-    {
-        return $this->belongsTo(Bulan::class, 'bulan_id');
-    }
+    
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class, 'transaksi_id');

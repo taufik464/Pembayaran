@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('tingkatan');
+            $table->enum('status', ['aktif', 'tidak aktif', 'lulus'])->default('tidak aktif');
             $table->timestamps();
         });
     }

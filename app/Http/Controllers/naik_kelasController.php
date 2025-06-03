@@ -23,15 +23,25 @@ class naik_kelasController extends Controller
 
     public function simpan(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'kelas_tujuan' => 'required',
             'siswa' => 'required|array'
         ]);
 
-        Siswa::whereIn('nis', $request->siswa)->update([
-            'kelas_id' => $request->kelas_tujuan
-        ]);
+        try {
+            $updated = Siswa::whereIn('nis', $validated['siswa'])
+                ->update(['kelas_id' => $validated['kelas_tujuan']]);
 
-        return redirect()->back()->with('success', 'Siswa berhasil dipindahkan ke kelas tujuan.');
+            if ($updated === 0) {
+                return redirect()->back()
+                    ->with('warning', 'Tidak ada siswa yang berhasil diperbarui.');
+            }
+
+            return redirect()->back()
+                ->with('success', 'Siswa berhasil dipindahkan ke kelas tujuan.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 }

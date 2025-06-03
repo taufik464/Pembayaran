@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PBulanan;
+use App\Models\PembayaranLain;
 use App\Models\PTahunan;
 use App\Models\PTambahan;
 use Illuminate\Http\Request;
@@ -26,8 +27,9 @@ class TransaksiController extends Controller
 
             if ($siswa) {
                 // Ambil semua data pembayaran yang berelasi dengan siswa ini
-                $bulanan = PBulanan::with('jenisPembayaran',)
+                $bulanan = PBulanan::with('jenisPembayaran')
                     ->where('siswa_id', $siswa->nis)
+                    ->whereNull('transaksi_id')
                     ->get();
 
                 $tahunan = PTahunan::with('jenisPembayaran')
@@ -36,6 +38,7 @@ class TransaksiController extends Controller
 
                 $tambahan = PTambahan::with('jenisPembayaran')
                     ->where('siswa_id', $siswa->nis)
+                    ->whereNull('transaksi_id')
                     ->get();
 
                 if ($bulanan->isEmpty() && $tahunan->isEmpty() && $tambahan->isEmpty()) {
@@ -44,7 +47,13 @@ class TransaksiController extends Controller
             }
         }
 
-        return view('staff.transaksi.index', compact('siswa', 'bulanan', 'tahunan', 'tambahan'));
+        $Btambah = PembayaranLain::all();
+        if ($Btambah->isEmpty()) {
+            session()->flash('message', 'Data pembayaran tambahan tidak ada.');
+        }
+        
+
+        return view('staff.transaksi.index', compact('siswa', 'bulanan', 'tahunan', 'tambahan', 'Btambah'));
     }
 
 

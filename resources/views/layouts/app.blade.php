@@ -36,6 +36,17 @@
             <span class="font-medium">Error!</span> {{ session('error') }}
         </div>
         @endif
+
+        @if($errors->any())
+        <div class="alert alert-danger p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 ">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <!-- Page Heading -->
         @isset($header)
         <header class="bg-white   shadow rounded-lg">

@@ -13,6 +13,7 @@ use App\Http\Controllers\SettingBulananController;
 use App\Http\Controllers\SettingTahunanController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\PLainController;
+use App\Http\Controllers\settingPtambahanController;
 use App\Models\transaksi;
 
 Route::get('/', function () {
@@ -90,6 +91,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/setting-tahunan/update/{id}', [SettingTahunanController::class, 'update'])->name('setting-tahunan.update');
     Route::delete('/setting-tahunan/destroy/{id}', [SettingTahunanController::class, 'destroy'])->name('setting-tahunan.destroy');
     Route::get('/setting-tahunan/show/{id}', [SettingTahunanController::class, 'show'])->name('setting-tahunan.show');
+
+    Route::post('/setting-tambahan', [settingPtambahanController::class, 'store'])->name('setting-tambahan.tambah');
 
     Route::get('/kelola-pembayaran', [transaksiController::class, 'index'])->name('kelola-pembayaran.index');
 });

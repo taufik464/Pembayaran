@@ -52,47 +52,56 @@
                     </div>
                 </div>
             </div>
-            @endif
+
             <div class="w-full flex flex-col items-center mt-2  bg-white p-4 rounded shadow ">
                 <!-- Tab Navigasi -->
-                <div class="flex border border-black rounded-md p-1 overflow-hidden w-max mb-4">
-                    <button onclick="showTab('bulanan')" id="btn-bulanan" class="tab-btn px-6 text-xs py-1 font-bold text-white bg-blue-400 rounded-md">Bulanan</button>
-                    <button onclick="showTab('tahunan')" id="btn-tahunan" class="tab-btn ml-2 text-xs px-6 py-1 text-black hover:bg-gray-100">Tahunan</button>
-                    <button onclick="showTab('tambahan')" id="btn-tambahan" class="tab-btn ml-2 text-xs px-6 py-1 text-black hover:bg-gray-100">Tambahan</button>
-                </div>
+                <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border border-gray-300 rounded-lg" id="custom-tabs" role="tablist" data-tabs-toggle="#tab-content" data-tabs-active-classes="bg-blue-500 text-white" data-tabs-inactive-classes="text-black hover:bg-gray-100">
+                    <li class="me-2">
+                        <button id="bulanan-tab" data-tabs-target="#bulanan" type="button" role="tab" class="inline-block px-6 py-2 rounded-md">Bulanan</button>
+                    </li>
+                    <li class="me-2">
+                        <button id="tahunan-tab" data-tabs-target="#tahunan" type="button" role="tab" class="inline-block px-6 py-2 rounded-md">Tahunan</button>
+                    </li>
+                    <li>
+                        <button id="tambahan-tab" data-tabs-target="#tambahan" type="button" role="tab" class="inline-block px-6 py-2 rounded-md">Tambahan</button>
+                    </li>
+                </ul>
 
-                <!-- Konten di bawah tab -->
-                <div class="w-full max-w-3xl bg-white  rounded shadow">
+                {{-- Konten Tab --}}
+                <div id="tab-content" class="w-full mt-2 bg-white rounded shadow p-2 min-h-[220px] max-h-[300px] overflow-y-auto">
                     @include('staff.transaksi.tabel-transaksi', [
                     'bulanan' => $bulanan,
                     'tahunan' => $tahunan,
                     'tambahan' => $tambahan,
+                   
                     ])
                 </div>
             </div>
 
-
+            @endif
 
         </div>
         <div class="basis-3/12 ml-4">
-            <div class="h-400 bg-white p-4 rounded shadow">
+            <div class="h-400 bg-white p-4 rounded shadow  min-h-[446px] h-full  ">
                 <div class="">
                     <h1 class="text-xl font-bold">Total Pembayaran</h1>
-                    <h1 class="text-xl mt-1 font-bold">Rp. 200000</h1>
+                    <h1 class="text-xl mt-1 font-bold" id="totalHarga">Rp. 0</h1>
 
                     <button type="button" class="w-full mt-4  text-xl font-medium text-center text-white bg-primary hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-2 ">Bayar</button>
 
                 </div>
                 <div class="mt-4 ">
-                    <h1 class="text-xl font-bold">Daftar Pembayaran</h>
-                </div>
+                    <h2 class="text-xl font-semibold mb-2">Daftar Pembayaran</h2>
 
+                    <div id="listPembayaran" class="mb-4 max-h-[320px] overflow-y-auto"></div>
+
+                </div>
 
             </div>
 
         </div>
     </div>
-    </div>
+
 </x-app-layout>
 
 <script>
@@ -113,4 +122,56 @@
     document.addEventListener('DOMContentLoaded', () => {
         showTab('bulanan');
     });
+
+
+    console.log("File tambahDaftar.js loaded!");
+    let daftarPembayaran = [];
+
+    function tambahPembayaran(id, nama, harga, jenis) {
+        const sudahAda = daftarPembayaran.find(item => item.id === id && item.jenis === jenis);
+        if (sudahAda) {
+            alert("Sudah ditambahkan!");
+            return;
+        }
+
+        daftarPembayaran.push({
+            id,
+            nama,
+            harga: parseFloat(harga),
+            jenis
+        });
+        updateDaftarPembayaran();
+    }
+
+    function hapusPembayaran(index) {
+        daftarPembayaran.splice(index, 1);
+        updateDaftarPembayaran();
+    }
+
+    function updateDaftarPembayaran() {
+        const container = document.getElementById("listPembayaran");
+        container.innerHTML = "";
+
+        let total = 0;
+
+        daftarPembayaran.forEach((item, index) => {
+            total += item.harga;
+
+            const card = document.createElement("div");
+            card.className = "flex justify-between items-center bg-white shadow px-4 py-2 mb-2 rounded border";
+
+            card.innerHTML = `
+      <div>
+        <p class="font-semibold text-sm">${item.nama}</p>
+        <p class="text-gray-700 text-sm">Rp${item.harga.toLocaleString()}</p>
+      </div>
+      <button onclick="hapusPembayaran(${index})" class="text-red-600 hover:text-red-800">
+        <span class="text-red-600">🗑️</span>
+      </button>
+    `;
+            container.appendChild(card);
+        });
+
+        document.getElementById("totalHarga").innerText = "Total: Rp" + total.toLocaleString();
+    }
 </script>

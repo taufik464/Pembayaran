@@ -26,6 +26,8 @@ class kelasController extends Controller
         // Validate the request data
         $request->validate([
             'nama' => 'required|string|max:255',
+            'tingkatan' => 'required|string|max:255 ',
+            'status' => 'required|in:aktif,tidak aktif,lulus',
 
         ]);
 
@@ -50,12 +52,16 @@ class kelasController extends Controller
         // Validate the request data
         $request->validate([
             'nama' => 'required|string|max:255',
+            'tingkatan' => 'required|string|max:255',
+            'status' => 'required|in:aktif,tidak aktif,lulus',
         ]);
         // Find the class by ID
         $kelas = kelas::findOrFail($request->id);
         // Update the class with the validated data
         $kelas->update([
             'nama' => $request->nama,
+            'tingkatan' => $request->tingkatan,
+            'status' => $request->status,
         ]);
         // Save the changes
         $kelas->save();
