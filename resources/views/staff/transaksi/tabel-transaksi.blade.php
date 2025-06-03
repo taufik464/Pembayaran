@@ -5,6 +5,7 @@
             <tr class="bg-gray-200">
                 <th class="px-4 py-2">No</th>
                 <th class="px-4 py-2">Nama</th>
+                <th class="px-4 py-2">Tahun</th>
                 <th class="px-4 py-2">Nominal</th>
                 <th class="px-4 py-2">Status</th>
 
@@ -16,6 +17,7 @@
                 onclick="tambahPembayaran( '{{$item->id }}', '{{ $item->jenisPembayaran->nama }} - {{ $item->nama_bulan }}', '{{ $item->harga }}', 'bulanan')">
                 <td class="px-4 py-2">{{ $loop->iteration }}</td>
                 <td class="px-4 py-2">{{ $item->jenisPembayaran->nama }} - {{ $item->nama_bulan }}</td>
+                <td class="px-4 py-2">{{ $item->jenisPembayaran->periode->tahun }}</td>
                 <td class="px-4 py-2">Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
                 <td class="px-4 py-2">{{ $item->status }}</td>
 

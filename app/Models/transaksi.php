@@ -14,7 +14,7 @@ class transaksi extends Model
         'metode_bayar_id',
         'tanggal',
         'uang_bayar',
-        'tanggal_bayar',
+      
     ];
     public function user()
     {
@@ -22,7 +22,7 @@ class transaksi extends Model
     }
     public function metodeBayar()
     {
-        return $this->belongsTo(MetodeBayar::class, 'metode_bayar_id');
+        return $this->belongsTo(Metode::class, 'metode_bayar_id');
     }
     public function aTahunan()
     {

@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Metode;
 use App\Models\PBulanan;
 use App\Models\PembayaranLain;
 use App\Models\PTahunan;
+use App\Models\ATahunan;
 use App\Models\PTambahan;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Transaksi;
+use Illuminate\Support\Facades\DB;
+
+
 
 class TransaksiController extends Controller
 {
@@ -47,20 +52,71 @@ class TransaksiController extends Controller
             }
         }
 
+       $metodes = Metode::all();
+        if ($metodes->isEmpty()) {
+            session()->flash('message', 'Data metode pembayaran tidak ada.');
+        }
+
         $Btambah = PembayaranLain::all();
         if ($Btambah->isEmpty()) {
             session()->flash('message', 'Data pembayaran tambahan tidak ada.');
         }
         
 
-        return view('staff.transaksi.index', compact('siswa', 'bulanan', 'tahunan', 'tambahan', 'Btambah'));
+        return view('staff.transaksi.index', compact('siswa', 'bulanan', 'tahunan', 'tambahan', 'Btambah', 'metodes'));
     }
 
 
-    public function create()
+    public function SimpanTransaksi(request $request)
     {
-        return view('transaksi.create');
+
+        $validated = $request->validate([
+            'metode_bayar' => 'required|exists:metode_bayar,id',
+            'jumlah_uang' => 'required|numeric|min:0',
+            'dataPembayaran' => 'required|string',
+        ]);
+
+        $data = json_decode($request->dataPembayaran, true);
+
+        DB::beginTransaction();
+
+        try {
+            // 1. Buat Transaksi
+            $transaksi = Transaksi::create([
+                'user_id' => auth('web')->id(),
+                'metode_bayar_id' => $validated['metode_bayar'],
+                'tanggal' => now(),
+                'uang_bayar' => $validated['jumlah_uang'],
+            ]);
+
+            // 2. Loop dan update/insert berdasarkan jenis
+            foreach ($data as $item) {
+                if ($item['jenis'] === 'bulanan') {
+                    PBulanan::where('id', $item['id'])->update([
+                        'transaksi_id' => $transaksi->id,
+                    ]);
+                } elseif ($item['jenis'] === 'tambahan') {
+                    PTambahan::where('id', $item['id'])->update([
+                        'transaksi_id' => $transaksi->id,
+                    ]);
+                } elseif ($item['jenis'] === 'tahunan') {
+                    ATahunan::create([
+                        'tahunan_id' => $item['id'],
+                        'transaksi_id' => $transaksi->id,
+                        'nominal' => $item['harga'],
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Pembayaran berhasil disimpan.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
+   
 
     public function show($id)
     {

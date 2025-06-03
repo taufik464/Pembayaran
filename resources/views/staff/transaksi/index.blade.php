@@ -63,7 +63,7 @@
                         <button id="tahunan-tab" data-tabs-target="#tahunan" type="button" role="tab" class="inline-block px-6 py-2 rounded-md">Tahunan</button>
                     </li>
                     <li>
-                        <button id="tambahan-tab" data-tabs-target="#tambahan" type="button" role="tab" class="inline-block px-6 py-2 rounded-md">Tambahan</button>
+                        <button id="tambahan-tab" data-tabs-target="#tambahan" type="button" role="tab" class="inline-block px-6 py-2 rounded-md">Lainnya</button>
                     </li>
                 </ul>
 
@@ -73,7 +73,7 @@
                     'bulanan' => $bulanan,
                     'tahunan' => $tahunan,
                     'tambahan' => $tambahan,
-                   
+
                     ])
                 </div>
             </div>
@@ -87,7 +87,14 @@
                     <h1 class="text-xl font-bold">Total Pembayaran</h1>
                     <h1 class="text-xl mt-1 font-bold" id="totalHarga">Rp. 0</h1>
 
-                    <button type="button" class="w-full mt-4  text-xl font-medium text-center text-white bg-primary hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-2 ">Bayar</button>
+                    <button 
+                        type="button" 
+                        onclick="prepareModalBayar()" 
+                        class="w-full mt-4 text-xl font-medium text-center text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 rounded-full text-sm px-5 py-1 me-2 mb-2" 
+                        data-modal-target="paymentModal"
+                        data-modal-toggle="paymentModal">
+                        Bayar
+                    </button>
 
                 </div>
                 <div class="mt-4 ">
@@ -101,6 +108,8 @@
 
         </div>
     </div>
+
+    @include('staff.transaksi.bayar-modal')
 
 </x-app-layout>
 
@@ -173,5 +182,18 @@
         });
 
         document.getElementById("totalHarga").innerText = "Total: Rp" + total.toLocaleString();
+    }
+
+    function prepareModalBayar() {
+        if (daftarPembayaran.length === 0) {
+            alert("Silakan tambahkan item pembayaran terlebih dahulu.");
+            return;
+        }
+
+        // (opsional) Hitung total dan tampilkan di span total
+        const total = daftarPembayaran.reduce((sum, item) => sum + item.harga, 0);
+        document.querySelector("#paymentModal .totalPembayaranSpan").innerText = "Rp" + total.toLocaleString();
+
+        // Modal tetap dibuka karena ada `data-modal-toggle`
     }
 </script>

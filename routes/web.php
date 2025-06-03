@@ -11,14 +11,20 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\SettingBulananController;
 use App\Http\Controllers\SettingTahunanController;
-use App\Http\Controllers\transaksiController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PLainController;
 use App\Http\Controllers\settingPtambahanController;
 use App\Models\transaksi;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Rebuild Web
+Route::get('/', [LandingController::class, 'index']); // Landing page utama
+Route::get('/landing', [LandingController::class, 'index']); // Alternatif
+
+//Route::get('/', function () {
+ //   return view('welcome');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
+//Siswa
     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa.index');
     Route::get('siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
     Route::post('siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
@@ -39,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::put('siswa/update/{id}', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
+//Staff
     Route::get('staff', [StaffController::class, 'index'])->name('staff.index');
     Route::get('staff/create', [StaffController::class, 'create'])->name('staff.create');
     Route::post('staff/store', [StaffController::class, 'store'])->name('staff.store');
@@ -46,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff.update');
     Route::delete('staff/destroy/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
+//Kelas
     Route::get('kelas', [KelasController::class, 'index'])->name('kelas.index');
     Route::post('kelas/store', [KelasController::class, 'store'])->name('kelas.store');
     Route::get('kelas/create', [KelasController::class, 'create'])->name('kelas.create');
@@ -55,11 +63,12 @@ Route::middleware('auth')->group(function () {
 
 
 
+//Naik Kelas
     Route::get('/naik-kelas', [naik_KelasController::class, 'index'])->name('naik_kelas.index');
     Route::get('/naik-kelas/siswa/{id}', [naik_KelasController::class, 'getSiswaByKelas']);
     Route::post('/naik-kelas/simpan', [naik_KelasController::class, 'simpan'])->name('naik_kelas.simpan');
 
-
+//Jenis Pembayaran
     Route::get('jenis-pembayaran', [JenisPembayaranController::class, 'index'])->name('jenis-pembayaran.index');
     Route::get('jenis-pembayaran/create', [JenisPembayaranController::class, 'create'])->name('jenis-pembayaran.create');
     Route::post('jenis-pembayaran/store', [JenisPembayaranController::class, 'store'])->name('jenis-pembayaran.store');
@@ -95,6 +104,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/setting-tambahan', [settingPtambahanController::class, 'store'])->name('setting-tambahan.tambah');
 
     Route::get('/kelola-pembayaran', [transaksiController::class, 'index'])->name('kelola-pembayaran.index');
+    Route::post('/kelola-pembayaran', [transaksiController::class, 'SimpanTransaksi'])->name('kelola-pembayaran.simpan');
+
+    Route::get ('/tahun_ajaran', [TahunAjaranController::class, 'index'])->name('tahun_ajaran.index');
+    Route::post('tahun_ajaran/store', [TahunAjaranController::class, 'store'])->name('tahun_ajaran.store');
+    Route::get('tahun_ajaran/create', [TahunAjaranController::class, 'create'])->name('tahun_ajaran.create');
+    Route::get('tahun_ajaran/edit/{id}', [TahunAjaranController::class, 'edit'])->name('tahun_ajaran.edit');
+    Route::put('tahun_ajaran/update/{id}', [TahunAjaranController::class, 'update'])->name('tahunajaran.update');
+    Route::delete('tahun_ajaran/destroy/{id}', [TahunAjaranController::class, 'destroy'])->name('tahun_ajaran.destroy');
 });
 
 require __DIR__ . '/auth.php';

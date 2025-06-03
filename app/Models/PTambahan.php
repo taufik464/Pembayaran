@@ -15,6 +15,8 @@ class PTambahan extends Model
         'harga',
     ];
 
+    
+
     public function getStatusAttribute()
     {
         return $this->transaksi_id === null ? 'Belum Lunas' : 'Lunas';

@@ -40,13 +40,13 @@ class SiswaController extends Controller
         }
 
         $siswaData = $request->except('foto');
-        $user = User::create([
+       // $user = User::create([
 
-            'username' => $request->nis,
-            'password' => bcrypt($request->nisn),
-        ]);
+       //     'username' => $request->nis,
+       //     'password' => bcrypt($request->nisn),
+       // ]);
 
-        $siswaData['user_id'] = $user->id;
+       // $siswaData['user_id'] = $user->id;
         $siswaData['foto'] = $fotoPath;
 
         Siswa::create($siswaData);
