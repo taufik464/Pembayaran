@@ -47,13 +47,18 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('staff.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                        <div class="mb-6 mt-4">
+                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nama</label>
+                            <input type="text" name="nama" id="nama" required
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Nama Staff">
+                        </div>
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="mb-6 mt-4">
-                                <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nama</label>
-                                <input type="text" name="nama" id="nama" required
+                                <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">NIK</label>
+                                <input type="text" name="nik" id="nik" required
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="Nama Staff">
+                                    placeholder="Nomer Induk Karyawan">
                             </div>
                             <div class="mb-6 mt-4">
                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>

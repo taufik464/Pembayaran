@@ -25,6 +25,7 @@ class StaffController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
+            'nik' => 'required|string|max:20|   unique:staff,id',
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:staff,email',
             'no_hp' => 'nullable|string|max:20',
@@ -32,20 +33,23 @@ class StaffController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        if (User::where('email', $validated['email'])->exists()) {
+            return redirect()->back()->withErrors(['email' => 'Email sudah terdaftar.'])->withInput();
+        }
+
         // Buat user baru terlebih dahulu
         $user = User::create([
-            'username' => $validated['nama'],
+            'username' => $validated['nik'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
             'role' => 'staff', // Atur role sesuai kebutuhan
         ]);
 
-        if (User::where('email', $validated['email'])->exists()) {
-            return redirect()->back()->withErrors(['email' => 'Email sudah terdaftar.'])->withInput();
-        }
+       
 
         // Buat staff baru dan hubungkan dengan user
         Staff::create([
+            'id' => $validated['nik'],
             'nama' => $validated['nama'],
             'email' => $validated['email'],
             'no_hp' => $validated['no_hp'],

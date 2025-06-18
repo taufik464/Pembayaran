@@ -15,6 +15,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PLainController;
+use App\Http\Controllers\rekapController;
 use App\Http\Controllers\settingPtambahanController;
 use App\Models\transaksi;
 
@@ -54,8 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('staff/destroy/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
 //Kelas
-    Route::get('kelas', [KelasController::class, 'index'])->name('kelas.index');
-    Route::post('kelas/store', [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('kelas', [KelasController::class, 'DaftarKelas'])->name('kelas.index');
+    Route::post('kelas/store', [KelasController::class, 'SimpanKelas'])->name('kelas.store');
     Route::get('kelas/create', [KelasController::class, 'create'])->name('kelas.create');
     Route::get('kelas/edit/{id}', [KelasController::class, 'edit'])->name('kelas.edit');
     Route::put('kelas/update/{id}', [KelasController::class, 'update'])->name('kelas.update');
@@ -112,6 +113,8 @@ Route::middleware('auth')->group(function () {
     Route::get('tahun_ajaran/edit/{id}', [TahunAjaranController::class, 'edit'])->name('tahun_ajaran.edit');
     Route::put('tahun_ajaran/update/{id}', [TahunAjaranController::class, 'update'])->name('tahunajaran.update');
     Route::delete('tahun_ajaran/destroy/{id}', [TahunAjaranController::class, 'destroy'])->name('tahun_ajaran.destroy');
+
+    Route::get('/rekap', [rekapController::class, 'index'])->name('rekap.index');
 });
 
 require __DIR__ . '/auth.php';

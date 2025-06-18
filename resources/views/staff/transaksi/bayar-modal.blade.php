@@ -20,12 +20,13 @@
                     <div class="flex justify-between font-bold text-lg">
                         <span>Total Pembayaran:</span>
                         <span class="totalPembayaranSpan">Rp0</span>
+                        <input type="hidden" name="total_pembayaran" id="totalPembayaranInput" value="0">
                     </div>
                     <div class="mt-2">
                         <label for="metode_bayar" class="block mb-2 text-sm font-medium text-gray-700">Metode Bayar</label>
                         <select id="metode_bayar" name="metode_bayar" class="block w-full p-1 border rounded focus:ring focus:ring-blue-200">
                             <option value="">Pilih Metode</option>
-                            @foreach($metodes as $m)
+                            @foreach($metode as $m)
                             <option value="{{ $m->id }}">{{ $m->nama }}</option>
                             @endforeach
                         </select>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Data Kelas') }}
+            {{ __('Rekapitulasi Data') }}
         </h2>
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -26,9 +26,6 @@
         </nav>
     </x-slot>
 
-
-
-
     <div class="bg-white rounded-lg text-gray-900 dark:text-gray-100">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4 ">
             <div class="flex items-center justify-between">
@@ -44,72 +41,54 @@
                     </div>
 
                 </div>
-                <button data-modal-target="tambahKelasModal" data-modal-toggle="tambahKelasModal" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-600 focus:outline-none dark:focus:ring-green-800">
-                    Tambah Data
-                </button>
-                @include('staff.kelas.modal_create_kelas')
+
             </div>
+
             <table class="w-full mt-2 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
-                            No
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Angkatan
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Status
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Kode Kelas
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Aksi
-                        </th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">No</th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">NIS</th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">Kelas</th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">Nama Siswa</th>
+                        @foreach($jenisP as $jp)
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">{{ $jp->nama }}</th>
+                        @endforeach
                     </tr>
                 </thead>
+
                 <tbody>
-                    @foreach($kelass as $kelas)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="NIS" class="px-6 py-3 font-xs text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $loop->iteration }}
-                        </th>
-                        <td class="px-6 py-3">
-                            {{ $kelas->nama }}
-                        </td>
-                        <td class="px-6 py-3">
-                            {{ $kelas->tingkatan }}
-                        </td>
-                        <td class="px-6 py-3">
-                            {{ $kelas->status }}
-                        </td>
-                        <td class="px-6 py-3">
-                            {{ $kelas->id }}
-                        </td>
-                        <td class="px-2 py-2 relative" x-data="{ open: false }">
-                            <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
-                                &#8942; <!-- Tiga titik vertikal -->
-                            </button>
+                    @forelse($siswas as $no => $siswa)
+                    <tr>
+                        <td class="px-6 py-3 whitespace-nowrap">{{ $no + 1 }}</td>
+                        <td class="px-6 py-3 whitespace-nowrap">{{ $siswa->nis }}</td>
+                        <td class="px-6 py-3 whitespace-nowrap">{{ $siswa->kelas->nama }}</td>
+                        <td class="px-6 py-3 whitespace-nowrap">{{ $siswa->nama }}</td>
 
-                            <div x-show="open" @click.away="open = false" class="absolute right-0 z-10 mt-2 w-36 bg-white border rounded shadow-md">
-                                <button data-modal-target="editKelasModal-{{ $kelas->id }}" data-modal-toggle="editKelasModal-{{ $kelas->id }}" class="w-full text-left block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100">Edit</button>
-
-
-                                <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Hapus</button>
-                                </form>
-                            </div>
+                        @foreach($jenisP as $jp)
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            @if($jp->tipe_pembayaran === 'bulanan')
+                                @php
+                                    $bulanan = $siswa->pPulanan->where('jenis_pembayaran_id', $jp->id);
+                                @endphp
+                                {{ $bulanan->count() > 0 ? $bulanan->count() . ' bulan' : '-' }}
+                            @else
+                                @php
+                                    $tahunan = $siswa->pTahunan->firstWhere('jenis_pembayaran_id', $jp->id);
+                                @endphp
+                                {{ $tahunan && $tahunan->harga ? 'Rp ' . number_format($tahunan->harga, 0, ',', '.') : '-' }}
+                            @endif
                         </td>
+                        @endforeach
                     </tr>
-                    @include('staff.kelas.modal_update_kelas', ['kelas' => $kelas])
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="{{ 3 + count($jenisP) }}" class="text-center py-4">Tidak ada data siswa.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
+
             </table>
 
 

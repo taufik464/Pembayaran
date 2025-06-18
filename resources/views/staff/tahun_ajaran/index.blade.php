@@ -4,9 +4,9 @@
             {{ __('Data Tahun Ajaran') }}
         </h2>
         <nav class="flex" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse mt-1">
                 <li class="inline-flex items-center">
-                    <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="/dashboard" class="inline-flex items-center text-xs font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                         </svg>
@@ -15,10 +15,10 @@
                 </li>
                 <li>
                     <div class="flex items-center">
-                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <svg class="rtl:rotate-180 w-2 h-2 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="route('tahun_ajaran.index')" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">tahun ajaran</a>
+                        <a href="{{ route('tahun_ajaran.index') }}" class=" ms-1 text-xs font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Tahun Ajaran</a>
                     </div>
                 </li>
 
@@ -29,8 +29,8 @@
 
 
 
-    <div class="p-4 text-gray-900 dark:text-gray-100">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4 ">
+    <div class=" text-gray-900 dark:text-gray-100 ">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4 bg-white">
             <div class="flex items-center justify-between">
                 <div class="pb-4 bg-white dark:bg-gray-900">
                     <label for="tabl</div>e-search" class="sr-only">Search</label>
@@ -69,17 +69,17 @@
                 <tbody>
                     @foreach($tahunajarans as $tahunajaran)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="NIS" class="px-6 py-1 font-xs text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="NIS" class="px-6 py-3 font-xs text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $loop->iteration }}
                         </th>
-                        <td class="px-6 py-1">
+                        <td class="px-6 py-3">
                             {{ $tahunajaran->tahun}}
                         </td>
-                        <td class="px-6 py-1">
+                        <td class="px-6 py-3">
                             {{ $tahunajaran->id }}
                         </td>
 
-                        <td class="px-6 py-1 text-right">
+                        <td class="px-6 py-3 text-right">
                             <div class="flex justify-end space-x-2 rtl:space-x-reverse">
                                 <button data-modal-target="edittahunajaranModal-{{ $tahunajaran->id }}" data-modal-toggle="edittahunajaranModal-{{ $tahunajaran->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

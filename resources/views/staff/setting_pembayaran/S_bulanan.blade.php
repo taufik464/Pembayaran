@@ -79,15 +79,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-blue-500 text-white p-3 rounded">
-                        <h3 class="text-lg font-semibold">Tarif Setiap Bulan Sama</h3>
-                    </div>
-
-                    <div class="bg-gray-100 p-4 rounded-lg">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal</label>
-                        <input type="number" name="nominal_sama" id="nominal-sama" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                        <p class="text-xs text-red-500">* Hanya menggunakan format angka!</p>
-                    </div>
+                    
                 </div>
 
                 <!-- Kolom kanan -->
@@ -112,7 +104,8 @@
                                         type="number"
                                         name="nominal[]"
                                         class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rp ..."
-                                        step="500">
+                                        step="500"
+                                    @if($b == 'Juli') id="input-juli" @endif >
                                 </div>
                             </div>
                             @endforeach
@@ -140,7 +133,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const nominalSamaInput = document.getElementById('nominal-sama');
+        const nominalSamaInput = document.getElementById('input-juli');
         const nominalBulanInputs = document.querySelectorAll('input[name="nominal[]"]');
 
         nominalSamaInput.addEventListener('keydown', function(event) {

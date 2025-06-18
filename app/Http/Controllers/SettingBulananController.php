@@ -21,18 +21,19 @@ class SettingBulananController extends Controller
 
         $pembayaran = JenisPembayaran::with('periode')->findOrFail($Id);
         $bulan = [
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember',
             'Januari',
             'Februari',
             'Maret',
             'April',
             'Mei',
             'Juni',
-            'Juli',
-            'Agustus',
-            'September',
-            'Oktober',
-            'November',
-            'Desember'
+           
         ];
 
         // Kelas bisa kamu filter jika perlu berdasarkan tahun ajaran

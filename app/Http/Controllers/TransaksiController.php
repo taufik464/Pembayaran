@@ -52,8 +52,8 @@ class TransaksiController extends Controller
             }
         }
 
-       $metodes = Metode::all();
-        if ($metodes->isEmpty()) {
+        $metode = Metode::all();
+        if ($metode->isEmpty()) {
             session()->flash('message', 'Data metode pembayaran tidak ada.');
         }
 
@@ -61,9 +61,9 @@ class TransaksiController extends Controller
         if ($Btambah->isEmpty()) {
             session()->flash('message', 'Data pembayaran tambahan tidak ada.');
         }
-        
 
-        return view('staff.transaksi.index', compact('siswa', 'bulanan', 'tahunan', 'tambahan', 'Btambah', 'metodes'));
+
+        return view('staff.transaksi.index', compact('siswa', 'bulanan', 'tahunan', 'tambahan', 'Btambah', 'metode'));
     }
 
 
@@ -74,7 +74,10 @@ class TransaksiController extends Controller
             'metode_bayar' => 'required|exists:metode_bayar,id',
             'jumlah_uang' => 'required|numeric|min:0',
             'dataPembayaran' => 'required|string',
+            'total_pembayaran' => 'required|numeric|min:0',
         ]);
+        // Validasi jumlah uang yang dibayar
+
 
         $data = json_decode($request->dataPembayaran, true);
 
@@ -82,12 +85,17 @@ class TransaksiController extends Controller
 
         try {
             // 1. Buat Transaksi
-            $transaksi = Transaksi::create([
-                'user_id' => auth('web')->id(),
-                'metode_bayar_id' => $validated['metode_bayar'],
-                'tanggal' => now(),
-                'uang_bayar' => $validated['jumlah_uang'],
-            ]);
+            if ($validated['jumlah_uang'] >= $validated['total_pembayaran']) {
+                $transaksi = Transaksi::create([
+                    'user_id' => auth('web')->id(),
+                    'metode_bayar_id' => $validated['metode_bayar'],
+                    'tanggal' => now(),
+                    'uang_bayar' => $validated['jumlah_uang'],
+                ]);
+            } else {
+                return redirect()->back()->with('error', 'Jumlah uang yang dibayar tidak mencukupi total pembayaran.');
+            }
+
 
             // 2. Loop dan update/insert berdasarkan jenis
             foreach ($data as $item) {
@@ -113,18 +121,7 @@ class TransaksiController extends Controller
             return redirect()->back()->with('success', 'Pembayaran berhasil disimpan.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan pada server');
         }
-    }
-   
-
-    public function show($id)
-    {
-        return view('transaksi.show', compact('id'));
-    }
-
-    public function edit($id)
-    {
-        return view('transaksi.edit', compact('id'));
     }
 }

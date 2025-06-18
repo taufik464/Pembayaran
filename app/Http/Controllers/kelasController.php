@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class kelasController extends Controller
 {
-    public function index()
+    public function DaftarKelas()
     {
 
         $kelass = Kelas::all();
@@ -21,7 +21,7 @@ class kelasController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function SimpanKelas(Request $request)
     {
         // Validate the request data
         $request->validate([
