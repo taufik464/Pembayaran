@@ -1,44 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.web')
 
 @section('title', 'Beranda')
 
 @section('content')
 <section class="bg-cover bg-center bg-no-repeat text-white py-24 relative" style="background-image: url('{{ asset('img/HalamanSekolah.jpg') }}');">
-    <div class="bg-black/60 absolute inset-0 z-0"></div>
-    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-8">
-        <div class="w-full md:w-1/2">
-            <div class="bg-white/30 backdrop-blur-lg rounded-xl p-6 sm:p-8 md:p-10 shadow-lg">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 text-white">
-                    Selamat Datang di <span class="text-green-300">SMA Al Hikmah</span>
-                </h2>
-                <p class="text-base sm:text-lg text-white mb-6">Sekolah Islam Modern yang Membentuk Generasi Cerdas, Islami, dan Mandiri</p>
-                <a href="{{ route('tentang') }}" class="bg-green-400 hover:bg-green-300 text-black px-6 py-3 rounded-full font-semibold transition">Pelajari Lebih Lanjut</a>
-            </div>
-        </div>
+  <div class="bg-black/60 absolute inset-0 z-0"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-8">
+    <div class="w-full md:w-1/2">
+      <div class="bg-white/30 backdrop-blur-lg rounded-xl p-6 sm:p-8 md:p-10 shadow-lg">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 text-white">
+          Selamat Datang di <span class="text-green-300">SMA Al Hikmah</span>
+        </h2>
+        <p class="text-base sm:text-lg text-white mb-6">Sekolah Islam Modern yang Membentuk Generasi Cerdas, Islami, dan Mandiri</p>
+        <a href="{{ route('tentang') }}" class="bg-green-400 hover:bg-green-300 text-black px-6 py-3 rounded-full font-semibold transition">Pelajari Lebih Lanjut</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section id="profil" class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Sambutan</h2>
-        <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
-            <!-- Gambar Kepala Sekolah -->
-            <div class="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
-    <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full shadow-lg">
-        <img src="/img/KEPSEK.jpg" alt="Kepala Sekolah" class="w-full h-full object-cover">
-    </div>
-    <p class="text-center font-semibold mt-4">Kelompok 2, S.Pd. (Kepala Sekolah)</p>
-</div>
-            <!-- Sambutan -->
-            <div class="w-full md:w-2/3">
-                <p class="text-lg leading-relaxed text-justify">
-                    Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kehadirat Allah SWT atas rahmat dan karunia-Nya, kami bisa terus memberikan pendidikan terbaik bagi generasi muda Islam. Di SMA Al Hikmah, kami tidak hanya fokus pada akademik, tetapi juga pembentukan karakter Islami yang kuat, sehingga siswa siap menghadapi tantangan masa depan dengan iman dan ilmu.</p>
-            </div>
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Sambutan</h2>
+    <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
+      <!-- Gambar Kepala Sekolah -->
+      <div class="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
+        <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full shadow-lg">
+          <img src="/img/KEPSEK.jpg" alt="Kepala Sekolah" class="w-full h-full object-cover">
         </div>
+        <p class="text-center font-semibold mt-4">Saiin, S.Pd. (Kepala Sekolah)</p>
+      </div>
+      <!-- Sambutan -->
+      <div class="w-full md:w-2/3">
+        <p class="text-lg leading-relaxed text-justify">
+          Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kehadirat Allah SWT atas rahmat dan karunia-Nya, kami bisa terus memberikan pendidikan terbaik bagi generasi muda Islam. Di SMA Al Hikmah, kami tidak hanya fokus pada akademik, tetapi juga pembentukan karakter Islami yang kuat, sehingga siswa siap menghadapi tantangan masa depan dengan iman dan ilmu.</p>
+      </div>
     </div>
+  </div>
 </section>
 
-  <!-- Ekstrakurikuler -->
+<!-- Ekstrakurikuler -->
 <section id="ekstrakurikuler" class="py-20 bg-gray-50">
   <div class="max-w-6xl mx-auto px-6">
     <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Ekstrakurikuler</h3>

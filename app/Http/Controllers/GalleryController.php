@@ -9,8 +9,8 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        $galleries = Gallery::latest()->get();
-        return view('gallery.index', compact('galleries'));
+        $gallery = Gallery::latest()->get();
+        return view('informasi.gallery', compact('gallery'));
     }
 
     public function store(Request $request)

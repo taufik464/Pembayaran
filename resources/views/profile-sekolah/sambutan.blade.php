@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.web')
 
 @section('title', 'Sambutan Kepala Sekolah')
 
@@ -13,8 +13,6 @@
                 </div>
             </div>
             <div class="w-full md:w-2/3">
-                <h3 class="text-xl font-semibold mb-2">Tim MISHI</h3>
-                <p class="text-gray-600 mb-4">Kepala SMA Al Hikmah</p>
                 <p class="text-lg leading-relaxed mb-4">
                     "Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kehadirat Allah SWT atas rahmat dan karunia-Nya, kami bisa terus memberikan pendidikan terbaik bagi generasi muda Islam."
                 </p>

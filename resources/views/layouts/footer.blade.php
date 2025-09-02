@@ -36,7 +36,7 @@
       <ul class="space-y-2">
         <li class="flex items-start">
           <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400"></i>
-          <span class="text-gray-400">Jl. Pendidikan No. 123, Bandung</span>
+          <span class="text-gray-400">JL.ABDUL MANAN KM.02, Sumberberas, Kec. Muncar, Kab. Banyuwangi Prov. Jawa Timur</span>
         </li>
         <li class="flex items-start">
           <i class="fas fa-phone-alt mt-1 mr-3 text-gray-400"></i>

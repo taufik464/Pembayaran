@@ -10,6 +10,9 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
+use App\Http\Controllers\KontenController;
+use App\Http\Controllers\KategoriArtikelController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,8 @@ use App\Http\Controllers\ProfileSekolahController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+require __DIR__.'/auth.php';
 
 // ==================== ROUTE BERANDA ====================
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
@@ -50,3 +55,17 @@ Route::prefix('layanan')->group(function () {
     Route::get('/prestasi-sekolah', [PrestasiController::class, 'prestasiSekolah'])->name('prestasi-sekolah');
     Route::get('/prestasi-siswa', [PrestasiController::class, 'prestasiSiswa'])->name('prestasi-siswa');
 });
+
+// ==================== DASHBOARD ADMIN ====================
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
+});
+
+Route::get('/artikel', [KontenController::class, 'index'])->name('admin-artikel');
+Route::get('/artikel/tambah', [KontenController::class, 'create'])->name('admin-artikel.tambah');
+Route::post('/artikel', [KontenController::class, 'store'])->name('admin-artikel.store');
+
+Route::get('/kategori-artikel', [KategoriArtikelController::class, 'index'])->name('kategori-artikel');
+Route::post('/kategori-artikel', [KategoriArtikelController::class, 'store'])->name('kategori-artikel.store');
+Route::post('/kategori-artikel/{id}', [KategoriArtikelController::class, 'update'])->name('kategori-artikel.update');
+Route::delete('/kategori-artikel/{id}', [KategoriArtikelController::class, 'destroy'])->name('kategori-artikel.destroy');

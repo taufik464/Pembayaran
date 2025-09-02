@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('img/logo_alhikmah.jpg') }}" alt="Logo SMA Al Hikmah" class="w-10 h-10">
-            <h1 class="text-xl font-bold text-green-700">SMA Al Hikmah</h1>
+            <h1 class="text-xl font-bold text-green-700">SMA Al Hikmah Muncar</h1>
         </div>
         <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
             <!-- Beranda Dropdown -->
