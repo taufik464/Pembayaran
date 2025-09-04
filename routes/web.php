@@ -12,6 +12,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
 use App\Http\Controllers\KontenController;
 use App\Http\Controllers\KategoriArtikelController;
+use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 
 
 /*
@@ -59,13 +60,6 @@ Route::prefix('layanan')->group(function () {
 // ==================== DASHBOARD ADMIN ====================
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
+    Route::get('/admin/ekstrakurikuler', [ekstraController::class, 'index'])->name('admin.ekstrakurikuler');
 });
 
-Route::get('/artikel', [KontenController::class, 'index'])->name('admin-artikel');
-Route::get('/artikel/tambah', [KontenController::class, 'create'])->name('admin-artikel.tambah');
-Route::post('/artikel', [KontenController::class, 'store'])->name('admin-artikel.store');
-
-Route::get('/kategori-artikel', [KategoriArtikelController::class, 'index'])->name('kategori-artikel');
-Route::post('/kategori-artikel', [KategoriArtikelController::class, 'store'])->name('kategori-artikel.store');
-Route::post('/kategori-artikel/{id}', [KategoriArtikelController::class, 'update'])->name('kategori-artikel.update');
-Route::delete('/kategori-artikel/{id}', [KategoriArtikelController::class, 'destroy'])->name('kategori-artikel.destroy');

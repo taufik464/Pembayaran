@@ -4,6 +4,7 @@
 
 @section('content')
 <section class="py-20 bg-gray-50">
+
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Program Ekstrakurikuler</h2>
     <p class="text-center text-lg text-gray-600 mb-12">
