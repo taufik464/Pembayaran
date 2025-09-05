@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileSekolahController;
 use App\Http\Controllers\KontenController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
+use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
 
 
 /*
@@ -62,4 +63,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
     Route::get('/admin/ekstrakurikuler', [ekstraController::class, 'index'])->name('admin.ekstrakurikuler');
 });
+
+Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
+Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
+Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
+Route::resource('profil', ProfilSekolahController::class);
 

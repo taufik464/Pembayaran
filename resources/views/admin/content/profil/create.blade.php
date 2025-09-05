@@ -1,0 +1,43 @@
+@extends('layouts.admin')
+@section('title', 'Tambah Profil Sekolah')
+
+@section('content')
+<x-page-header
+    title="Tambah Profil Sekolah"
+    :breadcrumb="[
+        ['url' => '/dashboard', 'label' => 'Dashboard'],
+        ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
+        ['url' => '#', 'label' => 'Tambah Data'],
+    ]" />
+
+<section class="bg-white p-6 rounded-lg shadow">
+    <form action="{{ route('profil.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-4">
+            <label class="block font-medium">Judul</label>
+            <input type="text" name="judul" class="w-full border rounded p-2" required>
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium">Isi</label>
+            <textarea name="isi" rows="4" class="w-full border rounded p-2" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium">Gambar</label>
+            <input type="file" name="image" class="w-full border rounded p-2">
+        </div>
+
+        <div class="flex space-x-3">
+            <button type="submit"
+                    class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
+                Simpan
+            </button>
+            <a href="{{ route('profil.index') }}"
+               class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg">
+                Batal
+            </a>
+        </div>
+    </form>
+</section>
+@endsection
