@@ -28,6 +28,10 @@ use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 
 require __DIR__.'/auth.php';
 
+route::get('tentang', function () {
+    return view('tentang');
+});
+
 // ==================== ROUTE BERANDA ====================
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/tentang', [BerandaController::class, 'tentang'])->name('tentang');
