@@ -72,6 +72,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/ekstrakurikuler/{ekstrakurikuler}/edit', [ekstraController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
     Route::put('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'update'])->name('admin.ekstrakurikuler.update');
     Route::delete('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
+        // ROUTE ADMIN GALERI
+        Route::get('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'index'])->name('admin.galeri');
+        Route::get('/admin/galeri/create', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'create'])->name('admin.galeri.create');
+        Route::post('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'store'])->name('admin.galeri.store');
+        Route::get('/admin/galeri/{gallery}/edit', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'edit'])->name('admin.galeri.edit');
+        Route::put('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'update'])->name('admin.galeri.update');
+        Route::delete('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
     //
 });
 
