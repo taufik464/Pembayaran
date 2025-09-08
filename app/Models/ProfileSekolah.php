@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProfileSekolah extends Model
 {
     use HasFactory;
+    protected $table = 'profil_sekolahs'; // Nama tabel sesuai konvensi Laravel
 
     protected $fillable = [
         'sejarah',

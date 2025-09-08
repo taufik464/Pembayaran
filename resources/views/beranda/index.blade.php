@@ -43,26 +43,14 @@
   <div class="max-w-6xl mx-auto px-6">
     <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Ekstrakurikuler</h3>
     <div class="grid md:grid-cols-3 gap-8">
-      <!-- Ekstra 1 -->
-      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-        <img src="/img/Silat.png" alt="Ekstrakurikuler Silat" class="w-100 h-100 object-cover">
-        <h4 class="text-center font-bold mb-2">Silat</h4>
-        <p class="text-gray-600">Program ekstrakurikuler silat tidak hanya mengajarkan teknik bela diri tradisional tetapi juga menanamkan nilai-nilai disiplin, keberanian, dan karakter kuat. Dibimbing oleh pelatih bersertifikat, siswa akan mempelajari jurus dasar, taktik pertahanan diri, serta filosofi hidup yang terkandung dalam seni bela diri. Kegiatan ini juga mempersiapkan siswa untuk mengikuti kejuaraan silat antar sekolah.</p>
-      </div>
+      @foreach ($ekstra as $item )
 
-      <!-- Ekstra 2 -->
-      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-        <img src="/img/bulutangkis.jpg" alt="Ekstrakurikuler Bulutangkis" class="w-100 h-100 object-cover">
-        <h4 class="text-center font-bold mb-2">Badminton</h4>
-        <p class="text-gray-600">Ekstrakurikuler badminton dirancang untuk mengasah keterampilan bermain bulutangkis mulai dari teknik dasar seperti grip, footwork, sampai strategi permainan tunggal dan ganda. Melalui program ini, siswa tidak hanya meningkatkan kebugaran jasmani tetapi juga belajar tentang sportivitas dan manajemen emosi dalam pertandingan. Fasilitas lapangan standar nasional tersedia untuk mendukung aktivitas latihan.</p>
-      </div>
 
-      <!-- Ekstra 3 -->
-      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-        <img src="/img/basket.jpg" alt="Ekstrakurikuler Basket" class="w-100 h-100 object-cover">
-        <h4 class="text-center font-bold mb-2">Basket</h4>
-        <p class="text-gray-600">Ekstrakurikuler basket di sekolah kami membina siswa dalam penguasaan teknik dasar bola basket seperti dribbling, shooting, dan passing. Melalui latihan rutin seminggu dua kali, peserta akan mengembangkan kemampuan kerjasama tim, ketangkasan fisik, dan sportivitas. Kegiatan ini juga menjadi wadah untuk menemukan bakat-bakat baru melalui kompetisi antar kelas dan turnamen sekolah.</p>
-      </div>
+      <x-ekstrakurikuler-card
+        image="{{ $item->gambar ? asset('storage/'.$item->gambar) : asset('images/default-ekstra.jpg') }}"
+        title="{{ $item->nama }}"
+        desc="{{ $item->deskripsi }}" />
+      @endforeach
     </div>
   </div>
 </section>

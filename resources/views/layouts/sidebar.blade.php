@@ -6,13 +6,14 @@
         <x-sidebar-link href="{{ route('dashboard') }}" icon="fas fa-tachometer-alt" :active="request()->is('dashboard')">
             Dashboard
         </x-sidebar-link>
-        <x-sidebar-link href="#" icon="fas fa-newspaper" :active="request()->is('artikel')">
+        <x-sidebar-link href="{{ route('profil.index') }}" icon="fas fa-newspaper" :active="request()->is('profil-sekolah')">
             Profil Sekolah
         </x-sidebar-link>
+
         <x-sidebar-link href="{{ route('admin.ekstrakurikuler') }}" icon="fas fa-tachometer-alt" :active="false">
             Ekstrakurikuler
         </x-sidebar-link>
-       
+
         <x-sidebar-link href="#" icon="fas fa-images" :active="request()->is('galeri')">
             Galeri
         </x-sidebar-link>

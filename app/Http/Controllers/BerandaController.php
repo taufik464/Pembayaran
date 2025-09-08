@@ -10,10 +10,12 @@ class BerandaController extends Controller
 {
     public function index()
     {
+        $ekstra = Ekstrakurikuler::latest()->take(3)->get();
         $beritaTerbaru = Berita::latest()->take(3)->get();
         return view('beranda.index', [
             'title' => 'Beranda',
-            'beritaTerbaru' => $beritaTerbaru
+            'beritaTerbaru' => $beritaTerbaru,
+            'ekstra' => $ekstra
         ]);
     }
 

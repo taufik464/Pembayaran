@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profile_sekolahs', function (Blueprint $table) {
-    $table->id();
-    $table->text('sejarah');
-    $table->text('visi');
-    $table->text('misi');
-    $table->text('tujuan');
-    $table->text('sambutan_kepsek');
-    $table->string('foto_kepsek');
-    $table->timestamps();
-});
+        Schema::create('profil_sekolahs', function (Blueprint $table) {
+            $table->id();
+            $table->string('judul');
+            $table->text('isi');
+            $table->string('image')->nullable();
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_sekolahs');
+        Schema::dropIfExists('profil_sekolah');
     }
 };

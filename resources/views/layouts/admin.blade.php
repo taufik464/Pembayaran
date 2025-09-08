@@ -1,7 +1,9 @@
 <x-app-layout>
     <div class="flex min-h-screen bg-gray-100">
-        @include('layouts.sidebar')
-        <main class="flex-1 p-6">
+        <div class="sticky top-0 h-screen">
+            @include('layouts.sidebar')
+        </div>
+        <main class="flex-1 p-6 h-full overflow-auto">
             @yield('content')
         </main>
     </div>

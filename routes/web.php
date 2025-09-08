@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileSekolahController;
 use App\Http\Controllers\KontenController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
+use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
 
 
 /*
@@ -26,7 +27,7 @@ use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 |
 */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 route::get('tentang', function () {
     return view('tentang');
@@ -64,6 +65,17 @@ Route::prefix('layanan')->group(function () {
 // ==================== DASHBOARD ADMIN ====================
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
+
     Route::get('/admin/ekstrakurikuler', [ekstraController::class, 'index'])->name('admin.ekstrakurikuler');
+    Route::get('/admin/ekstrakurikuler/create', [ekstraController::class, 'create'])->name('admin.ekstrakurikuler.create');
+    Route::post('/admin/ekstrakurikuler', [ekstraController::class, 'store'])->name('admin.ekstrakurikuler.store');
+    Route::get('/admin/ekstrakurikuler/{ekstrakurikuler}/edit', [ekstraController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
+    Route::put('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'update'])->name('admin.ekstrakurikuler.update');
+    Route::delete('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
+    //
 });
 
+Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
+Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
+Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
+Route::resource('profil', ProfilSekolahController::class);

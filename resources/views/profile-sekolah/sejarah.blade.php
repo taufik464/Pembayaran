@@ -14,11 +14,8 @@
                 </div>
                 <div class="w-full md:w-1/2">
                     <p class="text-lg leading-relaxed mb-4">
-                        SMA Al Hikmah Muncar terletak di Kabupaten Banyuwangi. Sekolah ini berkomitmen memberikan pendidikan berkualitas. Fokus utama ditujukan untuk siswa-siswi yang berprestasi.                    </p>
-                    <p class="text-lg leading-relaxed mb-4">
-                        Sebagai lembaga pendidikan swasta, sekolah ini tumbuh pesat. Didirikan sejak tanggal 7 September 1987, SMA Al Hikmah telah melayani generasi demi generasi.                    </p>
-                    <p class="text-lg leading-relaxed">
-                        Kini, SMA Al Hikmah berkembang menjadi Sekolah Menengah Atas. Perjalanan panjangnya penuh dedikasi dan pengabdian. Menjadi pilihan unggulan masyarakat hingga saat ini.                    </p>
+                        
+                    </p>
                 </div>
             </div>
         </div>
