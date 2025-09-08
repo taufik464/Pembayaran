@@ -24,6 +24,7 @@ class ProfilSekolahController extends Controller
     {
         $request->validate([
             'judul' => 'required|string|max:255',
+            'kategori' => 'required|string|in:Sambutan,tentang kami,sejarah,Visi,Misi',
             'isi'   => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -35,6 +36,7 @@ class ProfilSekolahController extends Controller
 
         ProfilSekolah::create([
             'judul' => $request->judul,
+            'kategori' => $request->kategori,
             'isi'   => $request->isi,
             'image' => $imagePath,
         ]);
@@ -52,6 +54,7 @@ class ProfilSekolahController extends Controller
     {
         $request->validate([
             'judul' => 'required|string|max:255',
+            'kategori' => 'required|string|in:Sambutan,tentang kami,sejarah,Visi,Misi',
             'isi'   => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -68,6 +71,7 @@ class ProfilSekolahController extends Controller
 
         $profil->judul = $request->judul;
         $profil->isi   = $request->isi;
+        $profil->kategori = $request->kategori;
         $profil->save();
 
         return redirect()->route('profil.index')->with('success', 'Data berhasil diperbarui!');

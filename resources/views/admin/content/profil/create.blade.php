@@ -19,6 +19,21 @@
         </div>
 
         <div class="mb-4">
+            <label class="block font-medium">Kategori</label>
+            <select name="kategori" class="w-full border rounded p-2" required>
+                <option value="" disabled selected>Pilih Kategori</option>
+                <option value="Sambutan">Sambutan</option>
+                <option value="tentang kami">Tentang Kami</option>
+                <option value="sejarah">Sejarah</option>
+                <option value="Visi">Visi</option>
+                <option value="Misi">Misi</option>
+            </select>
+
+        </div>
+
+        
+
+        <div class="mb-4">
             <label class="block font-medium">Isi</label>
             <textarea name="isi" rows="4" class="w-full border rounded p-2" required></textarea>
         </div>
@@ -30,11 +45,11 @@
 
         <div class="flex space-x-3">
             <button type="submit"
-                    class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
+                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
                 Simpan
             </button>
             <a href="{{ route('profil.index') }}"
-               class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg">
+                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg">
                 Batal
             </a>
         </div>
