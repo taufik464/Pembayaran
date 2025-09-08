@@ -19,23 +19,28 @@
 </section>
 
 <section id="profil" class="py-16 bg-gray-100">
+  @if ($sambutan)
   <div class="container mx-auto px-4">
+
     <h2 class="text-3xl font-bold text-center mb-8">Sambutan</h2>
     <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
       <!-- Gambar Kepala Sekolah -->
       <div class="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
         <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full shadow-lg">
-          <img src="/img/KEPSEK.jpg" alt="Kepala Sekolah" class="w-full h-full object-cover">
+          <img src="{{ asset('storage/' . $sambutan->image) }}" alt="Kepala Sekolah" class="w-full h-full object-cover">
         </div>
         <p class="text-center font-semibold mt-4">Saiin, S.Pd. (Kepala Sekolah)</p>
       </div>
       <!-- Sambutan -->
       <div class="w-full md:w-2/3">
-        <p class="text-lg leading-relaxed text-justify">
-          Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kehadirat Allah SWT atas rahmat dan karunia-Nya, kami bisa terus memberikan pendidikan terbaik bagi generasi muda Islam. Di SMA Al Hikmah, kami tidak hanya fokus pada akademik, tetapi juga pembentukan karakter Islami yang kuat, sehingga siswa siap menghadapi tantangan masa depan dengan iman dan ilmu.</p>
+        <p class="text-lg leading-relaxed text-justify pr-4">
+          {{ $sambutan->isi }}
+        </p>
       </div>
     </div>
+
   </div>
+  @endif
 </section>
 
 <!-- Ekstrakurikuler -->
