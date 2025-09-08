@@ -67,25 +67,14 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       <!-- Berita 1 -->
-      <div class="bg-white rounded-xl shadow p-6">
-        <img src="/img/Juara.jpg" alt="Berita 1" class="mb-4 rounded-lg w-full object-cover h-40">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara Lomba</h3>
-        <p class="text-sm text-gray-600">Siswa kelas 12 Juara.</p>
-      </div>
+      @foreach ($berita as $item )
 
-      <!-- Berita 2 -->
-      <div class="bg-white rounded-xl shadow p-6">
-        <img src="/img/Juara.jpg" alt="Berita 2" class="mb-4 rounded-lg w-full object-cover h-40">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara 1 Lomba Tahfidz</h3>
-        <p class="text-sm text-gray-600">Santri SMA Al Hikmah berhasil meraih juara dalam lomba tahfidz tingkat kabupaten.</p>
-      </div>
 
-      <!-- Berita 3 -->
-      <div class="bg-white rounded-xl shadow p-6">
-        <img src="/img/Juara.jpg" alt="Berita 3" class="mb-4 rounded-lg w-full object-cover h-40">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara Lomba</h3>
-        <p class="text-sm text-gray-600">Kelas 11 berhasil mendapatkan juara 2.</p>
-      </div>
+      <x-ekstrakurikuler-card
+        image="{{ $item->gambar ? asset('storage/'.$item->gambar) : asset('images/default-ekstra.jpg') }}"
+        title="{{ $item->judul }}"
+        desc="{{ $item->konten }}" />
+      @endforeach
     </div>
 
     <!-- Tombol Lihat Semua Berita -->

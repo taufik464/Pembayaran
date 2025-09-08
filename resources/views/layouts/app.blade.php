@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     @stack('styles')
 
-    <script src="https://cdn.tiny.cloud/1/dw4e6e8y76o2qs1t6jw27o1tcbiosfll2b8oju27vmifoxi6/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/4ka7mi0gpsoruvipsaulxjbz7u1ejtwku7o0fspfdxbty3eu/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
     <script>
         tinymce.init({
             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE

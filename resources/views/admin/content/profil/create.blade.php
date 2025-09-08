@@ -31,7 +31,7 @@
 
         </div>
 
-        
+        <textarea id="myeditorinstance">Hello, World!</textarea>
 
         <div class="mb-4">
             <label class="block font-medium">Isi</label>

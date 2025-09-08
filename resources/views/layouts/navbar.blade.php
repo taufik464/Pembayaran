@@ -46,7 +46,7 @@
                 </button>
                 <div x-show="open" @click.away="open = false" class="absolute bg-white shadow-lg rounded-md mt-2 py-1 w-48 z-50 transition-all duration-300 origin-top">
                     <a href="{{ route('gallery') }}" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">Gallery</a>
-                    <a href="{{ route('ppdb') }}" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">PPDB</a>
+                    <a href="https://ppdb.smaalhikmah.sch.id/" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">PPDB</a>
                 </div>
             </div>
 
