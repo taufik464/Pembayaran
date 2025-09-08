@@ -14,7 +14,7 @@ use App\Http\Controllers\KontenController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
-
+use App\Http\Controllers\admin\News\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +79,11 @@ Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('
 Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
 Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
 Route::resource('profil', ProfilSekolahController::class);
+
+ Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
+    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
+    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+    Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
+    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->text('konten');
             $table->string('gambar');
             $table->string('penulis');
-            $table->dateTime('tanggal_publish');
             $table->timestamps();
         });
     }
