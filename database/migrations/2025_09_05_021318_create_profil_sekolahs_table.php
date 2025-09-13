@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('profil_sekolahs', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
+            $table->enum('kategori', ['Sambutan', 'tentang kami', 'sejarah', 'Visi', 'Misi']);
             $table->text('isi');
             $table->string('image')->nullable();
             $table->timestamps();
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profil_sekolah');
+        Schema::dropIfExists('profil_sekolahs');
     }
 };

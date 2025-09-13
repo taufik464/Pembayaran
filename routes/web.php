@@ -14,7 +14,7 @@ use App\Http\Controllers\KontenController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
-
+use App\Http\Controllers\admin\News\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +72,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/ekstrakurikuler/{ekstrakurikuler}/edit', [ekstraController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
     Route::put('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'update'])->name('admin.ekstrakurikuler.update');
     Route::delete('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
+        // ROUTE ADMIN GALERI
+        Route::get('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'index'])->name('admin.galeri');
+        Route::get('/admin/galeri/create', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'create'])->name('admin.galeri.create');
+        Route::post('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'store'])->name('admin.galeri.store');
+        Route::get('/admin/galeri/{gallery}/edit', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'edit'])->name('admin.galeri.edit');
+        Route::put('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'update'])->name('admin.galeri.update');
+        Route::delete('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
     //
 });
 
@@ -79,3 +86,11 @@ Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('
 Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
 Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
 Route::resource('profil', ProfilSekolahController::class);
+
+ Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
+    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
+    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+    Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
+    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+

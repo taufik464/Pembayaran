@@ -9,5 +9,5 @@ class ProfilSekolah extends Model
 {
     use HasFactory;
     protected $table = 'profil_sekolahs';
-    protected $fillable = ['judul', 'isi', 'image'];
+    protected $fillable = ['judul', 'isi', 'image', 'kategori'];
 }

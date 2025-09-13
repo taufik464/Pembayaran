@@ -11,6 +11,15 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     @stack('styles')
+
+    <script src="https://cdn.tiny.cloud/1/4ka7mi0gpsoruvipsaulxjbz7u1ejtwku7o0fspfdxbty3eu/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+            plugins: 'code table lists',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        });
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;

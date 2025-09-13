@@ -14,7 +14,11 @@
             Ekstrakurikuler
         </x-sidebar-link>
 
-        <x-sidebar-link href="#" icon="fas fa-images" :active="request()->is('galeri')">
+        <x-sidebar-link href="{{ route('admin.news') }}" icon="fas fa-images" :active="request()->is('Berita')">
+            Berita
+        </x-sidebar-link>
+
+        <x-sidebar-link href="{{ route('admin.galeri') }}" icon="fas fa-images" :active="request()->is('galeri')">
             Galeri
         </x-sidebar-link>
         <x-sidebar-link href="#" icon="fas fa-users" :active="request()->is('pengguna')">

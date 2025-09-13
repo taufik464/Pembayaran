@@ -8,13 +8,13 @@
       </div>
       <p class="text-gray-400 mb-4">Sekolah Islam Modern yang Membentuk Generasi Cerdas, Islami, dan Mandiri</p>
       <div class="flex space-x-4">
-        <a href="#" class="text-gray-400 hover:text-white transition">
+        <a href="https://www.facebook.com/smaalhikmahmuncar" class="text-gray-400 hover:text-white transition">
           <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="#" class="text-gray-400 hover:text-white transition">
+        <a href="https://www.instagram.com/smaalhikmahmuncar?igsh=dDA3b2hneGtudXB5" class="text-gray-400 hover:text-white transition">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="#" class="text-gray-400 hover:text-white transition">
+        <a href="https://www.youtube.com/@bilhikmah" class="text-gray-400 hover:text-white transition">
           <i class="fab fa-youtube"></i>
         </a>
       </div>
@@ -26,7 +26,7 @@
       <ul class="space-y-2">
         <li><a href="{{ route('beranda') }}" class="text-gray-400 hover:text-white transition">Beranda</a></li>
         <li><a href="{{ route('tentang') }}" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
-        <li><a href="{{ route('ppdb') }}" class="text-gray-400 hover:text-white transition">PPDB</a></li>
+        <li><a href="https://ppdb.smaalhikmah.sch.id/" class="text-gray-400 hover:text-white transition">PPDB</a></li>
       </ul>
     </div>
 

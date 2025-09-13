@@ -8,21 +8,23 @@
         <h2 class="text-3xl font-bold text-center mb-12">Visi dan Misi</h2>
         <div class="grid md:grid-cols-2 gap-8">
             <div class="bg-white p-8 rounded-xl shadow">
-                <h3 class="text-xl font-semibold mb-4 text-green-600">Visi</h3>
+                @if ($visi)
+                <h3 class="text-xl font-semibold mb-4 text-green-600">{{ $visi->judul }}</h3>
                 <p class="text-lg leading-relaxed">
-                    Terwujudnya Peserta Didik yang Beriman dan Bertaqwa, Berprestasi  Berdaya saing, Mandiri dan Berwawasan Global                </p>
+                    {{ $visi->isi }}
+                </p>
+                @endif
+
             </div>
             <div class="bg-white p-8 rounded-xl shadow">
-                <h3 class="text-xl font-semibold mb-4 text-green-600">Misi</h3>
-                <ul class="list-disc pl-5 space-y-2 text-lg leading-relaxed">
-                    <li>Melaksanakan kegiatan yang dapat meningkatkan keimanan dan ketakwaan kepada Tuhan Yang Maha Esa.</li>
-                    <li>Menanamkan kedisiplinan pada semua aspek kepada seluruh warga sekolah</li>
-                    <li>Menumbuhkembangkan semangat untuk selalu berprestasi dibidang akademik maupun non akademik</li>
-                    <li>Menumbuhkan semangat inovasi yang dapat menunjang pengembangan profesionalisme</li>
-                    <li>Memberdayakan seluruh komponen sekolah dan mengoptimalkan sumber daya sekolah dalam mengembangkan potensi dan minat peserta didik secara optimal.</li>
+                @if ($misi)
+                <h3 class="text-xl font-semibold mb-4 text-green-600">{{ $misi->judul }}</h3>
+                <ul class="list-disc  space-y-2 text-lg leading-relaxed white-space: pre-wrap;">
+                    {{ $misi->isi }}
                 </ul>
+                @endif
             </div>
         </div>
-    </div>
-</section>
-@endsection
+    </div
+        </section>
+    @endsection
