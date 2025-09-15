@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin\sapras;
 
 use App\Http\Controllers\Controller;
-use App\Models\SAPRAS;
+use App\Models\sarpras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +11,7 @@ class SaprasController extends Controller
 {
     public function index()
     {
-        $sapras = SAPRAS::all();
+        $sapras = sarpras::all();
         return view('admin.sapras.index')->with('sapras', $sapras);
     }
 
@@ -35,21 +35,21 @@ class SaprasController extends Controller
             $imagePath = $request->file('gambar')->store('sapras', 'public');
         }
 
-        SAPRAS::create([
+       sarpras::create([
             'judul' => $request->judul,
             'gambar' => $imagePath,
         ]);
         return redirect()->route('admin.sapras')->with('success', 'Data berhasil ditambahkan.');
     }
 
-    public function edit(SAPRAS $sapras)
+    public function edit(sarpras $sapras)
     {
         return view('admin.sapras.edit', [
             'sapras' => $sapras,
         ]);
     }
 
-    public function update(Request $request, SAPRAS $sapras)
+    public function update(Request $request,sarpras $sapras)
     {
         $request->validate([
             'judul' => 'required|string|max:255',
@@ -72,7 +72,7 @@ class SaprasController extends Controller
             ->with('success', 'Data berhasil diupdate.');
     }
 
-    public function destroy(SAPRAS $sapras)
+    public function destroy(sarpras $sapras)
     {
         $sapras->delete();
         return redirect()->route('admin.sapras')

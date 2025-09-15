@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+@extends('layouts.web')
 @section('title', 'Sarana & Prasarana')
 @section('content')
 <x-page-header
@@ -20,7 +20,8 @@
         <x-sapras-card
             image="{{ $item->gambar ? asset('storage/'.$item->gambar) : asset('images/default-sapras.jpg') }}"
             judul="{{ $item->judul }}"
-        />
+            editUrl="{{ route('admin.sarpras.edit', $item->id) }}"
+            hapusUrl="{{ route('admin.sapras.destroy', $item->id) }}" />
         @endforeach
     </div>
     @endif

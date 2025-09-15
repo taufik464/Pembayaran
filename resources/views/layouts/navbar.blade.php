@@ -63,19 +63,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-<<<<<<< HEAD
-                <div x-show="open" @click.away="open = false" class="absolute bg-white shadow-lg rounded-md mt-2 py-1 w-48 z-50 transition-all duration-300 origin-top">
+                <div x-show="open" @click.away="open = false" class="absolute text-gray-700 bg-white shadow-lg rounded-md mt-2 py-1 w-48 z-50 transition-all duration-300 origin-top">
                     <a href="{{ route('gallery') }}" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">Gallery</a>
-                    <a href="{{ route('sarpras') }}" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">Gallery</a>
+                    <a href="{{ route('sarpras') }}" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">Sarpras</a>
                     <a href="{{ route('ppdb') }}" class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">PPDB</a>
-=======
-                <div x-show="open" @click.away="open = false"
-                    class="absolute bg-white text-gray-700  shadow-lg rounded-md mt-2 py-1 w-48 z-50 transition-all duration-300 origin-top">
-                    <a href="{{ route('gallery') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">Gallery</a>
-                    <a href="{{ route('ppdb') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 hover:text-green-600">PPDB</a>
->>>>>>> 18789fd033566257e1da8b280b6ef8938dd86d18
                 </div>
             </div>
 
