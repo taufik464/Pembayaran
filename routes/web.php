@@ -11,6 +11,7 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
+use App\Http\Controllers\admin\kontak\kontakController;
 
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
@@ -81,27 +82,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/ekstrakurikuler/{ekstrakurikuler}/edit', [ekstraController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
     Route::put('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'update'])->name('admin.ekstrakurikuler.update');
     Route::delete('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
-        // ROUTE ADMIN GALERI
-        Route::get('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'index'])->name('admin.galeri');
-        Route::get('/admin/galeri/create', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'create'])->name('admin.galeri.create');
-        Route::post('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'store'])->name('admin.galeri.store');
-        Route::get('/admin/galeri/{gallery}/edit', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'edit'])->name('admin.galeri.edit');
-        Route::put('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'update'])->name('admin.galeri.update');
-        Route::delete('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
-        // ROUTE ADMIN SAPRAS
-        Route::get('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sapras');
-        Route::get('/admin/sapras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sapras.create');
-        Route::post('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'store'])->name('admin.sapras.store');
-        Route::get('/admin/sapras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sapras.edit');
-        Route::put('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sapras.update');
-        Route::delete('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sapras.destroy');
-      
-Route::get('/sarpras', function() {
-    $sapras = SAPRAS::all();
-    return view('landing.sarpras', compact('sapras'));
-})->name('sarpras');
-    //
+    // ROUTE ADMIN GALERI
+    Route::get('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'index'])->name('admin.galeri');
+    Route::get('/admin/galeri/create', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'create'])->name('admin.galeri.create');
+    Route::post('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'store'])->name('admin.galeri.store');
+    Route::get('/admin/galeri/{gallery}/edit', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'edit'])->name('admin.galeri.edit');
+    Route::put('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'update'])->name('admin.galeri.update');
+    Route::delete('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
+    // ROUTE ADMIN SAPRAS
+    Route::get('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sapras');
+    Route::get('/admin/sapras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sapras.create');
+    Route::post('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'store'])->name('admin.sapras.store');
+    Route::get('/admin/sapras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sapras.edit');
+    Route::put('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sapras.update');
+    Route::delete('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sapras.destroy');
 
+    route::get('/admin/kontak', [kontakController::class, 'index'])->name('admin.kontak');
+    route::get('/admin/kontak/create', [kontakController::class, 'create'])->name('admin.kontak.create');
+    route::post('/admin/kontak', [kontakController::class, 'store'])->name('admin.kontak.store');
+    route::get('/admin/kontak/{id}/edit', [kontakController::class, 'edit'])->name('admin.kontak.edit');
+    route::put('/admin/kontak/{id}', [kontakController::class, 'update'])->name('admin.kontak.update');
+    route::delete('/admin/kontak/{id}', [kontakController::class, 'destroy'])->name('admin.kontak.destroy');
 });
 
 Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
@@ -109,16 +110,14 @@ Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'crea
 Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
 Route::resource('profil', ProfilSekolahController::class);
 
- Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
-    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
-    Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
-    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
-    Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
-    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
+Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
+Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
+Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
+Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
 
-use App\Models\SAPRAS;
-Route::get('/sarpras', function() {
-    $sapras = SAPRAS::all();
-    return view('landing.sarpras', compact('sapras'));
-})->name('sarpras');
+
+
+
