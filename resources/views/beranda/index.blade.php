@@ -19,34 +19,27 @@
         </svg>
     </div>
 
-    <!-- Logo dan Judul di atas kiri -->
-    <div class="absolute top-12 left-6 flex items-center space-x-7 z-20">
-        <!-- Logo sma-->
-        <img src="/img/logoalhikmah2.jpg" alt="Logo SMA" class="w-32 h-32 md:w-36 md:h-36 rounded-full">
-
-        <div>
-            <h3 class="text-4x2 md:text-3xl font-extrabold text-white drop-shadow-lg">
-                Selamat Datang
-            </h3>
-            <p class="text-lg md:text-xl font-semibold text-white drop-shadow-md">
-                Di SMA Al Hikmah Muncar
-            </p>
-        </div>
-    </div>
-
     <!-- Konten Utama -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 mt-6 grid md:grid-cols-2 gap-10 items-center">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-10 items-center">
+        <!-- Kolom Kiri: Logo + Teks -->
+        <div class="flex flex-col items-start space-y-4">
+            <div class="flex items-center space-x-6">
+                <img src="/img/logoalhikmah2.jpg" alt="Logo SMA" class="w-28 h-28 md:w-32 md:h-32 rounded-full shadow-lg">
+                <div>
+                    <h3 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg">
+                        Selamat Datang
+                    </h3>
+                    <p class="text-lg md:text-xl font-semibold drop-shadow-md">
+                        Di SMA Al Hikmah Muncar
+                    </p>
+                </div>
+            </div>
 
-        <!-- Kolom Kiri: Teks -->
-        <div class="space-y-4 mt-12 md:mt-0">
-            <h2 class="text-3xl md:text-4xl font-bold leading-snug">
+            <h2 class="text-2xl md:text-3xl font-bold leading-snug mt-6">
                 Generasi yang berkualitas <br>
                 <span class="text-sky-300">Unggul dibidang Alquran</span> <br>
                 & <span class="text-sky-300">Ilmu Pengetahuan dan Teknologi</span>
             </h2>
-            <p class="text-lg text-gray-200">
-                www.sma-alhikmah.sch.id
-            </p>
         </div>
 
         <!-- Kolom Kanan: Gambar -->
@@ -57,6 +50,8 @@
         </div>
     </div>
 </section>
+
+<!-- Video Section -->
 <section class="border-t border-gray-300 my-6">
     <div class="w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg">
         <div class="aspect-video">
@@ -75,34 +70,27 @@
 </section>
 
 <script>
-    // Tunggu sampai API YouTube siap
     function onYouTubeIframeAPIReady() {
         const player = new YT.Player('yt-video');
-
-        // Observer untuk mendeteksi apakah iframe terlihat di layar
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    player.playVideo(); // Mulai play
+                    player.playVideo();
                 } else {
-                    player.pauseVideo(); // Pause kalau keluar viewport
+                    player.pauseVideo();
                 }
             });
-        }, {
-            threshold: 0.5
-        }); // Minimal 50% terlihat
+        }, { threshold: 0.5 });
 
         observer.observe(document.getElementById('yt-video'));
     }
 
-    // Load YouTube API
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
 </script>
 
-
-
+<!-- Sambutan Section -->
 <section id="profil" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-8">Sambutan</h2>
@@ -120,7 +108,8 @@
                     Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kehadirat Allah SWT atas rahmat dan
                     karunia-Nya, kami bisa terus memberikan pendidikan terbaik bagi generasi muda Islam. Di SMA Al
                     Hikmah, kami tidak hanya fokus pada akademik, tetapi juga pembentukan karakter Islami yang kuat,
-                    sehingga siswa siap menghadapi tantangan masa depan dengan iman dan ilmu.</p>
+                    sehingga siswa siap menghadapi tantangan masa depan dengan iman dan ilmu.
+                </p>
             </div>
         </div>
     </div>
@@ -146,22 +135,18 @@
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Berita Terkini</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <!-- Berita 1 -->
             <div class="bg-white rounded-xl shadow p-6">
                 <img src="/img/Juara.jpg" alt="Berita 1" class="mb-4 rounded-lg w-full object-cover h-40">
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara Lomba</h3>
                 <p class="text-sm text-gray-600">Siswa kelas 12 Juara.</p>
             </div>
 
-            <!-- Berita 2 -->
             <div class="bg-white rounded-xl shadow p-6">
                 <img src="/img/Juara.jpg" alt="Berita 2" class="mb-4 rounded-lg w-full object-cover h-40">
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara 1 Lomba Tahfidz</h3>
-                <p class="text-sm text-gray-600">Santri SMA Al Hikmah berhasil meraih juara dalam lomba tahfidz tingkat
-                    kabupaten.</p>
+                <p class="text-sm text-gray-600">Santri SMA Al Hikmah berhasil meraih juara dalam lomba tahfidz tingkat kabupaten.</p>
             </div>
 
-            <!-- Berita 3 -->
             <div class="bg-white rounded-xl shadow p-6">
                 <img src="/img/Juara.jpg" alt="Berita 3" class="mb-4 rounded-lg w-full object-cover h-40">
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara Lomba</h3>
@@ -178,5 +163,4 @@
         </div>
     </div>
 </section>
-
 @endsection
