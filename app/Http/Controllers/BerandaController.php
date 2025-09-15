@@ -15,11 +15,13 @@ class BerandaController extends Controller
         $ekstra = Ekstrakurikuler::latest()->take(3)->get();
         $sambuatan = ProfilSekolah::where('kategori', 'Sambutan')->first();
         $beritaTerbaru = Berita::latest()->take(3)->get();
+        $berita = Berita::latest()->paginate(6);
         return view('beranda.index', [
             'title' => 'Beranda',
             'beritaTerbaru' => $beritaTerbaru,
             'ekstra' => $ekstra,
-            'sambutan' => $sambuatan
+            'sambutan' => $sambuatan,
+            'berita' => $berita
         ]);
     }
 

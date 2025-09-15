@@ -11,11 +11,11 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
-use App\Http\Controllers\KontenController;
-use App\Http\Controllers\KategoriArtikelController;
+
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
 use App\Http\Controllers\admin\News\NewsController;
+use App\Http\Controllers\sarprasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ Route::get('/tentang', [BerandaController::class, 'tentang'])->name('tentang');
 Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('ekstrakurikuler');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::get('/berita/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('/sarpras', [sarprasController::class, 'index'])->name('sarpras');
 
 // ==================== PROFILE SEKOLAH ====================
 Route::prefix('profile-sekolah')->group(function () {
@@ -100,6 +101,7 @@ Route::get('/sarpras', function() {
     return view('landing.sarpras', compact('sapras'));
 })->name('sarpras');
     //
+
 });
 
 Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
