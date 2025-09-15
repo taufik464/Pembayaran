@@ -21,6 +21,9 @@
         <x-sidebar-link href="{{ route('admin.galeri') }}" icon="fas fa-images" :active="request()->is('galeri')">
             Galeri
         </x-sidebar-link>
+        <x-sidebar-link href="{{ route('admin.sarpras') }}" icon="fas fa-images" :active="request()->is('sarpras')">
+            Sarpras
+        </x-sidebar-link>
         <x-sidebar-link href="#" icon="fas fa-users" :active="request()->is('pengguna')">
             Pengguna
         </x-sidebar-link>

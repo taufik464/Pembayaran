@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -10,11 +11,11 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
-use App\Http\Controllers\KontenController;
-use App\Http\Controllers\KategoriArtikelController;
+
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
 use App\Http\Controllers\admin\News\NewsController;
+use App\Http\Controllers\sarprasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::get('/tentang', [BerandaController::class, 'tentang'])->name('tentang');
 Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('ekstrakurikuler');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::get('/berita/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('/sarpras', [sarprasController::class, 'index'])->name('sarpras');
 
 // ==================== PROFILE SEKOLAH ====================
 Route::prefix('profile-sekolah')->group(function () {
@@ -64,6 +66,13 @@ Route::prefix('layanan')->group(function () {
 
 // ==================== DASHBOARD ADMIN ====================
 Route::middleware(['auth', 'verified'])->group(function () {
+    // ROUTE ADMIN SARPRAS
+    Route::get('/admin/sarpras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sarpras');
+    Route::get('/admin/sarpras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sarpras.create');
+    Route::post('/admin/sarpras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'store'])->name('admin.sarpras.store');
+    Route::get('/admin/sarpras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sarpras.edit');
+    Route::put('/admin/sarpras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sarpras.update');
+    Route::delete('/admin/sarpras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sarpras.destroy');
     Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
 
     Route::get('/admin/ekstrakurikuler', [ekstraController::class, 'index'])->name('admin.ekstrakurikuler');
@@ -79,7 +88,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/admin/galeri/{gallery}/edit', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'edit'])->name('admin.galeri.edit');
         Route::put('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'update'])->name('admin.galeri.update');
         Route::delete('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
+        // ROUTE ADMIN SAPRAS
+        Route::get('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sapras');
+        Route::get('/admin/sapras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sapras.create');
+        Route::post('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'store'])->name('admin.sapras.store');
+        Route::get('/admin/sapras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sapras.edit');
+        Route::put('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sapras.update');
+        Route::delete('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sapras.destroy');
+      
+Route::get('/sarpras', function() {
+    $sapras = SAPRAS::all();
+    return view('landing.sarpras', compact('sapras'));
+})->name('sarpras');
     //
+
 });
 
 Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
@@ -94,3 +116,9 @@ Route::resource('profil', ProfilSekolahController::class);
     Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
+
+use App\Models\SAPRAS;
+Route::get('/sarpras', function() {
+    $sapras = SAPRAS::all();
+    return view('landing.sarpras', compact('sapras'));
+})->name('sarpras');
