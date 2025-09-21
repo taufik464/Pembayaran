@@ -36,7 +36,7 @@
       <ul class="space-y-2">
         <li class="flex items-start">
           <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400"></i>
-          <span class="text-gray-400">JL.ABDUL MANAN KM.02, Sumberberas, Kec. Muncar, Kab. Banyuwangi Prov. Jawa Timur</span>
+          <span class="text-gray-400">Jl. KH Abdul Mannan No.RT. 006/12, Dusun Sidomulyo, Sumberberas, Kec. Muncar, Kabupaten Banyuwangi, Jawa Timur 68472</span>
         </li>
         <li class="flex items-start">
           <i class="fas fa-phone-alt mt-1 mr-3 text-gray-400"></i>
