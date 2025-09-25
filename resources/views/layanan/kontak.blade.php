@@ -86,10 +86,6 @@
                         <i class="fas fa-envelope text-green-600 mr-2"></i>
                         Email: smaalhikmahmuncar@yahoo.co.id
                     </p>
-                    <p class="flex items-center">
-                        <i class="fas fa-phone-alt text-green-600 mr-2"></i>
-                        Hubungi: 0333-592845
-                    </p>
                 </div>
 
                 <div class="flex space-x-4 mt-6">

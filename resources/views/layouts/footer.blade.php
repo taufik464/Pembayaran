@@ -40,7 +40,7 @@
         </li>
         <li class="flex items-start">
           <i class="fas fa-phone-alt mt-1 mr-3 text-gray-400"></i>
-          <span class="text-gray-400">(022) 1234567</span>
+          <span class="text-gray-400">(0333) 592845</span>
         </li>
       </ul>
     </div>
