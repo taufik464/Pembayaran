@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PrestasiController extends Controller
 {
+    public function index()
+    {
+        $prestasi = Prestasi::all();
+        return view('prestasi.index', compact('prestasi'));
+    }
+
     public function prestasiSekolah()
     {
         $prestasi = Prestasi::where('jenis', 'sekolah')->get();

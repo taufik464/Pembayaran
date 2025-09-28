@@ -51,11 +51,12 @@
                 </button>
                 <div x-show="open" @click.away="open = false"
                      x-transition
-                     class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-40 z-50 font-medium">
+                     class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-48 z-50 font-medium">
                     <a href="{{ route('gallery') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Gallery</a>
                     <a href="{{ route('berita') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Berita</a>
                     <a href="{{ route('ekstrakurikuler') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Ekstrakurikuler</a>
                     <a href="{{ route('sarpras') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Sarpras</a>
+                    <a href="{{ route('prestasi') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Prestasi</a>
                 </div>
             </div>
 
@@ -75,18 +76,14 @@
                      x-transition
                      class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-40 z-50 font-medium">
                     <a href="{{ route('kontak') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Kontak</a>
-                    <a href="{{ route('prestasi-sekolah') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Prestasi Sekolah</a>
-                    <a href="{{ route('prestasi-siswa') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Prestasi Siswa</a>
                 </div>
             </div>
 
             <!-- PPDB (menu utama baru) -->
-            <!-- PPDB (menu utama baru dengan style khusus) -->
-                    <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank"
-                    class="px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">
-                        PPDB Online
-                    </a>
-
+            <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank"
+               class="px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">
+                PPDB Online
+            </a>
         </nav>
 
         <!-- Mobile Menu Button -->
@@ -118,15 +115,16 @@
             <a href="{{ route('berita') }}" class="block pl-4 py-1 hover:text-green-600">Berita</a>
             <a href="{{ route('ekstrakurikuler') }}" class="block pl-4 py-1 hover:text-green-600">Ekstrakurikuler</a>
             <a href="{{ route('sarpras') }}" class="block pl-4 py-1 hover:text-green-600">Sarpras</a>
+            <a href="{{ route('prestasi') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi</a>
         </details>
 
         <details>
             <summary class="cursor-pointer py-2">Layanan</summary>
             <a href="{{ route('kontak') }}" class="block pl-4 py-1 hover:text-green-600">Kontak</a>
-            <a href="{{ route('prestasi-sekolah') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi Sekolah</a>
-            <a href="{{ route('prestasi-siswa') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi Siswa</a>
         </details>
-            <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank" class="block text-center px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white"> PPDB Online </a>    </div>
+
+        <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank" class="block text-center px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">PPDB Online</a>
+    </div>
 </header>
 
 <script>

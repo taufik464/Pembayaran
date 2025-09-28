@@ -13,9 +13,9 @@ return new class extends Migration
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('tingkat');
-            $table->integer('tahun');
+            $table->date('tanggal');
             $table->enum('jenis', ['sekolah', 'siswa']);
-            $table->string('gambar')->nullable();
+            $table->string('gambar');
             $table->timestamps();
         });
     }
