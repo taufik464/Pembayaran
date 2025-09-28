@@ -13,8 +13,10 @@ class Prestasi extends Model
         'judul',
         'deskripsi',
         'tingkat',
-        'tahun',
+        'tanggal',
         'jenis', // 'sekolah' atau 'siswa'
         'gambar'
     ];
+
+    protected $dates = ['tanggal'];
 }

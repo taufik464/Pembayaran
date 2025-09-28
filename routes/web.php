@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -17,6 +16,7 @@ use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
 use App\Http\Controllers\admin\News\NewsController;
 use App\Http\Controllers\sarprasController;
+use App\Http\Controllers\Admin\Achive\AchiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +118,13 @@ Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.n
 Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
 
+ Route::get('/achive', [AchiveController::class, 'index'])->name('achive.index');
+    Route::get('/achive/create', [AchiveController::class, 'create'])->name('achive.create');
+    Route::post('/achive', [AchiveController::class, 'store'])->name('achive.store');
+    Route::get('/achive/{id}/edit', [AchiveController::class, 'edit'])->name('achive.edit');
+    Route::put('/achive/{id}', [AchiveController::class, 'update'])->name('achive.update');
+    Route::delete('/achive/{id}', [AchiveController::class, 'destroy'])->name('achive.destroy');
 
+Route::get('/prestasi', [App\Http\Controllers\PrestasiController::class, 'index'])->name('prestasi');
 
 
