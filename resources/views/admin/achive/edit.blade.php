@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('title', 'Edit Achive')
+@section('title', 'Edit Prestasi')
 @section('content')
 <x-page-header
-    title="Edit Achive"
+    title="Edit Prestasi"
     :breadcrumb="[
         ['url' => '/dashboard', 'label' => 'Dashboard'],
-        ['url' => route('achive.index'), 'label' => 'Achive'],
+        ['url' => route('achive.index'), 'label' => 'Prestasi'],
         ['url' => '#', 'label' => 'Edit'],
     ]" />
 
