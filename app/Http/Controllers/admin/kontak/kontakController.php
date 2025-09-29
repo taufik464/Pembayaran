@@ -56,13 +56,15 @@ class kontakController extends Controller
     {
         //
     }
-    public function edit($id)
-    {
-        //
-    }
+   public function edit($id)
+{
+    $kontak = Kontak::findOrFail($id);
+    return view('admin.kontak.edit', compact('kontak'));
+}
+
     public function update(Request $request, $id)
     {
-        //
+        
     }
     public function destroy($id)
     {
