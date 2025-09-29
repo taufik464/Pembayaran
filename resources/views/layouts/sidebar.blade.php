@@ -14,18 +14,18 @@
             Ekstrakurikuler
         </x-sidebar-link>
 
-        <x-sidebar-link href="{{ route('admin.news') }}" icon="fas fa-images" :active="request()->is('Berita')">
+        <x-sidebar-link href="{{ route('admin.news') }}" icon="fas fa-newspaper" :active="request()->is('Berita')">
             Berita
         </x-sidebar-link>
 
         <x-sidebar-link href="{{ route('admin.galeri') }}" icon="fas fa-images" :active="request()->is('galeri')">
             Galeri
         </x-sidebar-link>
-        <x-sidebar-link href="{{ route('admin.sarpras') }}" icon="fas fa-images" :active="request()->is('sarpras')">
+        <x-sidebar-link href="{{ route('admin.sarpras') }}" icon="fas fa-building" :active="request()->is('sarpras')">
             Sarpras
         </x-sidebar-link>
-        
-        <x-sidebar-link href="{{ route('achive.index') }}" icon="fas fa-images" :active="request()->is('achive')">
+
+        <x-sidebar-link href="{{ route('achive.index') }}" icon="fas fa-trophy" :active="request()->is('achive')">
             Prestasi
         </x-sidebar-link>
 
