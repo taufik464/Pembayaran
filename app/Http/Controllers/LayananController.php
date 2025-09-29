@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\kontak;
 
 use App\Models\Prestasi;
 use Illuminate\Http\Request;
@@ -9,9 +10,8 @@ class LayananController extends Controller
 {
     public function kontak()
     {
-        return view('layanan.kontak', [
-            'title' => 'Kontak Kami'
-        ]);
+         $kontaks = kontak::all();
+        return view('layanan.kontak', compact('kontaks'));
     }
 
     public function prestasiSekolah()
