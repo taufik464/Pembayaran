@@ -29,8 +29,8 @@
             Prestasi
         </x-sidebar-link>
 
-        <x-sidebar-link href="#" icon="fas fa-users" :active="request()->is('pengguna')">
-            Pengguna
+        <x-sidebar-link href="{{ route('admin.kontak') }}" icon="fas fa-users" :active="request()->is('pengguna')">
+            Kontak
         </x-sidebar-link>
         <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
             Pengaturan
