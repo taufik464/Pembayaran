@@ -16,6 +16,9 @@
         <div class="mb-4">
             <label class="block font-medium">Judul</label>
             <input type="text" name="judul" class="w-full border rounded p-2" required>
+            @error('judul')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
@@ -28,19 +31,24 @@
                 <option value="Visi">Visi</option>
                 <option value="Misi">Misi</option>
             </select>
-
+            @error('kategori')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+            @enderror
         </div>
-
-        <textarea id="myeditorinstance">Hello, World!</textarea>
-
         <div class="mb-4">
             <label class="block font-medium">Isi</label>
-            <textarea name="isi" rows="4" class="w-full border rounded p-2" required></textarea>
+            <input id="content" type="hidden" name="isi">
+            <trix-editor input="content"></trix-editor> @error('isi')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
             <label class="block font-medium">Gambar</label>
             <input type="file" name="image" class="w-full border rounded p-2">
+            @error('image')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="flex space-x-3">
