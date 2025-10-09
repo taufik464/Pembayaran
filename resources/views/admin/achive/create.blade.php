@@ -42,11 +42,11 @@
         </div>
 
         {{-- Tanggal --}}
-        <div class="mb-4">
-            <label class="block font-medium">Tanggal</label>
-            <input type="date" name="tanggal" class="w-full border rounded p-2" value="{{ old('tanggal') }}">
+        <div>
+            <label class="block font-semibold mb-1">Tanggal <span class="text-red-500">*</span></label>
+            <input type="date" name="tanggal" class="w-full border rounded p-2" value="{{ old('tanggal') }}" required>
             @error('tanggal')
-            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 

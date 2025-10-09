@@ -76,6 +76,7 @@
                      x-transition
                      class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-40 z-50 font-medium">
                     <a href="{{ route('kontak') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Kontak</a>
+                    <a href="https://sppalhikmah.web.id/" target="_blank" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Administrasi</a>
                 </div>
             </div>
 
@@ -121,6 +122,7 @@
         <details>
             <summary class="cursor-pointer py-2">Layanan</summary>
             <a href="{{ route('kontak') }}" class="block pl-4 py-1 hover:text-green-600">Kontak</a>
+            <a href="https://sppalhikmah.web.id/" class="block pl-4 py-1 hover:text-green-600">Administrasi</a>
         </details>
 
         <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank" class="block text-center px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">PPDB Online</a>
@@ -132,4 +134,5 @@
     document.getElementById('mobile-menu-button').addEventListener('click', function () {
         document.getElementById('mobile-menu').classList.toggle('hidden');
     });
-</script>
+</script></script>
+
