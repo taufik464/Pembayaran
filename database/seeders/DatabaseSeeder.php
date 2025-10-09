@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
+            // use `username` (database column). The User model maps `name` to `username` for
+            // backward compatibility so other code can still use `name` if needed.
+            'username' => 'Test User',
             'email' => 'test@example.com',
         ]);
     }

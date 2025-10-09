@@ -64,10 +64,57 @@ class kontakController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+        // Validasi input, dengan aturan minimal salah satu antara link atau nomor wajib diisi
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'link' => 'nullable|string|max:255|required_without:nomor',
+            'nomor' => 'nullable|string|max:20|required_without:link',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'link.required_without' => 'Link harus diisi jika Nomor kosong.',
+            'nomor.required_without' => 'Nomor harus diisi jika Link kosong.',
+        ]);
+
+        $kontak = kontak::findOrFail($id);
+
+        // Inisialisasi variabel path gambar
+        $imagePath = $kontak->image;
+
+        // Jika ada file gambar yang diupload, simpan ke storage dan dapatkan path-nya
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($imagePath) {
+                \Storage::disk('public')->delete($imagePath);
+            }
+            $imagePath = $request->file('image')->store('kontak', 'public');
+        }
+
+        // Update data di database
+        $kontak->update([
+            'nama' => $request->nama,
+            'image' => $imagePath,
+            'link' => $request->link,
+            'nomor' => $request->nomor,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.kontak')->with('success', 'Data berhasil diupdate.');
     }
     public function destroy($id)
     {
-        //
+        $kontak = kontak::findOrFail($id);
+
+        // Hapus gambar dari storage jika ada
+        if ($kontak->image) {
+            \Storage::disk('public')->delete($kontak->image);
+        }
+
+        // Hapus data dari database
+        $kontak->delete();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.kontak')->with('success', 'Data berhasil dihapus.');
     }
 }

@@ -32,8 +32,7 @@
                             <i class="fas fa-home text-green-600 mr-2"></i> Alamat
                         </h4>
                         <p class="text-gray-600">
-                            Jl. KH Abdul Mannan No.RT. 006/12, Dusun Sidomulyo,
-                            Sumberberas, Kec. Muncar, Kabupaten Banyuwangi, Jawa Timur 68472
+                            {{ $identitas->alamat }}
                         </p>
                     </div>
 
@@ -88,19 +87,14 @@
                     </p>
                 </div>
 
-                <div class="flex space-x-4 mt-6">
-                    <a href="https://www.facebook.com/smaalhikmahmuncar" target="_blank" class="bg-green-600 hover:bg-green-700 text-white w-10 h-10 flex items-center justify-center rounded-full transition">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.instagram.com/smaalhikmahmuncar?igsh=dDA3b2hneGtudXB5" target="_blank" class="bg-green-600 hover:bg-green-700 text-white w-10 h-10 flex items-center justify-center rounded-full transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@bilhikmah" target="_blank" class="bg-green-600 hover:bg-green-700 text-white w-10 h-10 flex items-center justify-center rounded-full transition">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://www.yahoo.com" target="_blank" class="bg-green-600 hover:bg-green-700 text-white w-10 h-10 flex items-center justify-center rounded-full transition">
-                        <i class="fab fa-yahoo"></i>
-                    </a>
+                <div class="flex flex-row flex-wrap gap-4 mt-4">
+                    @foreach($kontaks as $kontak)
+                        <a href="{{ $kontak->link }}" target="_blank" class="flex items-center text-green-700 hover:underline">
+                            @if($kontak->image)
+                                <img src="{{ asset('storage/' . $kontak->image) }}" alt="{{ $kontak->nama }}" class="w-10 h-10 mr-2 rounded-full object-cover">
+                            @endif
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>

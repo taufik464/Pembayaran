@@ -2,7 +2,7 @@
 @section('title', 'KONTAK')
 @section('content')
 <x-page-header
-    title="Manajemen SAPRAS"
+    title="Manajemen Kontak"
     :breadcrumb="[
             ['url' => '/dashboard', 'label' => 'Dashboard'],
            

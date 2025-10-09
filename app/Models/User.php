@@ -25,6 +25,20 @@ class User extends Authenticatable
     ];
 
     /**
+     * Backwards compatibility: provide a virtual `name` attribute that maps to `username`.
+     * This keeps seeders/tests that use `name` working without changing the DB schema.
+     */
+    public function getNameAttribute(): ?string
+    {
+        return $this->attributes['username'] ?? null;
+    }
+
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['username'] = $value;
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
