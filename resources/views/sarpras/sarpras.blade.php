@@ -27,7 +27,6 @@
                         @click="open = true">
                     <div class="p-4">
                         <h3 class="text-blue-600 font-bold">{{ $item->judul }}</h3>
-                        <p class="text-gray-500 text-sm">Laboratorium | Baik</p>
                     </div>
 
                     <!-- Modal -->
@@ -55,29 +54,6 @@
                     </div>
                 </div>
                 @endforeach
-
-                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.zOdA5Z5N5HWTFcqw9vcDmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Laboratorium Bahasa" class="rounded-t-xl">
-                    <div class="p-4">
-                        <h3 class="text-blue-600 font-bold">Laboratorium Bahasa</h3>
-                        <p class="text-gray-500 text-sm">Laboratorium | Baik</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.zOdA5Z5N5HWTFcqw9vcDmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Laboratorium Bahasa" class="rounded-t-xl">
-                    <div class="p-4">
-                        <h3 class="text-blue-600 font-bold">Laboratorium Bahasa</h3>
-                        <p class="text-gray-500 text-sm">Laboratorium | Baik</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.zOdA5Z5N5HWTFcqw9vcDmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Laboratorium Bahasa" class="rounded-t-xl">
-                    <div class="p-4">
-                        <h3 class="text-blue-600 font-bold">Laboratorium Bahasa</h3>
-                        <p class="text-gray-500 text-sm">Laboratorium | Baik</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
