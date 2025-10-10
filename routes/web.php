@@ -49,7 +49,7 @@ Route::prefix('profile-sekolah')->group(function () {
     Route::get('/sambutan', [ProfileSekolahController::class, 'sambutan'])->name('sambutan');
     Route::get('/visi-misi', [ProfileSekolahController::class, 'visiMisi'])->name('visi-misi');
     Route::get('/sejarah', [ProfileSekolahController::class, 'sejarah'])->name('sejarah');
-});
+    Route::get('/profil-sekolah/{judul}', [ProfileSekolahController::class, 'showStriped'])->name('profil-sekolah.show.striped');});
 
 // ==================== INFORMASI ====================
 Route::prefix('informasi')->group(function () {

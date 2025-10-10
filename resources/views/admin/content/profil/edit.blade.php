@@ -5,7 +5,7 @@
 <x-page-header
     title="Edit Profil Sekolah"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+       
         ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
         ['url' => '#', 'label' => 'Edit Data'],
     ]" />
@@ -45,6 +45,7 @@
                 <option value="sejarah" {{ old('kategori', $profil->kategori) == 'sejarah' ? 'selected' : '' }}>Sejarah</option>
                 <option value="Visi" {{ old('kategori', $profil->kategori) == 'Visi' ? 'selected' : '' }}>Visi</option>
                 <option value="Misi" {{ old('kategori', $profil->kategori) == 'Misi' ? 'selected' : '' }}>Misi</option>
+                <option value="Lainnya" {{ old('kategori', $profil->kategori) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
             </select>
             @error('kategori')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

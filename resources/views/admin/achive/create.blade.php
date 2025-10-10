@@ -5,7 +5,7 @@
 <x-page-header
     title="Tambah Prestasi"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+      
         ['url' => route('achive.index'), 'label' => 'Prestasi'],
         ['url' => '#', 'label' => 'Tambah'],
     ]" />

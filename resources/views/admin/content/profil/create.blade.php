@@ -5,7 +5,7 @@
 <x-page-header
     title="Tambah Profil Sekolah"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+       
         ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
         ['url' => '#', 'label' => 'Tambah Data'],
     ]" />
@@ -30,6 +30,7 @@
                 <option value="sejarah">Sejarah</option>
                 <option value="Visi">Visi</option>
                 <option value="Misi">Misi</option>
+                <option value="Lainnya">Lainnya</option>
             </select>
             @error('kategori')
             <p class="text-red-500 text-xs italic">{{ $message }}</p>

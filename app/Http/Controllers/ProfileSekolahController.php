@@ -41,4 +41,31 @@ class ProfileSekolahController extends Controller
             'sejarah' => $sejarah
         ]);
     }
+
+    public static function getJudulForNavbar()
+    {
+        // Ambil hanya kolom 'judul'
+        return ProfileSekolah::select('judul')
+            // Tambahkan klausa where untuk memfilter kategori
+            ->where('kategori', 'lainnya')
+            ->get();
+    }
+
+    /**
+     * Menampilkan halaman detail, mengkonversi strip kembali menjadi spasi.
+     */
+    public function showStriped(string $judul_slug)
+    {
+        // 1. Konversi strip (-) kembali menjadi spasi ( )
+        $judul_asli = str_replace('-', ' ', $judul_slug);
+
+        // 2. Mencari data berdasarkan kolom 'judul' yang sudah dikembalikan ke aslinya
+        $lainnya = ProfileSekolah::where('judul', $judul_asli)->firstOrFail();
+
+        // 3. Mengirim data ke view
+        return view('profile-sekolah.lainnya', [
+            'title' => $lainnya->judul,
+            'Lainnya' => $lainnya
+        ]);
+    }
 }

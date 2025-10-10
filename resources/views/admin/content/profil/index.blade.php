@@ -5,7 +5,7 @@
 <x-page-header
     title="Profil Sekolah"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+       
         ['url' => '/admin/profilsekolah', 'label' => 'Profil Sekolah'],
     ]" />
 

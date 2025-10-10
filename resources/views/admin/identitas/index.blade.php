@@ -7,7 +7,7 @@ use Carbon\Carbon;
 <x-page-header
     title="Identitas Sekolah"
     :breadcrumb="[
-            ['url' => '/dashboard', 'label' => 'Dashboard'],
+           
             ['url' => '/admin/identitas', 'label' => 'Identitas Sekolah'],
         ]" />
 <section class="bg-white p-5 rounded-lg shadow">
