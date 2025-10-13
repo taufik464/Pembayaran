@@ -33,7 +33,7 @@ class IdentitasSekolahController extends Controller
     {
         $request->validate([
             'nama_sekolah' => 'required|string|max:255',
-            'npsn' => 'required|string|max:255|unique:identitas_sekolahs,npsn',
+            'npsn' => 'required|string|max:20|',
             'alamat' => 'required|string',
             'telepon' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
@@ -77,7 +77,7 @@ class IdentitasSekolahController extends Controller
       
         $request->validate([
             'nama_sekolah' => 'required|string|max:255',
-            'npsn' => "required|string|max:255|unique:identitas_sekolahs,npsn," . $identitasSekolah->id,
+            'npsn' => "required|string|max:20|" ,
             'alamat' => 'required|string',
             'telepon' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',

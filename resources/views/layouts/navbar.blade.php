@@ -93,16 +93,10 @@
                  <div x-show="open" @click.away="open = false"
                      x-transition
                      class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-40 z-50 font-medium">
-<<<<<<< HEAD
-                     <a href="{{ route('kontak') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Kontak</a>
-                 </div>
-             </div>
-=======
                     <a href="{{ route('kontak') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Kontak</a>
                     <a href="https://sppalhikmah.web.id/" target="_blank" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Administrasi</a>
                 </div>
             </div>
->>>>>>> bdc6b78094739c8d1ea84ae8c759e76d4ddbdd9c
 
              <!-- PPDB (menu utama baru) -->
              <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank"
@@ -151,7 +145,6 @@
              @endforeach
          </details>
 
-<<<<<<< HEAD
          <details>
              <summary class="cursor-pointer py-2">Informasi</summary>
              <a href="{{ route('gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
@@ -160,20 +153,14 @@
              <a href="{{ route('sarpras') }}" class="block pl-4 py-1 hover:text-green-600">Sarpras</a>
              <a href="{{ route('prestasi') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi</a>
          </details>
-=======
         <details>
             <summary class="cursor-pointer py-2">Layanan</summary>
             <a href="{{ route('kontak') }}" class="block pl-4 py-1 hover:text-green-600">Kontak</a>
             <a href="https://sppalhikmah.web.id/" class="block pl-4 py-1 hover:text-green-600">Administrasi</a>
         </details>
->>>>>>> bdc6b78094739c8d1ea84ae8c759e76d4ddbdd9c
 
-         <details>
-             <summary class="cursor-pointer py-2">Layanan</summary>
-             <a href="{{ route('kontak') }}" class="block pl-4 py-1 hover:text-green-600">Kontak</a>
-         </details>
+       
 
-<<<<<<< HEAD
          <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank" class="block text-center px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">PPDB Online</a>
      </div>
  </header>
@@ -184,12 +171,3 @@
          document.getElementById('mobile-menu').classList.toggle('hidden');
      });
  </script>
-=======
-<script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-button').addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-</script></script>
-
->>>>>>> bdc6b78094739c8d1ea84ae8c759e76d4ddbdd9c
