@@ -5,7 +5,7 @@
 <x-page-header
     title="Edit Profil Sekolah"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+       
         ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
         ['url' => '#', 'label' => 'Edit Data'],
     ]" />
@@ -45,22 +45,20 @@
                 <option value="sejarah" {{ old('kategori', $profil->kategori) == 'sejarah' ? 'selected' : '' }}>Sejarah</option>
                 <option value="Visi" {{ old('kategori', $profil->kategori) == 'Visi' ? 'selected' : '' }}>Visi</option>
                 <option value="Misi" {{ old('kategori', $profil->kategori) == 'Misi' ? 'selected' : '' }}>Misi</option>
+                <option value="Lainnya" {{ old('kategori', $profil->kategori) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
             </select>
             @error('kategori')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
-
-        <textarea id="myeditorinstance">Hello, World!</textarea>
         {{-- Input Isi --}}
         <div class="mb-4">
             <label for="isi" class="block text-sm font-medium text-gray-700 mb-2">
                 Isi
             </label>
-            <textarea name="isi" id="isi" rows="5"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm
-                     focus:ring-2 focus:ring-green-500 focus:border-green-500
-                     transition duration-200">{{ old('isi', $profil->isi) }}</textarea>
+            <input id="content" type="hidden" name="isi" value="{{ old('isi', $profil->isi) }}">
+            <trix-editor input="content"></trix-editor>
+
             @error('isi')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror

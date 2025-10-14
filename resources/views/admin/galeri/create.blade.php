@@ -4,7 +4,7 @@
 <x-page-header
     title="Tambah Galeri"
     :breadcrumb="[
-            ['url' => '/dashboard', 'label' => 'Dashboard'],
+           
             ['url' => '/admin/galeri', 'label' => 'Galeri'],
         ]" />
 

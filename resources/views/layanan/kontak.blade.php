@@ -32,8 +32,7 @@
                             <i class="fas fa-home text-green-600 mr-2"></i> Alamat
                         </h4>
                         <p class="text-gray-600">
-                            Jl. KH Abdul Mannan No.RT. 006/12, Dusun Sidomulyo,
-                            Sumberberas, Kec. Muncar, Kabupaten Banyuwangi, Jawa Timur 68472
+                            {{ $identitas->alamat }}
                         </p>
                     </div>
 

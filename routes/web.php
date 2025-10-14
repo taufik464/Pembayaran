@@ -11,6 +11,7 @@ use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
 use App\Http\Controllers\admin\kontak\kontakController;
+use App\Http\Controllers\admin\identitas\IdentitasSekolahController;
 
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
@@ -48,7 +49,7 @@ Route::prefix('profile-sekolah')->group(function () {
     Route::get('/sambutan', [ProfileSekolahController::class, 'sambutan'])->name('sambutan');
     Route::get('/visi-misi', [ProfileSekolahController::class, 'visiMisi'])->name('visi-misi');
     Route::get('/sejarah', [ProfileSekolahController::class, 'sejarah'])->name('sejarah');
-});
+    Route::get('/profil-sekolah/{judul}', [ProfileSekolahController::class, 'showStriped'])->name('profil-sekolah.show.striped');});
 
 // ==================== INFORMASI ====================
 Route::prefix('informasi')->group(function () {
@@ -103,7 +104,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     route::get('/admin/kontak/{id}/edit', [kontakController::class, 'edit'])->name('admin.kontak.edit');
     route::put('/admin/kontak/{id}', [kontakController::class, 'update'])->name('admin.kontak.update');
     route::delete('/admin/kontak/{id}', [kontakController::class, 'destroy'])->name('admin.kontak.destroy');
+
+    // Route Identitas Sekolah Tanpa Resource
+    Route::get('/admin/identitas', [IdentitasSekolahController::class, 'index'])->name('admin.identitas.index');
+    Route::get('/admin/identitas/create', [IdentitasSekolahController::class, 'create'])->name('admin.identitas.create');
+    Route::post('/admin/identitas', [IdentitasSekolahController::class, 'store'])->name('admin.identitas.store');
+    Route::get('/admin/identitas/{identitas}/edit', [IdentitasSekolahController::class, 'edit'])->name('admin.identitas.edit');
+    Route::put('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'update'])->name('admin.identitas.update');
+    Route::delete('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'destroy'])->name('admin.identitas.destroy');
 });
+
 
 Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
 Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');

@@ -18,7 +18,7 @@
                 </div>
                 <div class="w-full md:w-2/3">
                     <p class="text-lg leading-relaxed">
-                        {{ optional($sambutan)->isi ?? 'Belum ada sambutan ditambahkan.' }}
+                        {!! optional($sambutan)->isi ?? 'Belum ada sambutan ditambahkan.' !!}
                     </p>
                 </div>
             </div>

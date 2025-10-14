@@ -5,7 +5,7 @@
 <x-page-header
     title="Manajemen Prestasi"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+       
         ['url' => route('achive.index'), 'label' => 'Prestasi'],
     ]" />
 

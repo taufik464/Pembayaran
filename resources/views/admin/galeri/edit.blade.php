@@ -8,7 +8,7 @@
 <x-page-header
     title="Edit Galeri"
     :breadcrumb="[
-            ['url' => '/dashboard', 'label' => 'Dashboard'],
+           
             ['url' => '/admin/galeri', 'label' => 'Galeri'],
         ]" />
 

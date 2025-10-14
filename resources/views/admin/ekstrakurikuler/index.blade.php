@@ -4,7 +4,7 @@
 <x-page-header
     title="Manajemen Ekstrakurikuler"
     :breadcrumb="[
-            ['url' => '/dashboard', 'label' => 'Dashboard'],
+           
             ['url' => '/admin/ekstrakurikuler', 'label' => 'Ekstrakurikuler'],
         ]" />
 

@@ -5,7 +5,7 @@
 <x-page-header
     title="Kelola Berita"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+       
         ['url' => '/admin/news', 'label' => 'Berita'],
     ]" />
 

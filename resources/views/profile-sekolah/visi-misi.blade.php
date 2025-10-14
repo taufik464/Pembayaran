@@ -11,7 +11,7 @@
                 @if ($visi)
                 <h3 class="text-xl font-semibold mb-4 text-green-600">{{ $visi->judul }}</h3>
                 <p class="text-lg leading-relaxed">
-                    {{ $visi->isi }}
+                    {!! $visi->isi !!}
                 </p>
                 @endif
 
@@ -19,12 +19,11 @@
             <div class="bg-white p-8 rounded-xl shadow">
                 @if ($misi)
                 <h3 class="text-xl font-semibold mb-4 text-green-600">{{ $misi->judul }}</h3>
-                <ul class="list-disc  space-y-2 text-lg leading-relaxed white-space: pre-wrap;">
-                    {{ $misi->isi }}
-                </ul>
-                @endif
+                <p class="text-lg leading-relaxed">
+                    {!! $misi->isi !!}
+                    @endif
             </div>
         </div>
-    </div
-        </section>
-    @endsection
+    </div>
+</section>
+@endsection

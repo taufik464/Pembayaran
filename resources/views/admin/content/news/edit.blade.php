@@ -5,7 +5,7 @@
 <x-page-header
     title="Edit Berita"
     :breadcrumb="[
-        ['url' => '/dashboard', 'label' => 'Dashboard'],
+      
         ['url' => route('admin.news'), 'label' => 'Berita'],
         ['url' => '#', 'label' => 'Edit Data'],
     ]" />

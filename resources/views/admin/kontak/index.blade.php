@@ -4,7 +4,7 @@
 <x-page-header
     title="Manajemen Kontak"
     :breadcrumb="[
-            ['url' => '/dashboard', 'label' => 'Dashboard'],
+          
            
             ['url' => '/admin/kontak', 'label' => 'KONTAK'],
         ]" />

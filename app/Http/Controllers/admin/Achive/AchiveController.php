@@ -26,10 +26,10 @@ class AchiveController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul'     => 'required|string|max:255',
+            'judul'     => 'required|string|min:5|max:100',
             'deskripsi' => 'required|string',
-            'tingkat'   => 'required|string|max:255',
-            'tanggal'   => 'required|date',
+            'tingkat'   => 'required|string|min:3|max:100',
+            'tanggal'   => 'required|date|before_or_equal:today',
             'jenis'     => 'required|in:sekolah,siswa',
             'gambar'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -64,10 +64,10 @@ class AchiveController extends Controller
         $achive = Prestasi::findOrFail($id);
 
         $request->validate([
-            'judul'     => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'tingkat'   => 'required|string|max:255',
-            'tanggal'   => 'required|date',
+            'judul'     => 'required|string|min:5|max:100',
+            'deskripsi' => 'required|string|min:10|max:255',
+            'tingkat'   => 'required|string|min:3|max:100',
+            'tanggal'   => 'required|date|before_or_equal:today',
             'jenis'     => 'required|in:sekolah,siswa',
             'gambar'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -75,6 +75,7 @@ class AchiveController extends Controller
         $data = $request->only(['judul', 'deskripsi', 'tingkat', 'tanggal', 'jenis']);
 
         if ($request->hasFile('gambar')) {
+            // hapus gambar lama jika ada
             if ($achive->gambar && Storage::exists('public/' . $achive->gambar)) {
                 Storage::delete('public/' . $achive->gambar);
             }
