@@ -32,6 +32,11 @@
         <x-sidebar-link href="{{ route('admin.kontak') }}" icon="fas fa-users" :active="request()->is('pengguna')">
             Kontak
         </x-sidebar-link>
+        @if(auth()->check() && auth()->user()->role === 'superadmin')
+            <x-sidebar-link href="{{ route('admin.users') }}" icon="fas fa-users" :active="request()->is('pengguna')">
+                Users
+            </x-sidebar-link>
+        @endif
         <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
             Pengaturan
         </x-sidebar-link>

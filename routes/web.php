@@ -12,6 +12,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
 use App\Http\Controllers\admin\kontak\kontakController;
 use App\Http\Controllers\admin\identitas\IdentitasSekolahController;
+use App\Http\Controllers\Auth\UserController;
 
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
@@ -49,7 +50,8 @@ Route::prefix('profile-sekolah')->group(function () {
     Route::get('/sambutan', [ProfileSekolahController::class, 'sambutan'])->name('sambutan');
     Route::get('/visi-misi', [ProfileSekolahController::class, 'visiMisi'])->name('visi-misi');
     Route::get('/sejarah', [ProfileSekolahController::class, 'sejarah'])->name('sejarah');
-    Route::get('/profil-sekolah/{judul}', [ProfileSekolahController::class, 'showStriped'])->name('profil-sekolah.show.striped');});
+    Route::get('/profil-sekolah/{judul}', [ProfileSekolahController::class, 'showStriped'])->name('profil-sekolah.show.striped');
+});
 
 // ==================== INFORMASI ====================
 Route::prefix('informasi')->group(function () {
@@ -66,8 +68,22 @@ Route::prefix('layanan')->group(function () {
     Route::get('/prestasi-siswa', [PrestasiController::class, 'prestasiSiswa'])->name('prestasi-siswa');
 });
 
+// untuk menampilkan halaman admin bagi role superadmin 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+    Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create')->middleware(['isStaff']);
+});
+
+
 // ==================== DASHBOARD ADMIN ====================
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Route Admin User
+
+
     // ROUTE ADMIN SARPRAS
     Route::get('/admin/sarpras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sarpras');
     Route::get('/admin/sarpras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sarpras.create');
@@ -112,29 +128,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/identitas/{identitas}/edit', [IdentitasSekolahController::class, 'edit'])->name('admin.identitas.edit');
     Route::put('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'update'])->name('admin.identitas.update');
     Route::delete('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'destroy'])->name('admin.identitas.destroy');
-});
+
+    Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
+    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
+    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+    Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
+    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+
+    Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
+    Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
+    Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
+    Route::resource('profil', ProfilSekolahController::class);
 
 
-Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
-Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
-Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
-Route::resource('profil', ProfilSekolahController::class);
 
-Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
-Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
-Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
-Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
-Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
-Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
-
-
- Route::get('/achive', [AchiveController::class, 'index'])->name('achive.index');
+    Route::get('/achive', [AchiveController::class, 'index'])->name('achive.index');
     Route::get('/achive/create', [AchiveController::class, 'create'])->name('achive.create');
     Route::post('/achive', [AchiveController::class, 'store'])->name('achive.store');
     Route::get('/achive/{id}/edit', [AchiveController::class, 'edit'])->name('achive.edit');
     Route::put('/achive/{id}', [AchiveController::class, 'update'])->name('achive.update');
     Route::delete('/achive/{id}', [AchiveController::class, 'destroy'])->name('achive.destroy');
+});
+
+
+
 
 Route::get('/prestasi', [App\Http\Controllers\PrestasiController::class, 'index'])->name('prestasi');
-
-

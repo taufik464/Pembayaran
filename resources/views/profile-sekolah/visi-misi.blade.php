@@ -7,21 +7,28 @@
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl font-bold text-center mb-12">Visi dan Misi</h2>
         <div class="grid md:grid-cols-2 gap-8">
+
+            {{-- Kolom Visi --}}
             <div class="bg-white p-8 rounded-xl shadow">
                 @if ($visi)
                 <h3 class="text-xl font-semibold mb-4 text-green-600">{{ $visi->judul }}</h3>
-                <p class="text-lg leading-relaxed">
-                    {!! $visi->isi !!}
-                </p>
+                {{-- Gunakan div.prose untuk styling konten HTML --}}
+                <div class="ql-editor">
+                    {!! optional($visi)->isi ?? '' !!}
+                </div>
                 @endif
-
             </div>
+
+            {{-- Kolom Misi --}}
             <div class="bg-white p-8 rounded-xl shadow">
                 @if ($misi)
                 <h3 class="text-xl font-semibold mb-4 text-green-600">{{ $misi->judul }}</h3>
-                <p class="text-lg leading-relaxed">
-                    {!! $misi->isi !!}
-                    @endif
+                {{-- Gunakan div.prose untuk styling daftar bernomor/berpoin --}}
+                <div class="ql-editor">
+                    {!! optional($misi)->isi ?? 'Belum ada sambutan ditambahkan.' !!}
+                </div>
+
+                @endif
             </div>
         </div>
     </div>

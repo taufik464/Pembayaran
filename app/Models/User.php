@@ -24,6 +24,9 @@ class User extends Authenticatable
         'role', // 'superadmin' atau 'staff'
     ];
 
+    // Role constants
+    
+
     /**
      * Backwards compatibility: provide a virtual `name` attribute that maps to `username`.
      * This keeps seeders/tests that use `name` working without changing the DB schema.
