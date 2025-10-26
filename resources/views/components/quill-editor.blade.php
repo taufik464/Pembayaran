@@ -13,7 +13,7 @@
 
 
 {{-- 🧰 TOOLBAR --}}
-<div class=" bg-black" id="{{ $toolbarId }}">
+<div class=" " id="{{ $toolbarId }}">
     <span class="ql-formats">
         <select class="ql-font"></select>
         <select class="ql-size"></select>
@@ -53,23 +53,60 @@
         <button class="ql-image"></button>
         <button class="ql-video"></button>
         <button class="ql-formula"></button>
-       
-    </span>
-    <span class="ql-formats">
-        <select
-            class="ql-position min-w-[120px] rounded-md px-2 py-1 border border-gray-300 
-            bg-white appearance-none"
-            title="Position">
-            <option value="" selected>Posisi</option>
-            <option value="inline">Inline</option>
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-            <option value="center">Center</option>
-            <option value="behind">Behind Text</option>
-            <option value="front">In Front</option>
-        </select>
+
     </span>
 
+    <span class="ql-formats" role="group" aria-label="Image position">
+        <button class="ql-position" value="inline" title="Inline" aria-label="Inline">
+            <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
+                <rect x="2" y="6" width="14" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <rect x="6" y="8" width="6" height="2" fill="currentColor"/>
+            </svg>
+        </button>
+
+        <button class="ql-position" value="left" title="Left" aria-label="Left">
+            <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
+                <rect x="2" y="3" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="2" y="6.5" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="2" y="10" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="12" y="5" width="4" height="6" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button class="ql-position" value="center" title="Center" aria-label="Center">
+            <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
+                <rect x="2" y="3" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="2" y="7" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="2" y="11" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="7" y="5" width="4" height="8" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button class="ql-position" value="right" title="Right" aria-label="Right">
+            <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
+                <rect x="8" y="3" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="8" y="6.5" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="8" y="10" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
+                <rect x="2" y="5" width="4" height="6" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button class="ql-position" value="behind" title="Behind Text" aria-label="Behind Text">
+            <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
+                <rect x="3.5" y="4" width="10" height="7" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="5" y="7" width="8" height="6" rx="1" ry="1" fill="currentColor" opacity="0.18"/>
+                <path d="M4 13 L14 13" stroke="currentColor" stroke-width="1" />
+            </svg>
+        </button>
+
+        <button class="ql-position" value="front" title="In Front" aria-label="In Front">
+            <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
+                <rect x="4" y="5" width="8" height="6" rx="1" ry="1" fill="currentColor" opacity="0.18"/>
+                <rect x="6.5" y="3" width="8" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1"/>
+                <path d="M3.8 9 L14 9" stroke="currentColor" stroke-width="1" />
+            </svg>
+        </button>
+    </span>
     <span class="ql-formats">
         <button class="ql-clean"></button>
     </span>
@@ -82,6 +119,11 @@
 
 <style>
     
+
+    /* Pastikan option mewarisi warna agar teks selalu terlihat */
+    .ql-position option {
+        color: inherit;
+    }
 
     .ql-editor img.align-left {
         display: block;
@@ -153,10 +195,10 @@
         const BlockEmbed = Quill.import('blots/block/embed');
         const Image = Quill.import('formats/image');
 
-      
-      
 
-       
+
+
+
         // 🔹 Custom Image Format untuk mendukung class align
         class ImageFormat extends Image {
             static formats(domNode) {
@@ -179,7 +221,7 @@
             }
         }
 
-      
+
 
         Quill.register(ImageFormat, true);
         const editorElement = document.getElementById('{{ $editorId }}');
@@ -208,7 +250,7 @@
                                     }
                                 }
                             },
-                           
+
                             'position': function(value) {
                                 const range = this.quill.getSelection();
                                 if (range) {
