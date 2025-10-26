@@ -56,8 +56,16 @@
             <label for="isi" class="block text-sm font-medium text-gray-700 mb-2">
                 Isi
             </label>
-            <input id="content" type="hidden" name="isi" value="{{ old('isi', $profil->isi) }}">
-            <trix-editor input="content"></trix-editor>
+            <x-quill-editor
+                editor-id="myPostEditor" {{-- ID Div Editor --}}
+                toolbar-id="myPostToolbar" {{-- ID Toolbar --}}
+                content-input-id="hiddenPostContent" {{-- ID Hidden Input (PENTING!) --}}
+                content="{!! $profil->isi ?? '' !!}" {{-- Konten lama (jika ada) --}} />
+
+            {{-- 2. HIDDEN INPUT (Harus berada di dalam form dan ID-nya harus sesuai dengan content-input-id di atas) --}}
+            <input type="hidden" name="isi" id="hiddenPostContent">
+            <!--<input id="content" type="hidden" name="isi" value="{{ old('isi', $profil->isi) }}">
+            <trix-editor input="content"></trix-editor> -->
 
             @error('isi')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

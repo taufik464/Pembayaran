@@ -54,7 +54,7 @@ class ProfilSekolahController extends Controller
     {
         $request->validate([
             'judul' => 'required|string|max:255',
-            'kategori' => 'required|string|in:Sambutan,tentang kami,sejarah,Visi,Misi',
+            'kategori' => 'required|string|in:Sambutan,tentang kami,sejarah,Visi,Misi,Lainnya',
             'isi'   => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);

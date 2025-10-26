@@ -15,9 +15,11 @@
                 <h1 class="text-2xl font-bold text-green-800">Selamat Datang, Admin!</h1>
                 <p class="text-gray-600">Kelola website Sekolah Unggulan dengan mudah</p>
             </div>
-            <a href="login.html" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                <i class="fas fa-sign-out-alt"></i> Keluar
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
+                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" role="menuitem"> <i class="fas fa-sign-out-alt"></i> Keluar</a>
+            </form>
         </div>
     </div>
 

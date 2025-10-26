@@ -43,12 +43,12 @@
                      // Konversi spasi menjadi strip untuk URL yang bersih
                      $judul_striped = str_replace(' ', '-', $judulItem->judul);
                      @endphp
-                     
-                         {{-- Gunakan $judul_striped untuk parameter route --}}
-                         <a class="block px-4 py-2 hover:bg-green-100 hover:text-green-700" href="{{ route('profil-sekolah.show.striped', ['judul' => $judul_striped]) }}">
-                             {{ $judulItem->judul }}
-                         </a>
-                  
+
+                     {{-- Gunakan $judul_striped untuk parameter route --}}
+                     <a class="block px-4 py-2 hover:bg-green-100 hover:text-green-700" href="{{ route('profil-sekolah.show.striped', ['judul' => $judul_striped]) }}">
+                         {{ $judulItem->judul }}
+                     </a>
+
 
 
                      @endforeach
@@ -93,10 +93,10 @@
                  <div x-show="open" @click.away="open = false"
                      x-transition
                      class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-40 z-50 font-medium">
-                    <a href="{{ route('kontak') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Kontak</a>
-                    <a href="https://sppalhikmah.web.id/" target="_blank" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Administrasi</a>
-                </div>
-            </div>
+                     <a href="{{ route('kontak') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Kontak</a>
+                     <a href="https://sppalhikmah.web.id/" target="_blank" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Administrasi</a>
+                 </div>
+             </div>
 
              <!-- PPDB (menu utama baru) -->
              <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank"
@@ -136,12 +136,12 @@
              // Konversi spasi menjadi strip untuk URL yang bersih
              $judul_striped = str_replace(' ', '-', $judulItem->judul);
              @endphp
-             <li>
-                 {{-- Gunakan $judul_striped untuk parameter route --}}
-                 <a class="dropdown-item" href="{{ route('profil-sekolah.show.striped', ['judul' => $judul_striped]) }}">
-                     {{ $judulItem->judul }}
-                 </a>
-             </li>
+
+             {{-- Gunakan $judul_striped untuk parameter route --}}
+             <a class="dropdown-item block pl-4 py-1 hover:text-green-600" href="{{ route('profil-sekolah.show.striped', ['judul' => $judul_striped]) }}">
+                 {{ $judulItem->judul }}
+             </a>
+
              @endforeach
          </details>
 
@@ -153,13 +153,13 @@
              <a href="{{ route('sarpras') }}" class="block pl-4 py-1 hover:text-green-600">Sarpras</a>
              <a href="{{ route('prestasi') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi</a>
          </details>
-        <details>
-            <summary class="cursor-pointer py-2">Layanan</summary>
-            <a href="{{ route('kontak') }}" class="block pl-4 py-1 hover:text-green-600">Kontak</a>
-            <a href="https://sppalhikmah.web.id/" class="block pl-4 py-1 hover:text-green-600">Administrasi</a>
-        </details>
+         <details>
+             <summary class="cursor-pointer py-2">Layanan</summary>
+             <a href="{{ route('kontak') }}" class="block pl-4 py-1 hover:text-green-600">Kontak</a>
+             <a href="https://sppalhikmah.web.id/" class="block pl-4 py-1 hover:text-green-600">Administrasi</a>
+         </details>
 
-       
+
 
          <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank" class="block text-center px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">PPDB Online</a>
      </div>
