@@ -9,19 +9,21 @@
 <!-- Main Content -->
 <div class="flex-1 p-2">
     <!-- Header -->
-    <div class="bg-white p-5 rounded-lg shadow mb-5">
-        <div class="flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold text-green-800">Selamat Datang, Admin!</h1>
-                <p class="text-gray-600">Kelola website Sekolah Unggulan dengan mudah</p>
+    
+        <div class="bg-white p-5 rounded-lg shadow mb-5">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-green-800">Selamat Datang, Admin!</h1>
+                    <p class="text-gray-600">Kelola website Sekolah Unggulan dengan mudah</p>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" role="menuitem"> <i class="fas fa-sign-out-alt"></i> Keluar</a>
+                </form>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
-                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" role="menuitem"> <i class="fas fa-sign-out-alt"></i> Keluar</a>
-            </form>
         </div>
-    </div>
+    
 
     <!-- Statistics -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">

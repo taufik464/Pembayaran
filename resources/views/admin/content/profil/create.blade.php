@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('title', 'Tambah Profil Sekolah')
-
+@php
+$title = 'Tambah Profil Sekolah';
+$breadcrumb = [
+['label' => 'Profil Sekolah', 'url' => '/profil'],
+['label' => 'Tambah Data', 'url' => '#']
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Tambah Profil Sekolah"
-    :breadcrumb="[
-       
-        ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
-        ['url' => '#', 'label' => 'Tambah Data'],
-    ]" />
 
-<section class="bg-white p-6 rounded-lg shadow">
+
+<section class="bg-white mt-6 p-6 rounded-lg shadow">
     <form action="{{ route('profil.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-4">
@@ -44,13 +44,6 @@
                 content="" {{-- Konten lama (jika ada) --}} />
             <input type="hidden" name="isi" id="hiddenPostContent">
         </div>
-        <!--<div class="mb-4">
-            <label class="block font-medium">Isi</label>
-            <input id="content" type="hidden" name="isi">
-            <trix-editor input="content"></trix-editor> @error('isi')
-            <p class="text-red-500 text-xs italic">{{ $message }}</p>
-            @enderror
-        </div> -->
 
         <div class="mb-4">
             <label class="block font-medium">Gambar</label>

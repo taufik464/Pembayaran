@@ -1,9 +1,10 @@
-@props(['editorId' => 'editor', 'toolbarId' => 'toolbar-container', 'contentInputId' => 'hiddenContent', 'content' => ''])
+@props(['editorId' => '', 'toolbarId' => 'toolbar-container', 'contentInputId' => 'hiddenContent', 'content' => ''])
 
 {{-- 🔗 CSS & JS ASSETS --}}
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
@@ -15,7 +16,10 @@
 {{-- 🧰 TOOLBAR --}}
 <div class=" " id="{{ $toolbarId }}">
     <span class="ql-formats">
-        <select class="ql-font"></select>
+        <select class="ql-font">
+            <option value="serif">Serif</option>
+            <option value="monospace">Monospace</option>
+        </select>
         <select class="ql-size"></select>
     </span>
     <span class="ql-formats">
@@ -59,50 +63,50 @@
     <span class="ql-formats" role="group" aria-label="Image position">
         <button class="ql-position" value="inline" title="Inline" aria-label="Inline">
             <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
-                <rect x="2" y="6" width="14" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.2"/>
-                <rect x="6" y="8" width="6" height="2" fill="currentColor"/>
+                <rect x="2" y="6" width="14" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.2" />
+                <rect x="6" y="8" width="6" height="2" fill="currentColor" />
             </svg>
         </button>
 
         <button class="ql-position" value="left" title="Left" aria-label="Left">
             <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
-                <rect x="2" y="3" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="2" y="6.5" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="2" y="10" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="12" y="5" width="4" height="6" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="2" y="3" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="2" y="6.5" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="2" y="10" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="12" y="5" width="4" height="6" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1" />
             </svg>
         </button>
 
         <button class="ql-position" value="center" title="Center" aria-label="Center">
             <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
-                <rect x="2" y="3" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="2" y="7" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="2" y="11" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="7" y="5" width="4" height="8" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="2" y="3" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="2" y="7" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="2" y="11" width="14" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="7" y="5" width="4" height="8" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1" />
             </svg>
         </button>
 
         <button class="ql-position" value="right" title="Right" aria-label="Right">
             <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
-                <rect x="8" y="3" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="8" y="6.5" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="8" y="10" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor"/>
-                <rect x="2" y="5" width="4" height="6" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="8" y="3" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="8" y="6.5" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="8" y="10" width="8" height="2" rx="0.6" ry="0.6" fill="currentColor" />
+                <rect x="2" y="5" width="4" height="6" rx="0.6" ry="0.6" fill="none" stroke="currentColor" stroke-width="1" />
             </svg>
         </button>
 
         <button class="ql-position" value="behind" title="Behind Text" aria-label="Behind Text">
             <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
-                <rect x="3.5" y="4" width="10" height="7" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1"/>
-                <rect x="5" y="7" width="8" height="6" rx="1" ry="1" fill="currentColor" opacity="0.18"/>
+                <rect x="3.5" y="4" width="10" height="7" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1" />
+                <rect x="5" y="7" width="8" height="6" rx="1" ry="1" fill="currentColor" opacity="0.18" />
                 <path d="M4 13 L14 13" stroke="currentColor" stroke-width="1" />
             </svg>
         </button>
 
         <button class="ql-position" value="front" title="In Front" aria-label="In Front">
             <svg viewBox="0 0 18 18" width="18" height="18" focusable="false">
-                <rect x="4" y="5" width="8" height="6" rx="1" ry="1" fill="currentColor" opacity="0.18"/>
-                <rect x="6.5" y="3" width="8" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="4" y="5" width="8" height="6" rx="1" ry="1" fill="currentColor" opacity="0.18" />
+                <rect x="6.5" y="3" width="8" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1" />
                 <path d="M3.8 9 L14 9" stroke="currentColor" stroke-width="1" />
             </svg>
         </button>
@@ -113,13 +117,11 @@
 </div>
 
 {{-- 📝 EDITOR AREA --}}
-<div id="{{ $editorId }}" class="border rounded-md p-2 bg-white" style="min-height: 300px;">
+<div id="{{ $editorId }}" class="rendered-content quill-editor-output border rounded-md p-2 bg-white" style="min-height: 300px;">
     {!! $content !!}
 </div>
 
 <style>
-    
-
     /* Pastikan option mewarisi warna agar teks selalu terlihat */
     .ql-position option {
         color: inherit;
