@@ -1,15 +1,16 @@
 @extends('layouts.admin')
 @section('title', 'Profil Sekolah')
+@php
+$title = 'Profil Sekolah';
+$breadcrumb = [
+['label' => 'Profil Sekolah', 'url' => '/profil'],
 
+
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Profil Sekolah"
-    :breadcrumb="[
-       
-        ['url' => '/admin/profilsekolah', 'label' => 'Profil Sekolah'],
-    ]" />
 
-<section class="bg-white p-5 rounded-lg shadow">
+<section class="bg-white mt-6 p-5 rounded-lg shadow">
 
     {{-- Tombol Tambah Data --}}
     <div class="flex justify-end mb-4">

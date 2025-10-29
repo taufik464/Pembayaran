@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('title', 'Tambah Profil Sekolah')
-
+@php
+$title = 'Tambah Profil Sekolah';
+$breadcrumb = [
+['label' => 'Profil Sekolah', 'url' => '/profil'],
+['label' => 'Tambah Data', 'url' => '#']
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Tambah Profil Sekolah"
-    :breadcrumb="[
-       
-        ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
-        ['url' => '#', 'label' => 'Tambah Data'],
-    ]" />
 
-<section class="bg-white p-6 rounded-lg shadow">
+
+<section class="bg-white mt-6 p-6 rounded-lg shadow">
     <form action="{{ route('profil.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-4">

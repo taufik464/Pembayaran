@@ -4,7 +4,7 @@
         @include('layouts.sidebar')
 
         {{-- Konten utama --}}
-        <main class="flex-1 p-6 h-full overflow-auto">
+        <main class="flex-1 mt-7 p-6 h-full overflow-auto">
             @yield('content')
         </main>
     </div>

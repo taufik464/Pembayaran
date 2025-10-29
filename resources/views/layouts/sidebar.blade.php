@@ -1,11 +1,52 @@
 <div x-data="{ open: false }" class="relative">
     {{-- Tombol burger (selalu tampil di semua device) --}}
-    <div class="bg-white px-4 py-3 shadow-md flex items-center justify-between fixed top-0 left-0 right-0 z-40">
-        <button @click="open = !open" class="text-gray-800 focus:outline-none">
+
+    <div x-cloak class="bg-white h-auto px-4 py-3 shadow-md flex items-center justify-between fixed top-0 left-0 right-0 z-50">
+        <button @click.prevent="open = !open" class="mr-4 text-gray-800 focus:outline-none" aria-label="Toggle sidebar">
             <i class="fas fa-bars fa-lg"></i>
         </button>
-        <h1 class="text-lg font-semibold text-gray-700 tracking-wide">Menu</h1>
+
+        <x-application-logo class="ml-4 h-8 w-auto" />
+
+
+        {{-- JUDUL DAN BREADCRUMB (Tengah) --}}
+        <div class=" ml-4 flex-1 text-left">
+
+            @isset($title)
+            <h1 class="text-xl font-bold text-green-800">{{ $title }}</h1>
+            @endisset
+
+            @isset($breadcrumb)
+            <nav class="flex text-sm" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <a href="/dashboard" class="text-xs font-medium text-gray-700 hover:text-blue-600">Dashboard</a>
+                    </li>
+
+                    {{-- Breadcrumb Loop --}}
+                    @foreach ($breadcrumb as $item)
+                    <li>
+                        <div class="flex items-center">
+                            <span class="text-gray-400">/ </span>
+                            <a href="{{ $item['url'] }}" class="text-xs font-medium text-gray-700 hover:text-blue-600">{{ $item['label'] }}</a>
+                        </div>
+                    </li>
+                    @endforeach
+                </ol>
+            </nav>
+            @endisset
+        </div>
+
+        {{-- TOMBOL KELUAR (Kanan Jauh) --}}
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"
+                class="bg-green-600 text-white px-3 py-1 text-sm rounded hover:bg-green-700" role="menuitem">
+                <i class="fas fa-sign-out-alt mr-1"></i> Keluar
+            </a>
+        </form>
     </div>
+
 
     {{-- Overlay hitam --}}
     <div
@@ -69,10 +110,12 @@
             </x-sidebar-link>
             <x-sidebar-link href="{{ route('admin.informasi') }}" icon="fas fa-info-circle" :active="request()->is('informasi')">
                 Informasi Sekolah
-            </x-sidebar-link>
-            <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
-                Pengaturan
-            </x-sidebar-link>
+                <x-sidebar-link href="{{ route('admin.users') }}" icon="fas fa-users" :active="request()->is('user')">
+                    User
+                </x-sidebar-link>
+                <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
+                    Pengaturan
+                </x-sidebar-link>
         </nav>
     </div>
 </div>

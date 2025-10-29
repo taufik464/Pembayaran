@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('title', 'Edit Profil Sekolah')
-
+@php
+$title = 'Edit Profil Sekolah';
+$breadcrumb = [
+['label' => 'Profil Sekolah', 'url' => route('profil.index')],
+['label' => 'Edit Data', 'url' => '#']
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Edit Profil Sekolah"
-    :breadcrumb="[
-       
-        ['url' => route('profil.index'), 'label' => 'Profil Sekolah'],
-        ['url' => '#', 'label' => 'Edit Data'],
-    ]" />
+
 
 <section class="bg-white p-6 rounded-lg shadow">
     <form action="{{ route('profil.update', $profil->id) }}" method="POST" enctype="multipart/form-data">

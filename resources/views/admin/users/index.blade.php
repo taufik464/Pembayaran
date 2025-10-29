@@ -1,16 +1,21 @@
 @extends('layouts.admin')
-@section('title', 'User Management')
+
+{{-- Mengirimkan JUDUL ke layout --}}
+
+
+{{-- Mengirimkan BREADCRUMB ke layout (sebagai array yang perlu diproses di layout) --}}
+@php
+$title = 'Manajemen User';
+$breadcrumb = [
+['label' => 'Manajemen User', 'url' => route('admin.users')],
+
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Manajemen Kontak"
-    :breadcrumb="[
-          
-           
-            ['url' => '/admin/kontak', 'label' => 'KONTAK'],
-        ]" />
 
 
-<section class=" relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-5">
+
+<section class=" relative overflow-x-auto shadow-md sm:rounded-lg bg-white mt-6 p-5">
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.users.create') }}"
             class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow">

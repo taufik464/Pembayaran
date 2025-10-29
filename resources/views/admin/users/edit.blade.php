@@ -7,6 +7,14 @@
         ['url' => '/admin/users', 'label' => 'USER MANAGEMENT'],
         ['url' => '', 'label' => 'EDIT USER'],
     ]" />
+@php
+$title = 'Manajemen User';
+$breadcrumb = [
+['label' => 'Manajemen User', 'url' => '/admin/users'],
+['label' => 'Edit User', 'url' => '']
+
+];
+@endphp
 <section class="bg-white p-5 rounded-lg shadow">
     <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
         @csrf
@@ -31,7 +39,7 @@
             <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow">
                 Update
             </button>
-        </div>  
+        </div>
     </form>
 </section>
 @endsection
