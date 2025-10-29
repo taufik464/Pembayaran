@@ -42,7 +42,7 @@
                     <i class="fas fa-images text-green-600"></i>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-2xl font-bold">156</h3>
+                    <h3 class="text-2xl font-bold">{{ $jumgaleri }}</h3>
                     <p class="text-gray-600">Foto Galeri</p>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <i class="fas fa-eye text-green-600"></i>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-2xl font-bold">1.2K</h3>
+                    <h3 class="text-2xl font-bold">{{ $totalVisitors }}</h3>
                     <p class="text-gray-600">Pengunjung Bulanan</p>
                 </div>
             </div>
@@ -75,7 +75,7 @@
     <div class="bg-white p-5 rounded-lg shadow mb-5">
         <h2 class="text-xl font-bold text-green-800 mb-3">Aksi Cepat</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="admin-articles.html" class="bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-700">
+            <a href="{{ route('admin.informasi.create') }}" class="bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-700">
                 <i class="fas fa-plus"></i>
                 <span class="block mt-2">Tambah Artikel</span>
             </a>

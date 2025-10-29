@@ -38,19 +38,13 @@
         </div>
         <div>
             <x-quill-editor
-                editor-id="myPostEditor" {{-- ID Div Editor --}}
-                toolbar-id="myPostToolbar" {{-- ID Toolbar --}}
-                content-input-id="hiddenPostContent" {{-- ID Hidden Input (PENTING!) --}}
+                editorId="myPostEditor" {{-- ID Div Editor --}}
+                toolbarId="myPostToolbar" {{-- ID Toolbar --}}
+                contentInputId="hiddenPostContent" {{-- ID Hidden Input (PENTING!) --}}
                 content="" {{-- Konten lama (jika ada) --}} />
             <input type="hidden" name="isi" id="hiddenPostContent">
         </div>
-        <!--<div class="mb-4">
-            <label class="block font-medium">Isi</label>
-            <input id="content" type="hidden" name="isi">
-            <trix-editor input="content"></trix-editor> @error('isi')
-            <p class="text-red-500 text-xs italic">{{ $message }}</p>
-            @enderror
-        </div> -->
+       
 
         <div class="mb-4">
             <label class="block font-medium">Gambar</label>

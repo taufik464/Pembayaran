@@ -13,6 +13,8 @@ use App\Http\Controllers\ProfileSekolahController;
 use App\Http\Controllers\admin\kontak\kontakController;
 use App\Http\Controllers\admin\identitas\IdentitasSekolahController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\admin\informasi\kategoriController;
+use App\Http\Controllers\admin\informasi\informationController;
 
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
@@ -60,6 +62,11 @@ Route::prefix('informasi')->group(function () {
     Route::get('/ppdb/form', [PPDBController::class, 'create'])->name('ppdb.create');
     Route::post('/ppdb', [PPDBController::class, 'store'])->name('ppdb.store');
 });
+
+Route::get('/informasi/kategori/{id}', [InformasiController::class, 'byKategori'])->name('informasi.kategori');
+Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
+Route::get('/informasi/gallery', [InformasiController::class, 'gallery'])->name('informasi.gallery');
+
 
 // ==================== LAYANAN ====================
 Route::prefix('layanan')->group(function () {
@@ -149,6 +156,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/achive/{id}/edit', [AchiveController::class, 'edit'])->name('achive.edit');
     Route::put('/achive/{id}', [AchiveController::class, 'update'])->name('achive.update');
     Route::delete('/achive/{id}', [AchiveController::class, 'destroy'])->name('achive.destroy');
+
+    Route::get('/admin/kategori', [kategoriController::class, 'index'])->name('admin.kategori');
+    Route::get('/admin/kategori/create', [kategoriController::class, 'create'])->name('admin.kategori.create');
+    Route::post('/admin/kategori', [kategoriController::class, 'store'])->name('admin.kategori.store');
+    Route::get('/admin/kategori/{id}/edit', [kategoriController::class, 'edit'])->name('admin.kategori.edit');
+    Route::put('/admin/kategori/{id}', [kategoriController::class, 'update'])->name('admin.kategori.update');
+    Route::delete('/admin/kategori/{id}', [kategoriController::class, 'destroy'])->name('admin.kategori.destroy');
+
+    Route::get('/admin/informasi', [informationController::class, 'index'])->name('admin.informasi');
+    Route::get('/admin/informasi/create', [informationController::class, 'create'])->name('admin.informasi.create');
+    Route::post('/admin/informasi', [informationController::class, 'store'])->name('admin.informasi.store');
+    Route::get('/admin/informasi/{id}/edit', [informationController::class, 'edit'])->name('admin.informasi.edit');
+    Route::put('/admin/informasi/{id}', [informationController::class, 'update'])->name('admin.informasi.update');
+    Route::delete('/admin/informasi/{id}', [informationController::class, 'destroy'])->name('admin.informasi.destroy');
 });
 
 

@@ -1,6 +1,8 @@
  @php
  // Memanggil method statis dari Controller untuk mendapatkan data dropdown
  $profilJuduls = App\Http\Controllers\ProfileSekolahController::getJudulForNavbar();
+
+
  @endphp
  <header class="bg-gradient-to-r from-green-600 to-emerald-500 text-white shadow-lg sticky top-0 z-50 font-sans">
      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -70,13 +72,51 @@
                  <div x-show="open" @click.away="open = false"
                      x-transition
                      class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-48 z-50 font-medium">
-                     <a href="{{ route('gallery') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Gallery</a>
+                     <a href="{{ route('informasi.gallery') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Gallery</a>
                      <a href="{{ route('berita') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Berita</a>
                      <a href="{{ route('ekstrakurikuler') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Ekstrakurikuler</a>
                      <a href="{{ route('sarpras') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Sarpras</a>
                      <a href="{{ route('prestasi') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Prestasi</a>
                  </div>
              </div>
+
+             <!-- Informasi -->
+             <div class="relative" x-data="{ open: false }">
+                 <!-- Tombol Dropdown -->
+                 <button @click="open = !open"
+                     class="flex items-center px-3 py-2 rounded-lg hover:bg-green-700 transition font-bold text-white">
+                     <span>Informasi</span>
+                     <svg class="w-4 h-4 ml-1 transition-transform duration-200"
+                         :class="{ 'rotate-180': open }"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                             d="M19 9l-7 7-7-7" />
+                     </svg>
+                 </button>
+
+                 <!-- Dropdown Menu -->
+                 <div x-show="open" @click.away="open = false" x-transition
+                     class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-56 z-50 font-medium">
+
+                     <!-- 🔹 Menu Gallery -->
+                     <a href="{{ route('informasi.gallery') }}"
+                         class="block px-4 py-2 hover:bg-green-100 hover:text-green-700 border-b border-gray-100">
+                         Gallery
+                     </a>
+
+                     <!-- 🔹 Daftar Kategori Informasi -->
+                     @foreach ($kategoriInformasis as $kategori)
+                     <a href="{{ route('informasi.kategori', $kategori->id) }}"
+                         class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">
+                         {{ $kategori->name }}
+                     </a>
+                     @endforeach
+
+                 </div>
+             </div>
+
+
+
 
              <!-- Layanan -->
              <div class="relative" x-data="{ open: false }">
@@ -147,11 +187,20 @@
 
          <details>
              <summary class="cursor-pointer py-2">Informasi</summary>
-             <a href="{{ route('gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
+             <a href="{{ route('informasi.gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
              <a href="{{ route('berita') }}" class="block pl-4 py-1 hover:text-green-600">Berita</a>
              <a href="{{ route('ekstrakurikuler') }}" class="block pl-4 py-1 hover:text-green-600">Ekstrakurikuler</a>
              <a href="{{ route('sarpras') }}" class="block pl-4 py-1 hover:text-green-600">Sarpras</a>
              <a href="{{ route('prestasi') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi</a>
+         </details>
+         <details>
+             <summary class="cursor-pointer py-2">Informasi</summary>
+             <a href="{{ route('informasi.gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
+             @foreach ($kategoriInformasis as $kategori)
+             <a href="{{ route('informasi.kategori', $kategori->id) }}" class="block pl-4 py-1 hover:text-green-600">
+                 {{ $kategori->name }}
+             </a>
+             @endforeach
          </details>
          <details>
              <summary class="cursor-pointer py-2">Layanan</summary>
@@ -170,4 +219,9 @@
      document.getElementById('mobile-menu-button').addEventListener('click', function() {
          document.getElementById('mobile-menu').classList.toggle('hidden');
      });
+ </script>
+ <script>
+     fetch('/categories')
+         .then(response => response.json())
+         .then(data => console.log(data));
  </script>

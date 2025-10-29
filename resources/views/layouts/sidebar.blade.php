@@ -8,15 +8,14 @@
     </div>
 
     {{-- Overlay hitam --}}
-    <div 
-        x-show="open" 
+    <div
+        x-show="open"
         @click="open = false"
         class="fixed inset-0 bg-black bg-opacity-50 z-40"
-        x-transition.opacity
-    ></div>
+        x-transition.opacity></div>
 
     {{-- Sidebar utama --}}
-    <div 
+    <div
         class="fixed top-0 left-0 h-screen w-64 bg-green-800 text-white p-6 z-50 transform transition-transform duration-300 ease-in-out shadow-lg"
         :class="open ? 'translate-x-0' : '-translate-x-full'"
         x-transition:enter="transition ease-out duration-300"
@@ -24,8 +23,7 @@
         x-transition:enter-end="translate-x-0"
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="translate-x-0"
-        x-transition:leave-end="-translate-x-full"
-    >
+        x-transition:leave-end="-translate-x-full">
         {{-- Header sidebar --}}
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-xl font-bold flex items-center space-x-2">
@@ -40,15 +38,15 @@
         </div>
 
         {{-- Menu navigasi --}}
-        <nav class="space-y-3">
+        <nav class="overflow-y-auto" style="max-height: calc(100vh - 160px);">
             <x-sidebar-link href="{{ route('dashboard') }}" icon="fas fa-tachometer-alt" :active="request()->is('dashboard')">
                 Dashboard
             </x-sidebar-link>
             <x-sidebar-link href="{{ route('profil.index') }}" icon="fas fa-newspaper" :active="request()->is('profil-sekolah')">
                 Profil Sekolah
             </x-sidebar-link>
-            <x-sidebar-link href="{{ route('admin.ekstrakurikuler') }}" icon="fas fa-futbol" :active="request()->is('ekstrakurikuler')">
-                Ekstrakurikuler
+            {{-- <x-sidebar-link href="{{ route('admin.ekstrakurikuler') }}" icon="fas fa-futbol" :active="request()->is('ekstrakurikuler')">
+            Ekstrakurikuler
             </x-sidebar-link>
             <x-sidebar-link href="{{ route('admin.news') }}" icon="fas fa-newspaper" :active="request()->is('Berita')">
                 Berita
@@ -62,8 +60,15 @@
             <x-sidebar-link href="{{ route('achive.index') }}" icon="fas fa-trophy" :active="request()->is('achive')">
                 Prestasi
             </x-sidebar-link>
+            --}}
             <x-sidebar-link href="{{ route('admin.kontak') }}" icon="fas fa-users" :active="request()->is('pengguna')">
                 Kontak
+            </x-sidebar-link>
+            <x-sidebar-link href="{{ route('admin.kategori') }}" icon="fas fa-users" :active="request()->is('pengguna')">
+                kategori Informasi
+            </x-sidebar-link>
+            <x-sidebar-link href="{{ route('admin.informasi') }}" icon="fas fa-info-circle" :active="request()->is('informasi')">
+                Informasi Sekolah
             </x-sidebar-link>
             <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
                 Pengaturan

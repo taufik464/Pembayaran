@@ -21,5 +21,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useTailwind();
+        \Illuminate\Support\Facades\View::composer('layouts.navbar', function ($view) {
+            $view->with('kategoriInformasis', \App\Models\Category::all());
+        });
     }
 }

@@ -9,8 +9,8 @@
         </div>
         <div>
             <p class="text-lg font-medium">{{ $judul ?? 'Judul Konten' }}</p>
-            <p class="text-gray-600">
-                {{ \Illuminate\Support\Str::limit($isi ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit,', 100, '...') }}
+            <p class="text-gray-600 line-clamp-2">
+                {{ \Illuminate\Support\Str::limit(strip_tags($isi ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit,'), 100) }}
             </p>
         </div>
     </div>
