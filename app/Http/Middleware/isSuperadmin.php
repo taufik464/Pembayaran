@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class EnsureTokenIsValid
+class isSuperadmin
 {
     /**
      * Handle an incoming request.
@@ -16,22 +16,10 @@ class EnsureTokenIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Daftar role yang diizinkan
-        $roles = ['superadmin', 'staff'];
-        $userRole = $request->user()->role;
-        // Jika user tidak login atau rolenya tidak ada dalam daftar
-        if ($userRole != ($roles)) {
-           return abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk mengakses halaman ini.');
-        }
-        return $next($request);
-    }
-
-    public function isSuperadmin(Request $request)
-    {
-        return $request->user() && $request->user()->role === 'superadmin';
         if (! $request->user() || ! $request->user()->isSuperadmin()) {
             // Akses ditolak
             abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk mengakses halaman ini.');
+        }
+        return $next($request);
     }
-}
 }

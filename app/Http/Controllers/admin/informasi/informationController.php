@@ -15,10 +15,26 @@ class informationController extends Controller
 {
     public function index(Request $request)
     {
-        $informasi = Information::with('galleryInformasis')->paginate(20);
+        $title = $request->input('title');
+        $kategori_id = $request->input('category_id');
 
-        return view('admin.informasi.info.index', compact('informasi'));
+        $informasi = Information::with('galleryInformasis')
+            ->when($title, function ($query, $title) {
+                $query->where('title', 'like', "%{$title}%");
+            })
+            ->when($kategori_id, function ($query, $kategori_id) {
+                $query->where('category_id', $kategori_id);
+            })
+            ->paginate(20)
+            ->appends($request->only(['title', 'kategori_id'])); // biar query tetap ada saat pindah halaman
+
+        $kategori = Category::all(); // untuk dropdown kategori di view
+
+        return view('admin.informasi.info.index', compact('informasi', 'kategori', 'title', 'kategori_id'));
     }
+
+   
+
     public function create()
     {
         $kategori = Category::all();

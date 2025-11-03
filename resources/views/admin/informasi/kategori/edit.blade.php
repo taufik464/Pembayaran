@@ -1,13 +1,16 @@
 @extends('layouts.admin')
 @section('title', 'Kategori Informasi')
+
+@php
+$title = "Manajemen Kategori Informasi";
+$breadcrumb = [
+['url' => '/admin/kategori', 'label' => 'Kategori Informasi'],
+['url' => '', 'label' => 'Tambah Kategori Informasi'],
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Edit Kategori Informasi"
-    :breadcrumb="[
-            ['url' => '/admin/kategori', 'label' => 'Kategori Informasi'],
-            ['url' => '', 'label' => 'Tambah Kategori Informasi'],
-        ]" />
-<section class=" relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-5">
+
+<section class=" mt-20 relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-5">
     <form action="{{ route('admin.kategori.update', $kategori->id) }}" method="POST" class=" max-w-lg mx-auto">
         @csrf
         @method('PUT')

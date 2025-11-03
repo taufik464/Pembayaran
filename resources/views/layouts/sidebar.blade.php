@@ -110,6 +110,10 @@
             </x-sidebar-link>
             <x-sidebar-link href="{{ route('admin.informasi') }}" icon="fas fa-info-circle" :active="request()->is('informasi')">
                 Informasi Sekolah
+            </x-sidebar-link>
+                <x-sidebar-link href="{{ route('admin.faq') }}" icon="fas fa-question-circle" :active="request()->is('faq')">
+                    FAQ
+                </x-sidebar-link>
                 <x-sidebar-link href="{{ route('admin.users') }}" icon="fas fa-users" :active="request()->is('user')">
                     User
                 </x-sidebar-link>

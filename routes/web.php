@@ -75,19 +75,23 @@ Route::prefix('layanan')->group(function () {
     Route::get('/prestasi-siswa', [PrestasiController::class, 'prestasiSiswa'])->name('prestasi-siswa');
 });
 
+Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
+});
+
 // untuk menampilkan halaman admin bagi role superadmin 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['isSuperadmin', 'verified'])->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
     Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
-    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create')->middleware(['isStaff']);
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
 });
 
 
 // ==================== DASHBOARD ADMIN ====================
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     // Route Admin User
 
 
@@ -98,7 +102,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/sarpras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sarpras.edit');
     Route::put('/admin/sarpras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sarpras.update');
     Route::delete('/admin/sarpras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sarpras.destroy');
-    Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
 
     Route::get('/admin/ekstrakurikuler', [ekstraController::class, 'index'])->name('admin.ekstrakurikuler');
     Route::get('/admin/ekstrakurikuler/create', [ekstraController::class, 'create'])->name('admin.ekstrakurikuler.create');
@@ -158,6 +161,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/achive/{id}', [AchiveController::class, 'destroy'])->name('achive.destroy');
 
     Route::get('/admin/kategori', [kategoriController::class, 'index'])->name('admin.kategori');
+    Route::get('/admin/kategori/{id}', [kategoriController::class, 'show'])->name('admin.kategori.show');
     Route::get('/admin/kategori/create', [kategoriController::class, 'create'])->name('admin.kategori.create');
     Route::post('/admin/kategori', [kategoriController::class, 'store'])->name('admin.kategori.store');
     Route::get('/admin/kategori/{id}/edit', [kategoriController::class, 'edit'])->name('admin.kategori.edit');
@@ -170,6 +174,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/informasi/{id}/edit', [informationController::class, 'edit'])->name('admin.informasi.edit');
     Route::put('/admin/informasi/{id}', [informationController::class, 'update'])->name('admin.informasi.update');
     Route::delete('/admin/informasi/{id}', [informationController::class, 'destroy'])->name('admin.informasi.destroy');
+
+
+    Route::get('/admin/faq', [\App\Http\Controllers\admin\faq\faqController::class, 'index'])->name('admin.faq');
+    Route::get('/admin/faq/create', [\App\Http\Controllers\admin\faq\faqController::class, 'create'])->name('admin.faq.create');
+    Route::post('/admin/faq', [\App\Http\Controllers\admin\faq\faqController::class, 'store'])->name('admin.faq.store');
+    Route::get('/admin/faq/{id}/edit', [\App\Http\Controllers\admin\faq\faqController::class, 'edit'])->name('admin.faq.edit');
+    Route::put('/admin/faq/{id}', [\App\Http\Controllers\admin\faq\faqController::class, 'update'])->name('admin.faq.update');
+    Route::delete('/admin/faq/{id}', [\App\Http\Controllers\admin\faq\faqController::class, 'destroy'])->name('admin.faq.destroy');
 });
 
 

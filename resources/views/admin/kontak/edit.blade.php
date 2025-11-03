@@ -1,13 +1,15 @@
 @extends('layouts.admin')
+@php
+$title = 'Edit Kontak';
+$breadcrumb = [
+['label' => 'Kontak', 'url' => route('admin.kontak')],
+['label' => 'Edit Kontak', 'url' => route('admin.kontak.edit', $kontak->id)],
+];
+@endphp
 @section('title', 'Edit Kontak')
 @section('content')
-<x-page-header
-    title="Edit Kontak"
-    :breadcrumb="[
-            ['url' => '/admin/kontak', 'label' => 'Kontak'],
-            ['url' => '/admin/kontak/' . $kontak->id . '/edit', 'label' => 'Edit Kontak'],
-        ]" />
-<section class="bg-white p-5 rounded-lg shadow">
+
+<section class="bg-white mt-6 p-5 rounded-lg shadow">
     <form action="{{ route('admin.kontak.update', $kontak->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -48,7 +50,7 @@
         <div class="flex justify-end">
             <a href="{{ route('admin.kontak') }}"
                 class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg mr-2">Batal</a>
-            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Simpan</button>
+            <button type="submit" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">Simpan</button>
         </div>
     </form>
 </section>

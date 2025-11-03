@@ -1,14 +1,15 @@
 @extends('layouts.admin')
 @section('title', 'KONTAK')
+@php
+$title = 'Manajemen Kontak';
+$breadcrumb = [
+
+['label' => 'KONTAK', 'url' => route('admin.kontak')],
+];
+@endphp
 @section('content')
-<x-page-header
-    title="Manajemen Kontak"
-    :breadcrumb="[
-          
-           
-            ['url' => '/admin/kontak', 'label' => 'KONTAK'],
-        ]" />
-<section class="bg-white p-5 rounded-lg shadow">
+
+<section class="bg-white mt-6 p-5 rounded-lg shadow">
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.kontak.create') }}"
             class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">

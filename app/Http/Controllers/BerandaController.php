@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin\ProfilSekolah;
 use App\Models\Berita;
 use App\Models\Ekstrakurikuler;
+use App\Models\faq;
 
 use Illuminate\Http\Request;
 
@@ -16,12 +17,14 @@ class BerandaController extends Controller
         $sambuatan = ProfilSekolah::where('kategori', 'Sambutan')->first();
         $beritaTerbaru = Berita::latest()->take(3)->get();
         $berita = Berita::latest()->paginate(6);
+        $faqs = faq::latest()->take(5)->get();
         return view('beranda.index', [
             'title' => 'Beranda',
             'beritaTerbaru' => $beritaTerbaru,
             'ekstra' => $ekstra,
             'sambutan' => $sambuatan,
-            'berita' => $berita
+            'berita' => $berita,
+            'faqs' => $faqs
         ]);
     }
 

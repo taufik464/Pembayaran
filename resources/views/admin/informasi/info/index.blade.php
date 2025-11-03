@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 @section('title', 'Informasi Sekolah')
 @section('content')
-<x-page-header
-    title="Manajemen Informasi Sekolah"
-    :breadcrumb="[
-        ['url' => route('admin.informasi'), 'label' => 'Informasi Sekolah'],
-    ]" />
+@php
+$title = "Manajemen Informasi Sekolah";
+$breadcrumb = [
+['label' => 'Informasi Sekolah', 'url' => '/admin/informasi' ],
+];
+@endphp
 
-<section class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-5">
+
+<section class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg bg-white  p-5">
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.informasi.create') }}"
             class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow">
@@ -77,5 +79,6 @@
         <p class="text-gray-500">Belum ada informasi sekolah.</p>
         @endforelse
     </div>
+    
 </section>
 @endsection

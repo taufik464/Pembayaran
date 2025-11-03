@@ -13,8 +13,6 @@ $breadcrumb = [
 @endphp
 @section('content')
 
-
-
 <section class=" relative overflow-x-auto shadow-md sm:rounded-lg bg-white mt-6 p-5">
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.users.create') }}"

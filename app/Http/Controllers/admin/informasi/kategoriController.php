@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin\informasi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Information;
 use App\Models\Category;
 
 class kategoriController extends Controller
@@ -12,6 +13,12 @@ class kategoriController extends Controller
     {
         $kategori = Category::all();
         return view('admin.informasi.kategori.index', compact('kategori'));
+    }
+
+    public function show($id)
+    {
+        $informasi = Information::where('category_id', $id)->get();
+        return view('admin.informasi.info.index', compact('informasi'));
     }
 
     public function create()

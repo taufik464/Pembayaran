@@ -1,13 +1,16 @@
 @extends('layouts.admin')
 @section('title', 'Informasi Sekolah')
-@section('content')
-<x-page-header
-    title="Edit Informasi Sekolah"
-    :breadcrumb="[
-            ['url' => '/admin/informasi', 'label' => 'Informasi Sekolah'],
-        ]" />
 
-<section class="bg-white p-6 rounded-lg shadow">
+@php
+$title = "Manajemen Informasi Sekolah";
+$breadcrumb = [
+['url' => '/admin/informasi', 'label' => 'Informasi Sekolah'],
+['url' => '', 'label' => 'Edit Informasi Sekolah'],
+];
+@endphp
+@section('content')
+
+<section class="bg-white mt-6 p-6 rounded-lg shadow">
     <form action="{{ route('admin.informasi.update', $informasi->id ?? '') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

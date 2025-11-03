@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('title', 'Edit Profil Sekolah')
 @php
 $title = 'Edit Profil Sekolah';
@@ -10,7 +11,7 @@ $breadcrumb = [
 @section('content')
 
 
-<section class="bg-white p-6 rounded-lg shadow">
+<section class="bg-white mt-6 p-6 rounded-lg shadow">
     <form action="{{ route('profil.update', $profil->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
