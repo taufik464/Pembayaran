@@ -9,17 +9,17 @@
 <!-- Main Content -->
 <div class="flex-1 p-2">
     <!-- Header -->
-    
-        <div class="bg-white mt-7 p-5 rounded-lg shadow mb-5">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1 class="text-2xl font-bold text-green-800">Selamat Datang, Admin!</h1>
-                    <p class="text-gray-600">Kelola website Sekolah Unggulan dengan mudah</p>
-                </div>
-                
+
+    <div class="bg-white mt-7 p-5 rounded-lg shadow mb-5">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-green-800">Selamat Datang, Admin!</h1>
+                <p class="text-gray-600">Kelola website Sekolah Unggulan dengan mudah</p>
             </div>
+
         </div>
-    
+    </div>
+
 
     <!-- Statistics -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <!-- Recent Activity -->
+    <!-- Recent Activity 
     <div class="bg-white p-5 rounded-lg shadow">
         <h2 class="text-xl font-bold text-green-800 mb-3">Aktivitas Terbaru</h2>
         <ul class="list-disc list-inside">
@@ -109,7 +109,7 @@
                 <i class="fas fa-user text-purple-600"></i> User login - 5 jam yang lalu
             </li>
         </ul>
-    </div>
+    </div> -->
 </div>
 
 

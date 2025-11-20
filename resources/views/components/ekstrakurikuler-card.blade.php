@@ -7,7 +7,7 @@
 
     <h4 class="text-center font-bold text-xl mb-2 text-gray-800">{{ $title }}</h4>
 
-    <p class="text-gray-600 text-sm">
-        {{ $desc }}
+    <p class=" ql-editor text-gray-600 text-sm">
+        {{ \Illuminate\Support\Str::limit($desc, 150, '...') }}
     </p>
 </div>

@@ -63,7 +63,7 @@ Route::prefix('informasi')->group(function () {
     Route::post('/ppdb', [PPDBController::class, 'store'])->name('ppdb.store');
 });
 
-Route::get('/informasi/kategori/{id}', [InformasiController::class, 'byKategori'])->name('informasi.kategori');
+Route::get('/informasi/{slug}', [InformasiController::class, 'byKategori'])->name('informasi.kategori');
 Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
 Route::get('/informasi/gallery', [InformasiController::class, 'gallery'])->name('informasi.gallery');
 
@@ -76,7 +76,7 @@ Route::prefix('layanan')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
 });
 
 // untuk menampilkan halaman admin bagi role superadmin 
@@ -95,34 +95,6 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     // Route Admin User
 
 
-    // ROUTE ADMIN SARPRAS
-    Route::get('/admin/sarpras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sarpras');
-    Route::get('/admin/sarpras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sarpras.create');
-    Route::post('/admin/sarpras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'store'])->name('admin.sarpras.store');
-    Route::get('/admin/sarpras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sarpras.edit');
-    Route::put('/admin/sarpras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sarpras.update');
-    Route::delete('/admin/sarpras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sarpras.destroy');
-
-    Route::get('/admin/ekstrakurikuler', [ekstraController::class, 'index'])->name('admin.ekstrakurikuler');
-    Route::get('/admin/ekstrakurikuler/create', [ekstraController::class, 'create'])->name('admin.ekstrakurikuler.create');
-    Route::post('/admin/ekstrakurikuler', [ekstraController::class, 'store'])->name('admin.ekstrakurikuler.store');
-    Route::get('/admin/ekstrakurikuler/{ekstrakurikuler}/edit', [ekstraController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
-    Route::put('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'update'])->name('admin.ekstrakurikuler.update');
-    Route::delete('/admin/ekstrakurikuler/{ekstrakurikuler}', [ekstraController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
-    // ROUTE ADMIN GALERI
-    Route::get('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'index'])->name('admin.galeri');
-    Route::get('/admin/galeri/create', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'create'])->name('admin.galeri.create');
-    Route::post('/admin/galeri', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'store'])->name('admin.galeri.store');
-    Route::get('/admin/galeri/{gallery}/edit', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'edit'])->name('admin.galeri.edit');
-    Route::put('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'update'])->name('admin.galeri.update');
-    Route::delete('/admin/galeri/{gallery}', [\App\Http\Controllers\admin\galeri\GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
-    // ROUTE ADMIN SAPRAS
-    Route::get('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'index'])->name('admin.sapras');
-    Route::get('/admin/sapras/create', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'create'])->name('admin.sapras.create');
-    Route::post('/admin/sapras', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'store'])->name('admin.sapras.store');
-    Route::get('/admin/sapras/{sapras}/edit', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'edit'])->name('admin.sapras.edit');
-    Route::put('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'update'])->name('admin.sapras.update');
-    Route::delete('/admin/sapras/{sapras}', [\App\Http\Controllers\admin\sapras\SaprasController::class, 'destroy'])->name('admin.sapras.destroy');
 
     route::get('/admin/kontak', [kontakController::class, 'index'])->name('admin.kontak');
     route::get('/admin/kontak/create', [kontakController::class, 'create'])->name('admin.kontak.create');
@@ -139,12 +111,6 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::put('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'update'])->name('admin.identitas.update');
     Route::delete('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'destroy'])->name('admin.identitas.destroy');
 
-    Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news');
-    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
-    Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
-    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
-    Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update');
-    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
     Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
     Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
@@ -161,8 +127,8 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::delete('/achive/{id}', [AchiveController::class, 'destroy'])->name('achive.destroy');
 
     Route::get('/admin/kategori', [kategoriController::class, 'index'])->name('admin.kategori');
+    Route::get('/admin/kategori/tambah', [kategoriController::class, 'tambah'])->name('admin.kategori.tambah');
     Route::get('/admin/kategori/{id}', [kategoriController::class, 'show'])->name('admin.kategori.show');
-    Route::get('/admin/kategori/create', [kategoriController::class, 'create'])->name('admin.kategori.create');
     Route::post('/admin/kategori', [kategoriController::class, 'store'])->name('admin.kategori.store');
     Route::get('/admin/kategori/{id}/edit', [kategoriController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('/admin/kategori/{id}', [kategoriController::class, 'update'])->name('admin.kategori.update');
@@ -174,6 +140,13 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::get('/admin/informasi/{id}/edit', [informationController::class, 'edit'])->name('admin.informasi.edit');
     Route::put('/admin/informasi/{id}', [informationController::class, 'update'])->name('admin.informasi.update');
     Route::delete('/admin/informasi/{id}', [informationController::class, 'destroy'])->name('admin.informasi.destroy');
+
+    Route::get('/admin/alumni', [\App\Http\Controllers\admin\alumni\alumniController::class, 'index'])->name('admin.alumni');
+    Route::get('/admin/alumni/create', [\App\Http\Controllers\admin\alumni\alumniController::class, 'create'])->name('admin.alumni.create');    
+    Route::post('/admin/alumni', [\App\Http\Controllers\admin\alumni\alumniController::class, 'store'])->name('admin.alumni.store');
+    Route::get('/admin/alumni/{id}/edit', [\App\Http\Controllers\admin\alumni\alumniController::class, 'edit'])->name('admin.alumni.edit');
+    Route::put('/admin/alumni/{id}', [\App\Http\Controllers\admin\alumni\alumniController::class, 'update'])->name('admin.alumni.update');
+    Route::delete('/admin/alumni/{id}', [\App\Http\Controllers\admin\alumni\alumniController::class, 'destroy'])->name('admin.alumni.destroy');
 
 
     Route::get('/admin/faq', [\App\Http\Controllers\admin\faq\faqController::class, 'index'])->name('admin.faq');

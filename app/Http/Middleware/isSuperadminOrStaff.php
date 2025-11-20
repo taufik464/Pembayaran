@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class isSuperadminOrStaff
 {
     /**
@@ -15,13 +16,14 @@ class isSuperadminOrStaff
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Daftar role yang diizinkan
         $roles = ['superadmin', 'staff'];
-        $userRole = $request->user()->role;
-
-        if (! in_array($userRole, $roles)) {
-            return abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk mengakses halaman ini.');
+        $userRole = optional($request->user())->role;
+        // Jika user tidak login atau rolenya tidak ada dalam daftar
+        if (! $request->user() || ! in_array($userRole, $roles)) {
+              return redirect('/login');
         }
-
         return $next($request);
     }
 }
+

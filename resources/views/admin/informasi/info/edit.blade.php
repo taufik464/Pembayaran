@@ -36,8 +36,9 @@ $breadcrumb = [
             <select id="kategori_id" name="kategori_id" required
                 class=" w-full border rounded p-2">
                 <option value="" disabled>Pilih Kategori</option>
+
                 @foreach($kategori as $kat)
-                <option value="{{ $kat->id }}" {{ (old('kategori_id', $informasi->kategori_id ?? '') == $kat->id) ? 'selected' : '' }}>{{ $kat->name }}</option>
+                <option value="{{ $kat->id }}" {{ (old('kategori_id', $informasi->category_id ?? '') == $kat->id) ? 'selected' : '' }}>{{ $kat->name }}</option>
                 @endforeach
             </select>
             @error('kategori_id')
@@ -74,7 +75,7 @@ $breadcrumb = [
 
         {{-- Tombol --}}
         <div class="flex justify-end gap-2">
-            <a href="{{ route('profil.index') }}" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg shadow">
+            <a href="{{ route('admin.informasi') }}" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg shadow">
                 Batal
             </a>
             <button type="submit" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow">

@@ -19,11 +19,11 @@ class InformasiController extends Controller
 
 
 
-    public function byKategori($categoryId)
+    public function byKategori($slug)
     {
-        $kategori = Category::findOrFail($categoryId)->name;
+        $kategori = Category::where('name', $slug)->firstOrFail();
         $informasi = Information::with('galleryInformasis')
-            ->where('category_id', $categoryId)
+            ->where('category_id', $kategori->id)
             ->paginate(10);
         return view('informasi.informasi', compact('informasi', 'kategori'));
     }

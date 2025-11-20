@@ -57,29 +57,7 @@
                  </div>
              </div>
 
-             <!-- Informasi -->
-             <div class="relative" x-data="{ open: false }">
-                 <button @click="open = !open"
-                     class="flex items-center px-3 py-2 rounded-lg hover:bg-green-700 transition font-bold">
-                     <span>Informasi</span>
-                     <svg class="w-4 h-4 ml-1 transition-transform duration-200"
-                         :class="{ 'rotate-180': open }"
-                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                             d="M19 9l-7 7-7-7" />
-                     </svg>
-                 </button>
-                 <div x-show="open" @click.away="open = false"
-                     x-transition
-                     class="absolute top-full left-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg py-2 w-48 z-50 font-medium">
-                     <a href="{{ route('informasi.gallery') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Gallery</a>
-                     <a href="{{ route('berita') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Berita</a>
-                     <a href="{{ route('ekstrakurikuler') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Ekstrakurikuler</a>
-                     <a href="{{ route('sarpras') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Sarpras</a>
-                     <a href="{{ route('prestasi') }}" class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">Prestasi</a>
-                 </div>
-             </div>
-
+           
              <!-- Informasi -->
              <div class="relative" x-data="{ open: false }">
                  <!-- Tombol Dropdown -->
@@ -106,7 +84,7 @@
 
                      <!-- 🔹 Daftar Kategori Informasi -->
                      @foreach ($kategoriInformasis as $kategori)
-                     <a href="{{ route('informasi.kategori', $kategori->id) }}"
+                     <a href="{{ route('informasi.kategori', $kategori->name) }}"
                          class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">
                          {{ $kategori->name }}
                      </a>
@@ -140,7 +118,7 @@
 
              <!-- PPDB (menu utama baru) -->
              <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank"
-                 class="px-4 py-2 bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">
+                 class="px-4 py-2 text-center bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">
                  PPDB Online
              </a>
          </nav>
@@ -185,19 +163,12 @@
              @endforeach
          </details>
 
-         <details>
-             <summary class="cursor-pointer py-2">Informasi</summary>
-             <a href="{{ route('informasi.gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
-             <a href="{{ route('berita') }}" class="block pl-4 py-1 hover:text-green-600">Berita</a>
-             <a href="{{ route('ekstrakurikuler') }}" class="block pl-4 py-1 hover:text-green-600">Ekstrakurikuler</a>
-             <a href="{{ route('sarpras') }}" class="block pl-4 py-1 hover:text-green-600">Sarpras</a>
-             <a href="{{ route('prestasi') }}" class="block pl-4 py-1 hover:text-green-600">Prestasi</a>
-         </details>
+        
          <details>
              <summary class="cursor-pointer py-2">Informasi</summary>
              <a href="{{ route('informasi.gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
              @foreach ($kategoriInformasis as $kategori)
-             <a href="{{ route('informasi.kategori', $kategori->id) }}" class="block pl-4 py-1 hover:text-green-600">
+             <a href="{{ route('informasi.kategori', $kategori->name) }}" class="block pl-4 py-1 hover:text-green-600">
                  {{ $kategori->name }}
              </a>
              @endforeach

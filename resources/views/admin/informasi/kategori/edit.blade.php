@@ -5,7 +5,7 @@
 $title = "Manajemen Kategori Informasi";
 $breadcrumb = [
 ['url' => '/admin/kategori', 'label' => 'Kategori Informasi'],
-['url' => '', 'label' => 'Tambah Kategori Informasi'],
+['url' => '', 'label' => 'Edit Kategori Informasi'],
 ];
 @endphp
 @section('content')

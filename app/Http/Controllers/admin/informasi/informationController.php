@@ -92,6 +92,7 @@ class informationController extends Controller
             'kategori_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        
 
         // 🔹 Ambil data lama
         $informasi = Information::findOrFail($id);
@@ -102,6 +103,8 @@ class informationController extends Controller
             'content' => $request->konten,
             'category_id' => $request->kategori_id,
         ]);
+
+       
 
         // 🔹 Simpan gambar baru (jika ada)
         if ($request->hasFile('images')) {

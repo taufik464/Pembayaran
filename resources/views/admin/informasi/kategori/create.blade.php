@@ -25,3 +25,4 @@ $breadcrumb = [
         </div>
     </form>
 </section>
+@endsection

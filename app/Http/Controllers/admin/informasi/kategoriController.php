@@ -20,11 +20,12 @@ class kategoriController extends Controller
         $informasi = Information::where('category_id', $id)->get();
         return view('admin.informasi.info.index', compact('informasi'));
     }
-
-    public function create()
+    public function tambah()
     {
         return view('admin.informasi.kategori.create');
     }
+
+
     public function store(Request $request)
     {
         $request->validate([

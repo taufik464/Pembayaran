@@ -3,7 +3,7 @@
 @section('content')
 <section class="py-16 bg-gray-100">
     <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">{{ $kategori}}</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">{{ $kategori->name}}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($informasi as $item)
             <div class="bg-white rounded-lg shadow-md overflow-hidden"
@@ -54,6 +54,6 @@
         </div>
         <div class="mt-6 flex justify-center">
             {{ $informasi->links() }}
-    </div>
+        </div>
 </section>
 @endsection

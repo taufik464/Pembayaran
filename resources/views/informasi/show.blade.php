@@ -12,16 +12,18 @@
             {{-- Carousel --}}
             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                <div class="relative w-full overflow-hidden rounded-lg h-64 sm:h-80 md:h-96">
+
                     @foreach($informasi->galleryInformasis as $index => $image)
-                    <div class="{{ $index === 0 ? '' : 'hidden' }} duration-700 ease-in-out" data-carousel-item>
+                    <div class="{{ $index === 0 ? '' : 'hidden' }} duration-700 ease-in-out flex justify-center items-center"
+                        data-carousel-item>
                         <img src="{{ asset('storage/' . $image->image_path) }}"
-                            class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                            class="block w-full h-full object-cover"
                             alt="{{ $informasi->title }}">
                     </div>
                     @endforeach
-                </div>
 
+                </div>
                 <!-- Slider indicators -->
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
                     @foreach($informasi->galleryInformasis as $index => $image)

@@ -10,12 +10,12 @@
         @if ($sejarah)
         <div class="bg-white p-8 rounded-xl shadow">
             <div class="flex flex-col md:flex-row gap-8">
-                <div class="w-full md:w-1/2">
+                <div class="w-full md:w-1/3">
                     <img src="{{ asset('storage/' . $sejarah->image) }}" alt="Halaman Depan" class="w-full rounded-lg shadow">
                 </div>
-                <div class="w-full md:w-1/2">
+                <div class="w-full md:w-2/3">
                     <p class="text-lg leading-relaxed mb-4">
-                        {{ $sejarah->isi }}
+                        {!! $sejarah->isi !!}
                     </p>
                 </div>
             </div>

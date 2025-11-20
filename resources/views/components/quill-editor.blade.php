@@ -69,6 +69,7 @@
         <button class="ql-position" value="right" title="Image Right">R</button>
     </span>
 
+
     {{-- 🔹 Tombol Layout Dua Kolom --}}
     <span class="ql-formats">
         <button class="ql-two-column" title="Two Column Layout">

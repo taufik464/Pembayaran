@@ -10,11 +10,11 @@
         <div class="grid md:grid-cols-2 gap-8 items-center">
             <div>
                 <p class="text-lg leading-relaxed mb-4">
-                    {{ $tentang->isi }}
+                    {!! $tentang->isi !!}
                 </p>
 
             </div>
-            <div class="rounded-xl overflow-hidden w-64 shadow-lg mr-auto ml-auto">
+            <div class="rounded-xl overflow-hidden w-auto shadow-lg mr-auto ml-auto">
                 <img src="{{ $tentang->image ? asset('storage/' . $tentang->image) : asset('images/default-kepala-sekolah.jpg') }}" alt="Kelas SMA Al Hikmah" class="w-64 h-64 object-cover">
             </div>
         </div>

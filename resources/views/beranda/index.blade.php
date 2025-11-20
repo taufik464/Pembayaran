@@ -117,47 +117,110 @@
     </div>
 </section>
 
+
 <!-- Ekstrakurikuler -->
-<section id="ekstrakurikuler" class="py-20 bg-gray-50">
+<section id="ekstrakurikuler" class="bg-gradient-to-r from-green-500 to-emerald-700 text-white py-6 px-4 md:px-12 text-center relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Ekstrakurikuler</h3>
+        <h3 class="text-3xl font-extrabold text-center mb-12 text-white">Ekstrakurikuler</h3>
         <div class="grid md:grid-cols-3 gap-8">
             @foreach ($ekstra as $item)
-            <x-ekstrakurikuler-card
-                image="{{ $item->gambar ? asset('storage/' . $item->gambar) : asset('images/default-ekstra.jpg') }}"
-                title="{{ $item->nama }}" desc="{{ $item->deskripsi }}" />
+            <div class="bg-white rounded-lg shadow-md overflow-hidden"
+                x-data="{ 
+        current: 0, 
+        images: {{ json_encode($item->galleryInformasis->pluck('image_path')) }} 
+     }"
+                x-init="if (images.length > 0) setInterval(() => { current = (current + 1) % images.length }, 5000)">
+
+                {{-- Wrapper Gambar --}}
+                <div class="relative w-full h-48 overflow-hidden">
+                    <template x-for="(image, index) in images" :key="index">
+                        <img
+                            :src="'{{ asset('storage') }}/' + image"
+                            alt="{{ $item->title }}"
+                            class="absolute w-full h-48 object-cover transition-all duration-700 ease-in-out"
+                            :class="{
+                    'translate-x-0 opacity-100': current === index,
+                    '-translate-x-full opacity-0': current > index,
+                    'translate-x-full opacity-0': current < index
+                }">
+                    </template>
+
+                    {{-- Jika tidak ada gambar di galeri --}}
+                    <template x-if="images.length === 0">
+                        <img src="{{ asset('images/default-informasi.jpg') }}"
+                            alt="{{ $item->title }}"
+                            class="w-full h-48 object-cover">
+                    </template>
+                </div>
+
+                {{-- Konten Informasi --}}
+                <div class="p-4 text-justify">
+                    <h3 class="text-xl text-black font-semibold mb-2">{{ $item->title }}</h3>
+                    <div class="text-gray-600 text-sm mb-4 line-clamp-3">
+                        {!! \Illuminate\Support\Str::limit($item->content, 150, '...') !!}
+                    </div>
+                    <a href="{{ route('informasi.show', $item->id) }}"
+                        class="text-blue-600 hover:underline">Baca Selengkapnya</a>
+                </div>
+            </div>
             @endforeach
         </div>
     </div>
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-mosaic.png')] opacity-10 pointer-events-none"></div>
+
 </section>
 
 <!-- Berita Terkini -->
 <section class="py-16 bg-gray-100" id="berita">
     <div class="max-w-7xl mx-auto px-6  ">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Berita Terkini</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-xl shadow p-6">
-                <img src="/img/Juara.jpg" alt="Berita 1" class="mb-4 rounded-lg w-full object-cover h-40">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara Lomba</h3>
-                <p class="text-sm text-gray-600">Siswa kelas 12 Juara.</p>
-            </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            @foreach ($berita as $item)
+            <div class="bg-white rounded-lg shadow-md overflow-hidden"
+                x-data="{ 
+        current: 0, 
+        images: {{ json_encode($item->galleryInformasis->pluck('image_path')) }} 
+     }"
+                x-init="if (images.length > 0) setInterval(() => { current = (current + 1) % images.length }, 5000)">
 
-            <div class="bg-white rounded-xl shadow p-6">
-                <img src="/img/Juara.jpg" alt="Berita 2" class="mb-4 rounded-lg w-full object-cover h-40">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara 1 Lomba Tahfidz</h3>
-                <p class="text-sm text-gray-600">Santri SMA Al Hikmah berhasil meraih juara dalam lomba tahfidz tingkat kabupaten.</p>
-            </div>
+                {{-- Wrapper Gambar --}}
+                <div class="relative w-full h-48 overflow-hidden">
+                    <template x-for="(image, index) in images" :key="index">
+                        <img
+                            :src="'{{ asset('storage') }}/' + image"
+                            alt="{{ $item->title }}"
+                            class="absolute w-full h-48 object-cover transition-all duration-700 ease-in-out"
+                            :class="{
+                    'translate-x-0 opacity-100': current === index,
+                    '-translate-x-full opacity-0': current > index,
+                    'translate-x-full opacity-0': current < index
+                }">
+                    </template>
 
-            <div class="bg-white rounded-xl shadow p-6">
-                <img src="/img/Juara.jpg" alt="Berita 3" class="mb-4 rounded-lg w-full object-cover h-40">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Juara Lomba</h3>
-                <p class="text-sm text-gray-600">Kelas 11 berhasil mendapatkan juara 2.</p>
+                    {{-- Jika tidak ada gambar di galeri --}}
+                    <template x-if="images.length === 0">
+                        <img src="{{ asset('images/default-informasi.jpg') }}"
+                            alt="{{ $item->title }}"
+                            class="w-full h-48 object-cover">
+                    </template>
+                </div>
+
+                {{-- Konten Informasi --}}
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-2">{{ $item->title }}</h3>
+                    <div class="text-gray-600 text-sm mb-4 line-clamp-4">
+                        {!! \Illuminate\Support\Str::limit($item->content, 150, '...') !!}
+                    </div>
+                    <a href="{{ route('informasi.show', $item->id) }}"
+                        class="text-blue-600 hover:underline">Baca Selengkapnya</a>
+                </div>
             </div>
+            @endforeach
         </div>
 
         <!-- Tombol Lihat Semua Berita -->
         <div class="text-center mt-8">
-            <a href="{{ route('berita') }}"
+            <a href="{{ route('informasi.kategori', 'Berita') }}"
                 class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition">
                 Lihat Semua Berita
             </a>
@@ -165,6 +228,55 @@
     </div>
 
 </section>
+
+<section id="alumni" class="bg-green-500 w-full">
+
+    <div class="w-full  grid md:grid-cols-3  items-center">
+        <!-- Gambar Utama Alumni -->
+        <div class="col-span-1 bg-white">
+            <img src="img/gambar_alumni.png" alt="Gambar Alumni" class="w-full rounded-lg shadow-lg">
+        </div>
+
+        <!-- Paragraf Penjelasan Utama -->
+        <div class=" ml-3 px-6 col-span-2 items-start"> <!-- Tambah items-start untuk rata atas vertikal -->
+            <h2 class="text-3xl text-center font-bold mb-8">Alumni Kami</h2> <!-- Ganti text-center ke text-left jika ingin rata kiri -->
+            <p class="text-justify leading-relaxed my-1"> <!-- Ganti flex justify-between ke text-justify untuk rata kiri-kanan -->
+                SMA Al Hikmah Muncar bangga memiliki jaringan alumni yang kuat dan berprestasi di berbagai bidang. Kami tidak hanya sukses dalam karir profesional, tetapi juga aktif berkontribusi dalam
+                masyarakat dan menjaga nilai-nilai Islami yang diajarkan selama di sekolah. Kami terus mendukung
+                perkembangan alumni melalui berbagai program dan kegiatan, serta menjalin hubungan erat untuk
+                menciptakan komunitas yang saling mendukung.
+            </p>
+
+            <!-- Alumni Cards: Gambar dan Penjelasan Sejajar -->
+            <div class="grid md:grid-cols-2 mt-2 gap-8 items-start"> <!-- Tambah items-start untuk rata atas di grid -->
+
+                <!-- Card Alumni 1 -->
+                @foreach ($alumni as $a)
+                <div class="bg-white p-4 rounded-lg grid grid-cols-3 gap-4 items-start">
+                    <div class="col-span-1">
+                        <img src="{{ $a->foto ? asset('storage/' . $a->foto) : asset('images/default-alumni.jpg') }}"
+                            alt="{{ $a->nama }}" class="w-16 h-16 rounded-full object-cover">
+                    </div>
+                    <div class="col-span-2">
+                        <div class="text-sm font-semibold">{{ $a->nama }}</div>
+                        <p class="text-xs text-gray-600">Angkatan {{ $a->tahun_lulus }}, {{ $a->pekerjaan }} di {{ $a->tempat_kerja }}.</p>
+                    </div>
+                </div>
+                @endforeach
+
+
+              
+           
+            </div>
+            <a href="#"
+                class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                Lihat Semua Alumni
+            </a>
+        </div>
+
+    </div>
+</section>
+<!-- FAQ Section -->
 <section class="py-16 bg-gray-300">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">FAQ</h2>
 
