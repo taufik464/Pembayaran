@@ -2,7 +2,7 @@
 @section('title', 'Kategori Informasi')
 
 @php
-$title = "Manajemen Kategori Informasi";
+$title = "Edit Kategori Informasi";
 $breadcrumb = [
 ['url' => '/admin/kategori', 'label' => 'Kategori Informasi'],
 ['url' => '', 'label' => 'Edit Kategori Informasi'],

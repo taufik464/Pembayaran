@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\identitas\IdentitasSekolahController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\admin\informasi\kategoriController;
 use App\Http\Controllers\admin\informasi\informationController;
+use App\Http\Controllers\admin\ProfileController;
 
 use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
@@ -42,11 +43,7 @@ route::get('tentang', function () {
 // ==================== ROUTE BERANDA ====================
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/tentang', [BerandaController::class, 'tentang'])->name('tentang');
-Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('ekstrakurikuler');
-Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
-Route::get('/berita/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
-Route::get('/sarpras', [sarprasController::class, 'index'])->name('sarpras');
-
+route::get('/faqs', [BerandaController::class, 'faqs'])->name('faqs');
 // ==================== PROFILE SEKOLAH ====================
 Route::prefix('profile-sekolah')->group(function () {
     Route::get('/sambutan', [ProfileSekolahController::class, 'sambutan'])->name('sambutan');
@@ -56,23 +53,20 @@ Route::prefix('profile-sekolah')->group(function () {
 });
 
 // ==================== INFORMASI ====================
-Route::prefix('informasi')->group(function () {
-    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-    Route::get('/ppdb', [PPDBController::class, 'index'])->name('ppdb');
-    Route::get('/ppdb/form', [PPDBController::class, 'create'])->name('ppdb.create');
-    Route::post('/ppdb', [PPDBController::class, 'store'])->name('ppdb.store');
-});
+
+Route::get('informasis/{slug}', [InformasiController::class, 'byKategori'])->name('informasis.kategori');
+Route::get('informasi/gallery', [InformasiController::class, 'gallery'])->name('informasi.gallery');
+Route::get('informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
+Route::get('informasi/', [InformasiController::class, 'alumni'])->name('informasi.alumni');
+
 
 Route::get('/informasi/{slug}', [InformasiController::class, 'byKategori'])->name('informasi.kategori');
-Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
 Route::get('/informasi/gallery', [InformasiController::class, 'gallery'])->name('informasi.gallery');
 
 
 // ==================== LAYANAN ====================
 Route::prefix('layanan')->group(function () {
     Route::get('/kontak', [LayananController::class, 'kontak'])->name('kontak');
-    Route::get('/prestasi-sekolah', [PrestasiController::class, 'prestasiSekolah'])->name('prestasi-sekolah');
-    Route::get('/prestasi-siswa', [PrestasiController::class, 'prestasiSiswa'])->name('prestasi-siswa');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -93,7 +87,11 @@ Route::middleware(['isSuperadmin', 'verified'])->group(function () {
 // ==================== DASHBOARD ADMIN ====================
 Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     // Route Admin User
+    
 
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
     route::get('/admin/kontak', [kontakController::class, 'index'])->name('admin.kontak');
@@ -112,19 +110,13 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::delete('/admin/identitas/{identitas}', [IdentitasSekolahController::class, 'destroy'])->name('admin.identitas.destroy');
 
 
-    Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
+    Route::get('/profil-Sekolah', [ProfilSekolahController::class, 'index'])->name('profil.index');
     Route::get('/admin/profilsekolah/create', [ProfilSekolahController::class, 'create'])->name('profil.create');
     Route::post('/', [ProfilSekolahController::class, 'store'])->name('store');
     Route::resource('profil', ProfilSekolahController::class);
 
 
 
-    Route::get('/achive', [AchiveController::class, 'index'])->name('achive.index');
-    Route::get('/achive/create', [AchiveController::class, 'create'])->name('achive.create');
-    Route::post('/achive', [AchiveController::class, 'store'])->name('achive.store');
-    Route::get('/achive/{id}/edit', [AchiveController::class, 'edit'])->name('achive.edit');
-    Route::put('/achive/{id}', [AchiveController::class, 'update'])->name('achive.update');
-    Route::delete('/achive/{id}', [AchiveController::class, 'destroy'])->name('achive.destroy');
 
     Route::get('/admin/kategori', [kategoriController::class, 'index'])->name('admin.kategori');
     Route::get('/admin/kategori/tambah', [kategoriController::class, 'tambah'])->name('admin.kategori.tambah');
@@ -142,7 +134,7 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::delete('/admin/informasi/{id}', [informationController::class, 'destroy'])->name('admin.informasi.destroy');
 
     Route::get('/admin/alumni', [\App\Http\Controllers\admin\alumni\alumniController::class, 'index'])->name('admin.alumni');
-    Route::get('/admin/alumni/create', [\App\Http\Controllers\admin\alumni\alumniController::class, 'create'])->name('admin.alumni.create');    
+    Route::get('/admin/alumni/create', [\App\Http\Controllers\admin\alumni\alumniController::class, 'create'])->name(name: 'admin.alumni.create');
     Route::post('/admin/alumni', [\App\Http\Controllers\admin\alumni\alumniController::class, 'store'])->name('admin.alumni.store');
     Route::get('/admin/alumni/{id}/edit', [\App\Http\Controllers\admin\alumni\alumniController::class, 'edit'])->name('admin.alumni.edit');
     Route::put('/admin/alumni/{id}', [\App\Http\Controllers\admin\alumni\alumniController::class, 'update'])->name('admin.alumni.update');
@@ -156,8 +148,3 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::put('/admin/faq/{id}', [\App\Http\Controllers\admin\faq\faqController::class, 'update'])->name('admin.faq.update');
     Route::delete('/admin/faq/{id}', [\App\Http\Controllers\admin\faq\faqController::class, 'destroy'])->name('admin.faq.destroy');
 });
-
-
-
-
-Route::get('/prestasi', [App\Http\Controllers\PrestasiController::class, 'index'])->name('prestasi');

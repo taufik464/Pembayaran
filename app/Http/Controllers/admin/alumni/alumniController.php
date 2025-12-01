@@ -7,10 +7,35 @@ use Illuminate\Http\Request;
 use App\Models\alumni;
 class alumniController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $alumni = alumni::paginate(20);
-        return view('admin.alumni.index', ['alumni' => $alumni]);
+        // 1. Ambil kata kunci pencarian dari request input 'keyword'
+        // Jika tidak ada, nilainya akan menjadi null.
+        $keyword = $request->input('keyword');
+
+        // 2. Memulai Query Builder pada model Alumni
+        $alumni = Alumni::query();
+
+        // 3. Terapkan filter pencarian jika 'keyword' ada
+        if ($keyword) {
+            // Mencari di beberapa kolom yang relevan (misalnya nama dan pekerjaan)
+            $alumni->where('nama', 'like', '%' . $keyword . '%')
+                ->orWhere('tahun_lulus', 'like', '%' . $keyword . '%')
+                ->orWhere('kuliah', 'like', '%' . $keyword . '%')
+                ->orWhere('tempat_kuliah', 'like', '%' . $keyword . '%')
+                ->orWhere('pekerjaan', 'like', '%' . $keyword . '%')
+                ->orWhere('tempat_kerja', 'like', '%' . $keyword . '%')
+                ->orWhere('pesan', 'like', '%' . $keyword . '%');
+        }
+
+       
+        $alumni = $alumni->paginate(20)->withQueryString();
+
+        
+        return view('admin.alumni.index', [
+            'alumni' => $alumni,
+            'keyword' => $keyword // Opsional, untuk mengisi ulang form pencarian
+        ]);
     }
 
     // --- IGNORE ---
@@ -49,10 +74,7 @@ class alumniController extends Controller
         return redirect()->route('admin.alumni')->with('success', 'Alumni created successfully.');
     }
 
-    public function show($id)
-    {
-        //
-    }
+   
     public function edit($id)
     { $alumni = alumni::findOrFail($id);
         return view('admin.alumni.edit', ['alumni' => $alumni]);

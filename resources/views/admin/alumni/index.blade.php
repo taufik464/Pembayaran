@@ -7,12 +7,15 @@ $breadcrumb = [
 ];
 @endphp
 @section('content')
-<div class="container bg-gray-200 mx-auto px-4 sm:px-8">
-    <div class="py-8">
+<div class="container bg-white py-16 ">
+    <div class="py-2 bg-white mb-6 rounded-md shadow-md">
         <div class="mb-5 justify-right flex">
-           
+            <x-search-form
+                placeholder="Pencarian..."
+                action="{{ route('admin.alumni') }}"
+                name="keyword" />
             <a href="{{ route('admin.alumni.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah Alumni</a>
+                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow">Tambah Alumni</a>
         </div>
         <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -42,6 +45,10 @@ $breadcrumb = [
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Pekerjaan
+                            </th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+
                             </th>
 
 

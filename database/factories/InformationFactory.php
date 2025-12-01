@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-
+use App\Models\Information;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class InformationFactory extends Factory
 {
+    protected $model = Information::class;
     /**
      * Define the model's default state.
      *
@@ -19,9 +20,9 @@ class InformationFactory extends Factory
     public function definition(): array
     {
         return [
-        'title' => $this->faker->word(),
-        'category_id' => Category::factory(),
-        'content' => $this->faker->word(),
+            'title' => $this->faker->word(),
+            'category_id' => Category::factory(),
+            'content' => $this->faker->word(),
         ];
     }
 }

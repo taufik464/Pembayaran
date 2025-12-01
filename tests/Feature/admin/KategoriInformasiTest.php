@@ -1,144 +1,170 @@
 <?php
 
-use App\Models\Category;
+namespace Tests\Feature\Admin;
+
+use Tests\TestCase;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
+use App\Models\Information;
 
-// Menggunakan trait RefreshDatabase secara global untuk semua test di file ini
-uses(RefreshDatabase::class);
+class KategoriInformasiTest extends TestCase
+{
+    use RefreshDatabase;
 
-// --- SETUP ---
-// Menyiapkan staff yang terotentikasi sebelum setiap test
-beforeEach(function () {
-    // Asumsi: Pengguna yang dibuat memiliki izin yang cukup untuk mengakses rute admin.
-    // Jika model User memiliki field 'role' atau relasi, pastikan di-set ke 'staff' atau sesuai.
-    // Contoh: Jika factory tidak otomatis set role, tambahkan:
-     $this->staff = User::factory()->create(['role' => 'staff']);
-   
-});
+    protected $staff;
 
-test('staff tidak dapat melihat daftar kategori karena belum login', function () {
-    // ARRANGE: Siapkan beberapa kategori
-    User::factory()->create();
-    Category::factory()->create(['name' => 'Berita']);
-    Category::factory()->create(['name' => 'Pengumuman']);
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-    // ACT: Akses halaman daftar kategori tanpa login
-    $response = $this->get('/admin/kategori');
-    // ASSERT: Verifikasi pengalihan ke halaman login
-    $response->assertRedirect('/login');
-});
+        // Buat user role staff
+        $this->staff = User::factory()->create([
+            'role' => 'staff'
+        ]);
+    }
 
-test('staff dapat melihat daftar kategori setelah login', function () {
-    // ARRANGE: Siapkan staff yang terotentikasi
-    $staff = User::factory()->create(['role' => 'staff']); // Renamed
+   #[Test]
+    public function staff_tidak_dapat_melihat_daftar_kategori_jika_belum_login()
+    {
+        Category::factory()->create(['name' => 'Berita']);
+        Category::factory()->create(['name' => 'Pengumuman']);
 
-    // 2. Create the categories
-    Category::factory()->create(['name' => 'Berita']);
-    Category::factory()->create(['name' => 'Pengumuman']);
+        $response = $this->get('/admin/kategori');
 
-    // ACT: Login as staff and access the category list page
-    // We use actingAs() to simulate the authenticated session
-    $response = $this->actingAs($staff)->get('/admin/kategori'); // Corrected from $admin to $staff
+        $response->assertRedirect('/login');
+    }
 
-    // ASSERT: Verifikasi status dan konten halaman
-    $response->assertStatus(200);
-    $response->assertViewIs('admin.informasi.kategori.index');
+    #[Test]
+    public function staff_dapat_melihat_daftar_kategori_setelah_login()
+    {
+        Category::factory()->create(['name' => 'Berita']);
+        Category::factory()->create(['name' => 'Pengumuman']);
 
-    // ASSERT additional content checks for a stronger test
-    $response->assertSee('Berita');
-    $response->assertSee('Pengumuman');
-});
+        $response = $this->actingAs($this->staff)->get('/admin/kategori');
 
-test('staff dapat melihat form pembuatan kategori baru', function () {
-    $staff = User::factory()->create(['role' => 'staff']); // Renamed
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.informasi.kategori.index');
+        $response->assertSee('Berita');
+        $response->assertSee('Pengumuman');
+    }
 
-    // ACT: Akses halaman create
-    $response = $this->actingAs($staff)->get(route('admin.kategori.tambah'));
+    #[Test]
+    public function staff_dapat_melihat_form_tambah_kategori()
+    {
+        $response = $this->actingAs($this->staff)->get(route('admin.kategori.tambah'));
 
-    // ASSERT: Verifikasi
-    $response->assertStatus(200);
-    $response->assertViewIs('admin.informasi.kategori.create');
-});
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.informasi.kategori.create');
+    }
 
-test('staff dapat menyimpan kategori baru dengan data valid', function () {
-    // ARRANGE: Data kategori baru
-    $data = ['name' => 'Kategori Baru Percobaan'];
+    #[Test]
+    public function staff_dapat_menyimpan_kategori_baru()
+    {
+        $data = [
+            'name' => 'Kategori Baru Percobaan'
+        ];
 
-    // ACT: Kirim data POST ke endpoint store
-    $response = $this->actingAs($this->staff)->post(route('admin.kategori.store'), $data);
+        $response = $this->actingAs($this->staff)->post(route('admin.kategori.store'), $data);
 
-    // ASSERT: Verifikasi
-    $response->assertRedirect(route('admin.kategori')); // Cek redirect ke index
-    $response->assertSessionHas('success', 'Kategori berhasil ditambahkan.'); // Cek pesan sukses
+        $response->assertRedirect(route('admin.kategori'));
+        $response->assertSessionHas('success', 'Kategori berhasil ditambahkan.');
 
-    // Cek database
-    $this->assertDatabaseHas('categories', $data);
-});
+        $this->assertDatabaseHas('categories', $data);
+    }
 
-test('penyimpanan kategori gagal jika nama kosong', function () {
-    // ARRANGE: Data kosong
-    $data = ['name' => ''];
+    #[Test]
+    public function staff_dapat_melihat_informasi_berdasarkan_kategori()
+    {
+        $category = Category::factory()->create(['name' => 'Berita']);
+        $info1 = Information::factory()->create([
+            'category_id' => $category->id,
+            'title' => 'Judul Berita 1'
+        ]);
+        $info2 = Information::factory()->create([
+            'category_id' => $category->id,
+            'title' => 'Judul Berita 2'
+        ]);
 
-    // ACT: Kirim data POST yang tidak valid
-    $response = $this->actingAs($this->staff)->post(route('admin.kategori.store'), $data);
+        $response = $this->actingAs($this->staff)->get('/admin/kategori/' . $category->id);
 
-    // ASSERT: Verifikasi
-    $response->assertSessionHasErrors(['name']); // Cek validasi error untuk field 'name'
-    $this->assertDatabaseCount('categories', 0); // Pastikan tidak ada kategori yang tersimpan
-});
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.informasi.info.index');
+        $response->assertSee('Judul Berita 1');
+        $response->assertSee('Judul Berita 2');
+    }
 
-// --- UPDATE (EDIT & UPDATE) TESTS ---
+  
 
-test('staff dapat melihat form edit kategori yang sudah ada', function () {
-    // ARRANGE: Buat kategori yang akan diedit
-    $staff = User::factory()->create(['role' => 'staff']); // Renamed
 
-    $category = Category::factory()->create(['name' => 'Nama Lama']);
+    #[Test]
+    public function penyimpanan_kategori_gagal_jika_nama_kosong()
+    {
+        $data = [
+            'name' => ''
+        ];
 
-    // ACT: Akses halaman edit, menggunakan route helper dengan parameter
-    $response = $this->actingAs($staff)->get(route('admin.kategori.edit', $category->id));
+        $response = $this->actingAs($this->staff)->post(route('admin.kategori.store'), $data);
 
-    // ASSERT: Verifikasi
-    $response->assertStatus(200);
-    $response->assertViewIs('admin.informasi.kategori.edit');
-    $response->assertSee('Nama Lama'); // Pastikan nama lama dimuat di form
-   
-});
+        $response->assertSessionHasErrors('name');
+        $this->assertDatabaseCount('categories', 0);
+    }
 
-test('staff dapat memperbarui kategori dengan data valid', function () {
-    // ARRANGE: Buat kategori awal
-    $category = Category::factory()->create(['name' => 'Nama Asli']);
-    $updatedData = ['name' => 'Nama Diperbarui'];
+    #[Test]
+    public function staff_dapat_melihat_form_edit_kategori()
+    {
+        $category = Category::factory()->create([
+            'name' => 'Nama Lama'
+        ]);
 
-    // ACT: Kirim request update (PUT) ke endpoint
-    $response = $this->actingAs($this->staff)->put(route('admin.kategori.update', $category->id), $updatedData);
+        $response = $this->actingAs($this->staff)->get(route('admin.kategori.edit', $category->id));
 
-    // ASSERT: Verifikasi
-    $response->assertRedirect(route('admin.kategori')); // Cek redirect ke index
-    $response->assertSessionHas('success', 'Kategori berhasil diperbarui.'); // Cek pesan sukses
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.informasi.kategori.edit');
+        $response->assertSee('Nama Lama');
+    }
 
-    // Cek database, pastikan nama lama hilang dan nama baru ada
-    $this->assertDatabaseMissing('categories', ['name' => 'Nama Asli']);
-    $this->assertDatabaseHas('categories', [
-        'id' => $category->id,
-        'name' => 'Nama Diperbarui',
-    ]);
-});
+    #[Test]
+    public function staff_dapat_memperbarui_kategori()
+    {
+        $category = Category::factory()->create([
+            'name' => 'Nama Asli'
+        ]);
 
-// --- DELETE (DESTROY) TESTS ---
+        $updatedData = [
+            'name' => 'Nama Diperbarui'
+        ];
 
-test('staff dapat menghapus kategori', function () {
-    // ARRANGE: Buat kategori yang akan dihapus
-    $category = Category::factory()->create(['name' => 'Siap Dihapus']);
+        $response = $this->actingAs($this->staff)->put(route('admin.kategori.update', $category->id), $updatedData);
 
-    // ACT: Kirim request DELETE ke endpoint
-    $response = $this->actingAs($this->staff)->delete(route('admin.kategori.destroy', $category->id));
+        $response->assertRedirect(route('admin.kategori'));
+        $response->assertSessionHas('success', 'Kategori berhasil diperbarui.');
 
-    // ASSERT: Verifikasi
-    $response->assertRedirect(route('admin.kategori')); // Cek redirect ke index
-    $response->assertSessionHas('success', 'Kategori berhasil dihapus.'); // Cek pesan sukses
+        $this->assertDatabaseMissing('categories', [
+            'name' => 'Nama Asli'
+        ]);
 
-    // Cek database, pastikan kategori telah hilang
-    $this->assertDatabaseMissing('categories', ['id' => $category->id]);
-});
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'name' => 'Nama Diperbarui'
+        ]);
+    }
+
+    #[Test]
+    public function staff_dapat_menghapus_kategori()
+    {
+        $category = Category::factory()->create([
+            'name' => 'Siap Dihapus'
+        ]);
+
+        $response = $this->actingAs($this->staff)->delete(route('admin.kategori.destroy', $category->id));
+
+        $response->assertRedirect(route('admin.kategori'));
+        $response->assertSessionHas('success', 'Kategori berhasil dihapus.');
+
+        $this->assertDatabaseMissing('categories', [
+            'id' => $category->id
+        ]);
+    }
+}

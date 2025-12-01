@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Information;
 use App\Models\Category;
 use App\Models\GalleryInformasi;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -49,6 +48,7 @@ class informationController extends Controller
             'konten' => 'required|string',
             'kategori_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'max:5'
         ]);
 
       
@@ -91,6 +91,7 @@ class informationController extends Controller
             'konten' => 'required|string',
             'kategori_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'max:5'
         ]);
         
 

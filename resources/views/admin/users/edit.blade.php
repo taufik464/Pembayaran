@@ -1,12 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'User Management')
 @section('content')
-<x-page-header
-    title="Edit User"
-    :breadcrumb="[
-        ['url' => '/admin/users', 'label' => 'USER MANAGEMENT'],
-        ['url' => '', 'label' => 'EDIT USER'],
-    ]" />
+
 @php
 $title = 'Manajemen User';
 $breadcrumb = [

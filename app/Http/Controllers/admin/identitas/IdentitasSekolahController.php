@@ -18,13 +18,7 @@ class IdentitasSekolahController extends Controller
         return view('admin.identitas.index')->with('identitas', $identitas);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -53,22 +47,7 @@ class IdentitasSekolahController extends Controller
         return redirect()->route('admin.identitas.index')->with('success', 'Identitas sekolah berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(IdentitasSekolah $identitasSekolah)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(IdentitasSekolah $identitasSekolah)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      */
@@ -103,11 +82,5 @@ class IdentitasSekolahController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(IdentitasSekolah $identitasSekolah)
-    {
-        //
-    }
+   
 }

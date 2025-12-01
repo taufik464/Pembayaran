@@ -3,6 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('content')
+@php
+$title = "Dashboard Admin";
+@endphp
 
 
 

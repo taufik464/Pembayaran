@@ -14,24 +14,8 @@ class EnsureTokenIsValid
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
-    {
-        // Daftar role yang diizinkan
-        $roles = ['superadmin', 'staff'];
-        $userRole = $request->user()->role;
-        // Jika user tidak login atau rolenya tidak ada dalam daftar
-        if ($userRole != ($roles)) {
-           return abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk mengakses halaman ini.');
-        }
-        return $next($request);
-    }
+   
 
-    public function isSuperadmin(Request $request)
-    {
-        return $request->user() && $request->user()->role === 'superadmin';
-        if (! $request->user() || ! $request->user()->isSuperadmin()) {
-            // Akses ditolak
-            abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk mengakses halaman ini.');
-    }
-}
+    
+
 }

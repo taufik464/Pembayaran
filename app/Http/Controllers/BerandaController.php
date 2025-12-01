@@ -31,7 +31,7 @@ class BerandaController extends Controller
 
         if ($kategoriBerita) {
 
-            $berita = Information::with('galleryInformasis')
+            $berita = Information::with('galleryInformasis')->latest()
                 ->take(6)
                 ->where('category_id', $kategoriEkstra->id)->get();
         }
@@ -49,6 +49,12 @@ class BerandaController extends Controller
             'faqs' => $faqs,
             'alumni' => $alumni
         ]);
+    }
+
+    public function faqs()
+    {
+        $faqs = faq::latest()->paginate(10);
+        return view('beranda.faqs', ['faqs' => $faqs]);
     }
 
     public function tentang()

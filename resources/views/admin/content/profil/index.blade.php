@@ -11,9 +11,13 @@ $breadcrumb = [
 @section('content')
 
 <section class="bg-white mt-6 p-5 rounded-lg shadow">
-
+   
     {{-- Tombol Tambah Data --}}
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-end mb-10">
+        <x-search-form
+            placeholder="Pencarian..."
+            action="{{ route('profil.index') }}"
+            name="keyword" />
         <a href="{{ route('profil.create') }}"
             class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow">
             + Tambah Data

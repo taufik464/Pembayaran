@@ -27,6 +27,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+    /*
     public function store(Request $request): RedirectResponse
     
     {
@@ -49,4 +51,5 @@ class RegisteredUserController extends Controller
 
     return redirect(route('dashboard', absolute: false));
     }
+    */
 }

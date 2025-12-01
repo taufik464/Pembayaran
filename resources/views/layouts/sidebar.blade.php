@@ -38,14 +38,94 @@
         </div>
 
         {{-- TOMBOL KELUAR (Kanan Jauh) --}}
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"
-                class="bg-green-600 text-white px-3 py-1 text-sm rounded hover:bg-green-700" role="menuitem">
-                <i class="fas fa-sign-out-alt mr-1"></i> Keluar
-            </a>
-        </form>
+        @auth
+        {{-- Ambil objek pengguna yang sedang login --}}
+        @php
+        $user = auth()->user();
+
+        // Pastikan $user ada sebelum memproses
+        if ($user) {
+        $fullName = $user->name ?? 'NN';
+        $nameParts = explode(' ', trim($fullName));
+        $initials = 'U'; // Default inisial
+
+        // --- 1. Logika Inisial DUA HURUF ---
+        if (count($nameParts) >= 2) {
+        $initials = strtoupper(substr($nameParts[0], 0, 1) . substr($nameParts[1], 0, 1));
+        } else {
+        $initials = strtoupper(substr($nameParts[0], 0, 2));
+        }
+
+        // --- 2. Logika Warna Dinamis ---
+        $colors = [
+        'bg-red-500',
+        'bg-blue-500',
+        'bg-green-500',
+        'bg-indigo-500',
+        'bg-purple-500',
+        'bg-pink-500',
+        'bg-teal-500',
+        'bg-yellow-500'
+        ];
+
+        // Mendapatkan indeks warna berdasarkan panjang nama (konsisten per user)
+        $colorIndex = strlen($fullName) % count($colors);
+        $bgColorClass = $colors[$colorIndex];
+        } else {
+        // Default jika tidak ada user yang login (seharusnya tidak terjadi di sini karena ada @auth)
+        $initials = 'NA';
+        $bgColorClass = 'bg-gray-600';
+        }
+        @endphp
+
+        {{-- Tombol Dropdown User Menu --}}
+        <div class="flex items-center ">
+            <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                <span class="sr-only">Open user menu</span>
+
+                @if ($user->foto ?? null) {{-- Menggunakan null-coalescing untuk safety --}}
+                {{-- KONDISI 1: FOTO ADA --}}
+                <img class="w-8 h-8 rounded-full object-cover"
+                    src="{{ asset('storage/' . $user->foto) }}"
+                    alt="Foto {{ $user->name }}">
+                @else
+                {{-- KONDISI 2: FOTO TIDAK ADA, TAMPILKAN INISIAL TEKS DENGAN WARNA DINAMIS --}}
+                <span class="flex items-center justify-center w-8 h-8 rounded-full {{ $bgColorClass }} text-white font-semibold text-xs leading-none">
+                    {{ $initials }}
+                </span>
+                @endif
+
+            </button>
+
+            {{-- Contoh Menampilkan Nama Pengguna (Dropdown Content) --}}
+            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+                <div class="px-4 py-3" role="none">
+                    {{-- Menggunakan variabel $user yang sudah didefinisikan --}}
+                    <p class="text-sm text-gray-900 dark:text-white" role="none">
+                        {{ $user->name }}
+                    </p>
+                    <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                        {{ $user->email }}
+                    </p>
+                </div>
+                <ul class="py-1" role="none">
+                    <li>
+                        <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profile</a>
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @endauth
     </div>
+
+
 
 
     {{-- Overlay hitam --}}
@@ -111,15 +191,19 @@
             <x-sidebar-link href="{{ route('admin.informasi') }}" icon="fas fa-info-circle" :active="request()->is('informasi')">
                 Informasi Sekolah
             </x-sidebar-link>
-                <x-sidebar-link href="{{ route('admin.faq') }}" icon="fas fa-question-circle" :active="request()->is('faq')">
-                    FAQ
-                </x-sidebar-link>
-                <x-sidebar-link href="{{ route('admin.users') }}" icon="fas fa-users" :active="request()->is('user')">
-                    User
-                </x-sidebar-link>
-                <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
-                    Pengaturan
-                </x-sidebar-link>
+            <x-sidebar-link href="{{ route('admin.alumni') }}" icon="fas fa-user-graduate" :active="request()->is('alumni')">
+                Data Alumni
+            </x-sidebar-link>
+
+            <x-sidebar-link href="{{ route('admin.faq') }}" icon="fas fa-question-circle" :active="request()->is('faq')">
+                FAQ
+            </x-sidebar-link>
+            <x-sidebar-link href="{{ route('admin.users') }}" icon="fas fa-users" :active="request()->is('user')">
+                User
+            </x-sidebar-link>
+            <x-sidebar-link href="#" icon="fas fa-cog" :active="request()->is('pengaturan')">
+                Pengaturan
+            </x-sidebar-link>
         </nav>
     </div>
 </div>

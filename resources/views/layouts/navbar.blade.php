@@ -57,7 +57,7 @@
                  </div>
              </div>
 
-           
+
              <!-- Informasi -->
              <div class="relative" x-data="{ open: false }">
                  <!-- Tombol Dropdown -->
@@ -81,10 +81,14 @@
                          class="block px-4 py-2 hover:bg-green-100 hover:text-green-700 border-b border-gray-100">
                          Gallery
                      </a>
+                     <a href="{{ route('informasi.alumni') }}"
+                         class="block px-4 py-2 hover:bg-green-100 hover:text-green-700 border-b border-gray-100">
+                         Alumni
+                     </a>
 
                      <!-- 🔹 Daftar Kategori Informasi -->
                      @foreach ($kategoriInformasis as $kategori)
-                     <a href="{{ route('informasi.kategori', $kategori->name) }}"
+                     <a href="{{ route('informasis.kategori', $kategori->name) }}"
                          class="block px-4 py-2 hover:bg-green-100 hover:text-green-700">
                          {{ $kategori->name }}
                      </a>
@@ -163,10 +167,11 @@
              @endforeach
          </details>
 
-        
+
          <details>
              <summary class="cursor-pointer py-2">Informasi</summary>
              <a href="{{ route('informasi.gallery') }}" class="block pl-4 py-1 hover:text-green-600">Gallery</a>
+             <a href="{{ route('informasi.alumni') }}" class="block pl-4 py-1 hover:text-green-600">Alumni</a>
              @foreach ($kategoriInformasis as $kategori)
              <a href="{{ route('informasi.kategori', $kategori->name) }}" class="block pl-4 py-1 hover:text-green-600">
                  {{ $kategori->name }}

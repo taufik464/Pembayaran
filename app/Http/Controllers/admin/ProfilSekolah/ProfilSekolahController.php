@@ -9,10 +9,20 @@ use App\Models\Admin\ProfilSekolah;
 
 class ProfilSekolahController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $profil = ProfilSekolah::all();
-        return view('admin.content.profil.index', compact('profil'));
+      
+        $keyword = $request->input('keyword');
+        $profil = ProfilSekolah::query();
+        if ($keyword) {
+            $profil->where('judul', 'like', '%' . $keyword . '%')
+                ->orWhere('kategori', 'like', '%' . $keyword . '%')
+                ->orWhere('isi', 'like', '%' . $keyword . '%');
+
+        }
+
+        $profil = $profil->paginate(15);
+        return view('admin.content.profil.index', compact('profil', 'keyword'));
     }
 
     public function create()

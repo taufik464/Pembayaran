@@ -1,117 +1,236 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Models\Category;
 use App\Models\Information;
-
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use App\Http\Controllers\admin\informasi\informationController;
+use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * Tes fungsional untuk pengelolaan informasi sekolah di halaman admin.
+ * Menggantikan sintaks Pest dengan sintaks PHPUnit standar.
+ */
+class InformasiSekolahTest extends TestCase
+{
+    // Menggunakan trait RefreshDatabase untuk me-reset database setelah setiap tes
+    use RefreshDatabase;
 
+    // Properti untuk menyimpan data yang dibuat di setUp()
+    protected $user;
+    protected $kategori;
+    protected $informasi;
 
+    /**
+     * Metode setUp() akan dijalankan sebelum setiap tes.
+     * Ini menggantikan fungsi beforeEach() dari Pest.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
 
+        // Menggunakan fake storage untuk menghindari manipulasi file asli
+        Storage::fake('public');
 
-// Menggunakan RefreshDatabase pada level file/suite
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+        // Buat user superadmin untuk otentikasi
+        $this->user = User::factory()->create(['role' => 'superadmin']);
 
-beforeEach(function () {
-// 1. Fake Storage
-Storage::fake('public');
+        // Buat satu kategori
+        $this->kategori = Category::factory()->create();
 
-// 2. Buat Kategori dan Informasi awal
-$this->validCategory = Category::factory()->create();
-$this->informasi = Information::create([
-'title' => 'Judul Lama',
-'content' => 'Konten Lama',
-'category_id' => $this->validCategory->id,
-]);
-});
+        // Buat satu data informasi awal
+        $this->informasi = Information::create([
+            'title' => 'Judul Lama',
+            'content' => 'Konten Lama',
+            'category_id' => $this->kategori->id,
+        ]);
+    }
 
+    #[Test]
+    public function it_displays_an_empty_list_of_information()
+    {
+        // Hapus semua informasi yang ada untuk menguji kondisi kosong
+        Information::query()->delete();
 
-test(' Menampilkan daftar informasi yang kosong', function () {
-    $user = User::factory()->create(['role' => 'superadmin']); // Atau 'staff'
-    // Arrange: Ensure database is empty
-    Information::query()->delete();
-    // Act & Assert: Access the page and check for empty message
-    $this->actingAs($user)
-        ->get(route('admin.informasi')) // Pastikan route name sesuai (misalnya 'admin.informasi.index')
-        ->assertStatus(200)
-        ->assertSee('Belum ada informasi sekolah.'); // Match dengan pesan di HTML view
-});
+        $this->actingAs($this->user)
+            ->get(route('admin.informasi'))
+            ->assertStatus(200)
+            ->assertSee('Belum ada informasi sekolah.');
+    }
 
-test('Menampilkan daftar informasi 3 data', function (){
-    $user = User::factory()->create(['role' => 'superadmin']);
-    $this->actingAs($user)
+    #[Test]
+    public function it_displays_a_list_of_3_information_items()
+    {
+        // Tambah 2 data informasi lagi, total jadi 3 (1 dari setUp)
+        Information::factory()->count(2)->create([
+            'category_id' => $this->kategori->id,
+        ]);
 
-        ->get(route('admin.informasi'))
-        ->assertStatus(200);
-});
+        $this->actingAs($this->user)
+            ->get(route('admin.informasi'))
+            ->assertStatus(200)
+            ->assertSee($this->informasi->title); // Memastikan data dari setUp terlihat
+    }
 
-test('dapat menampilkan halaman tambah informasi sekolah', function(){
-   $user = User::factory()->create(['role' => 'superadmin']);
-    $this->actingAs($user)
+    #[Test]
+    public function it_displays_the_school_information_creation_page()
+    {
+        $this->actingAs($this->user)
+            ->get(route('admin.informasi.create'))
+            ->assertStatus(200)
+            ->assertSee('Tambah Informasi Sekolah');
+    }
 
-        ->get(route('admin.informasi.create'))
-        ->assertStatus(200);
-});
-
-test('menambah data informasi dengan benar', function(){
-    test('menambah data informasi dengan benar', function () {
-        // Data valid untuk request
-        $validatedData = [
+    #[Test]
+    public function it_adds_new_information_correctly()
+    {
+        $data = [
             'judul' => 'Judul Informasi Baru',
             'konten' => 'Konten informasi yang lengkap.',
-            'kategori_id' => 1, // Asumsikan kategori dengan ID 1 ada
+            'kategori_id' => $this->kategori->id,
         ];
-        // Mock Request
-        $request = mock(Request::class);
-        $request->shouldReceive('validate')->andReturn($validatedData);
-        $request->shouldReceive('hasFile')->with('images')->andReturn(false); // Asumsikan tanpa gambar untuk test ini
-        // Mock Information model
-        $information = mock(Information::class);
-        $information->id = 1; // Simulasi ID yang dihasilkan
-        Information::shouldReceive('create')->with([
+
+        $response = $this->actingAs($this->user)
+            ->post(route('admin.informasi.store'), $data);
+
+        // Assert: Redirect ke index setelah berhasil
+        $response->assertRedirect(route('admin.informasi'));
+        $response->assertSessionHas('success', 'Informasi berhasil ditambahkan.');
+
+        // Assert: Pastikan data baru tersimpan di database
+        $this->assertDatabaseHas('information', [
             'title' => 'Judul Informasi Baru',
             'content' => 'Konten informasi yang lengkap.',
-            'category_id' => 1,
-        ])->andReturn($information);
-        // Instansiasi controller dan panggil method store
-        $controller = new InformationController();
-        $response = $controller->store($request);
-        // Assert bahwa response adalah redirect ke route admin.informasi
-        expect($response)->toBeInstanceOf(\Illuminate\Http\RedirectResponse::class);
-        expect($response->getTargetUrl())->toBe(route('admin.informasi'));
-        // Assert bahwa session memiliki pesan sukses
-        expect(session('success'))->toBe('Informasi berhasil ditambahkan.');
-    });
-});
+            'category_id' => $this->kategori->id,
+        ]);
+    }
 
-test('admin dapat menampilkan halaman edit informasi sekolah', function () {
-    // 1. ARRANGE (Persiapan data dan user)
+    #[Test]
+    public function it_can_display_the_school_information_edit_page()
+    {
+        // Buat data baru khusus untuk tes edit
+        $informasiUntukEdit = Information::factory()->create([
+            'title' => 'Judul Lama untuk Edit',
+            'category_id' => $this->kategori->id,
+        ]);
 
-    // Asumsi: Anda memiliki User Factory
-    $user = User::factory()->create(['role' => 'superadmin']);
+        $response = $this->actingAs($this->user)
+            ->get(route('admin.informasi.edit', $informasiUntukEdit->id));
 
-    // Asumsi: Anda memiliki Information Factory. Buat satu record untuk diedit.
-    $informasi = App\Models\Information::factory()->create([
-        'title' => 'Judul Lama untuk Edit'
-    ]);
+        // Assert: Halaman ditampilkan dengan status 200 dan melihat judul lama
+        $response->assertStatus(200);
+        $response->assertSee('Judul Lama untuk Edit');
+    }
 
-    // 2. ACT (Aksi)
-    // Berperan sebagai user dan akses route edit dengan ID informasi
-    $response = $this->actingAs($user)
-        ->get(route('admin.informasi.edit', $informasi->id));
+    #[Test]
+    public function it_can_update_school_information_with_valid_data()
+    {
+        $informasiToUpdate = $this->informasi; // Ambil data dari setUp
 
-    // 3. ASSERT (Verifikasi)
+        $dataBaru = [
+            'judul' => 'Judul Baru',
+            'konten' => 'Konten Baru',
+            'kategori_id' => $this->kategori->id,
+        ];
 
-    // Memastikan status HTTP 200 (OK)
-    $response->assertStatus(200);
+        $response = $this->actingAs($this->user)
+            ->put(route('admin.informasi.update', $informasiToUpdate->id), $dataBaru);
 
-    // Memastikan halaman tersebut memuat view yang benar (opsional)
-    // $response->assertViewIs('admin.informasi.edit');
+        // Assert: Redirect ke index
+        $response->assertRedirect(route('admin.informasi'));
+        $response->assertSessionHas('success', 'Informasi berhasil diperbarui.');
 
-    // Memastikan konten lama muncul di halaman (verifikasi bahwa data dimuat)
-    $response->assertSee('Judul Lama untuk Edit');
-});
+        // Assert: Data di database telah diperbarui
+        $this->assertDatabaseHas('information', [
+            'id' => $informasiToUpdate->id,
+            'title' => 'Judul Baru',
+            'content' => 'Konten Baru',
+        ]);
 
+        // Assert: Data lama sudah tidak ada
+        $this->assertDatabaseMissing('information', [
+            'id' => $informasiToUpdate->id,
+            'title' => 'Judul Lama', // Dari setUp
+        ]);
+    }
+
+    #[Test]
+    public function it_can_delete_school_information()
+    {
+        $informasiToDelete = Information::factory()->create([
+            'title' => 'Judul untuk Dihapus',
+            'category_id' => $this->kategori->id,
+        ]);
+
+        $response = $this->actingAs($this->user)
+            ->delete(route('admin.informasi.destroy', $informasiToDelete->id));
+
+        // Assert: Redirect ke index
+        $response->assertRedirect(route('admin.informasi'));
+        $response->assertSessionHas('success', 'Informasi berhasil dihapus.');
+
+        // Assert: Data sudah tidak ada di database
+        $this->assertDatabaseMissing('information', [
+            'id' => $informasiToDelete->id,
+        ]);
+    }
+   #[Test]
+    public function bisa_filter_informasi_berdasarkan_title()
+    {
+        $user = User::factory()->create(['role' => 'staff']);
+
+        // Data yang cocok
+        Information::factory()->create([
+            'title' => 'Agenda Sekolah 2025'
+        ]);
+
+        // Data yang tidak cocok
+        Information::factory()->create([
+            'title' => 'Pengumuman Libur'
+        ]);
+
+        // Request dengan filter title
+        $response = $this->actingAs($user)->get('/admin/informasi?title=Agenda');
+
+        $response->assertStatus(200);
+
+        // Yang muncul
+        $response->assertSee('Agenda Sekolah 2025');
+
+        // Yang tidak muncul
+        $response->assertDontSee('Pengumuman Libur');
+    }
+
+    public function bisa_filter_informasi_berdasarkan_kategori()
+    {
+        $user = User::factory()->create(['role' => 'staff']);
+
+        $category1 = Category::factory()->create(['name' => 'Berita']);
+        $category2 = Category::factory()->create(['name' => 'Pengumuman']);
+
+        // Data kategori 1
+        Information::factory()->create([
+            'title' => 'Agenda Sekolah',
+            'category_id' => $category1->id,
+        ]);
+
+        // Data kategori 2
+        Information::factory()->create([
+            'title' => 'Pengumuman Libur',
+            'category_id' => $category2->id,
+        ]);
+
+        // Request dengan filter category_id
+        $response = $this->actingAs($user)
+            ->get("/admin/informasi?kategori_id={$category1->id}");
+
+        $response->assertStatus(200);
+
+        // Yang muncul hanya kategori 1
+        $response->assertSee('Agenda Sekolah');
+        $response->assertDontSee('Pengumuman Libur');
+    }
+}

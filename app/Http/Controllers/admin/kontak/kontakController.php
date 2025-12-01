@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin\kontak;
 use App\Http\Controllers\Controller;
 use App\Models\kontak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class kontakController extends Controller
 {
@@ -52,10 +53,6 @@ class kontakController extends Controller
         return redirect()->route('admin.kontak')->with('success', 'Data berhasil ditambahkan.');
     }
 
-    public function show($id)
-    {
-        //
-    }
    public function edit($id)
 {
     $kontak = Kontak::findOrFail($id);
@@ -86,7 +83,7 @@ class kontakController extends Controller
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
             if ($imagePath) {
-                \Storage::disk('public')->delete($imagePath);
+                Storage::disk('public')->delete($imagePath);
             }
             $imagePath = $request->file('image')->store('kontak', 'public');
         }
@@ -108,7 +105,7 @@ class kontakController extends Controller
 
         // Hapus gambar dari storage jika ada
         if ($kontak->image) {
-            \Storage::disk('public')->delete($kontak->image);
+            Storage::disk('public')->delete($kontak->image);
         }
 
         // Hapus data dari database

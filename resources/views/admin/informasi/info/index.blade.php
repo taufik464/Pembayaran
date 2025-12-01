@@ -11,6 +11,10 @@ $breadcrumb = [
 
 <section class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg bg-white  p-5">
     <div class="flex justify-end mb-4">
+        <x-search-form
+            placeholder="Pencarian..."
+            action="{{ route('admin.informasi') }}"
+            name="keyword" />
         <a href="{{ route('admin.informasi.create') }}"
             class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow">
             + Tambah Data
@@ -79,6 +83,6 @@ $breadcrumb = [
         <p class="text-gray-500">Belum ada informasi sekolah.</p>
         @endforelse
     </div>
-    
+
 </section>
 @endsection

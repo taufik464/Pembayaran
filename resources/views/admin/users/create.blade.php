@@ -1,14 +1,15 @@
 @extends('layouts.admin')
 @section('title', 'User Management')
 @section('content')
-<x-page-header
-    title="Tambah User Baru"
-    :breadcrumb="[
-        ['url' => '/admin/users', 'label' => 'USER MANAGEMENT'],
-        ['url' => '', 'label' => 'TAMBAH USER'],
-    ]" />
+@php
+$title = 'Manajemen User';
+$breadcrumb = [
+['label' => 'Manajemen User', 'url' => '/admin/users'],
 
-<section class="bg-white p-5 rounded-lg shadow">
+];
+@endphp
+
+<section class="bg-white mt-12 p-5 rounded-lg shadow">
     <form action="{{ route('admin.users.store') }}" method="POST">
         @csrf
         <div class="mb-4">

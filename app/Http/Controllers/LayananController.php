@@ -16,21 +16,5 @@ class LayananController extends Controller
         return view('layanan.kontak', compact('kontaks', 'identitas'));
     }
 
-    public function prestasiSekolah()
-    {
-        $prestasi = Prestasi::where('jenis', 'sekolah')->get();
-        return view('layanan.prestasi-sekolah', [
-            'title' => 'Prestasi Sekolah',
-            'prestasi' => $prestasi
-        ]);
-    }
-
-    public function prestasiSiswa()
-    {
-        $prestasi = Prestasi::where('jenis', 'siswa')->get();
-        return view('layanan.prestasi-siswa', [
-            'title' => 'Prestasi Siswa',
-            'prestasi' => $prestasi
-        ]);
-    }
+   
 }

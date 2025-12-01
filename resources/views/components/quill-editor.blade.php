@@ -57,20 +57,20 @@
     </span>
     <span class="ql-formats">
         <button class="ql-link"></button>
-        <button class="ql-image"></button>
+        {{--<button class="ql-image"></button>
         <button class="ql-video"></button>
-        <button class="ql-formula"></button>
+        <button class="ql-formula"></button>--}}
     </span>
 
     {{-- 🔹 Tombol Posisi Gambar --}}
-    <span class="ql-formats">
+    {{-- <span class="ql-formats">
         <button class="ql-position" value="left" title="Image Left">L</button>
         <button class="ql-position" value="center" title="Image Center">C</button>
         <button class="ql-position" value="right" title="Image Right">R</button>
-    </span>
+    </span> --}}
 
 
-    {{-- 🔹 Tombol Layout Dua Kolom --}}
+    {{-- 🔹 Tombol Layout Dua Kolom
     <span class="ql-formats">
         <button class="ql-two-column" title="Two Column Layout">
             <svg viewBox="0 0 18 18" width="18" height="18">
@@ -78,7 +78,7 @@
                 <rect x="10" y="4" width="6" height="10" stroke="currentColor" fill="none" stroke-width="1" />
             </svg>
         </button>
-    </span>
+    </span> --}}
 
     <span class="ql-formats">
         <button class="ql-clean"></button>
