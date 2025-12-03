@@ -8,7 +8,7 @@
      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
          <!-- Logo & Judul -->
          <div class="flex items-center space-x-3">
-             <img src="{{ asset('img/logo_alhikmah.jpg') }}"
+             <img src="{{ asset('/img/logo_alhikmah.jpg') }}"
                  alt="Logo SMA Al Hikmah"
                  class="w-12 h-12 rounded-full border-2 border-white shadow-md">
              <h1 class="text-xl md:text-2xl font-extrabold tracking-wide">SMA Al Hikmah Muncar</h1>
