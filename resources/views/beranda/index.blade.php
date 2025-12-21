@@ -4,14 +4,17 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-r from-green-900 to-green-400 text-white min-h-[70vh] w-full overflow-hidden">
-    <!-- Wave Pattern SVG di background -->
+<section class="relative bg-gradient-to-r from-green-900 to-green-400 text-white min-h-[60vh] lg:min-h-[70vh] w-full overflow-hidden">
+
+    <!-- Background Wave -->
     <div class="absolute inset-0">
-        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <svg class="w-full h-full max-h-[220px] lg:max-h-none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none">
             <defs>
                 <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#166534" stop-opacity="0.8" />
-                    <stop offset="100%" stop-color="#22c55e" stop-opacity="0.8" />
+                    <stop offset="0%" stop-color="#166534" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#22c55e" stop-opacity="0.85" />
                 </linearGradient>
             </defs>
             <path fill="url(#waveGradient)"
@@ -19,37 +22,52 @@
         </svg>
     </div>
 
-    <!-- Konten Utama -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-10 items-center">
-        <!-- Kolom Kiri: Logo + Teks -->
-        <div class="flex flex-col items-start space-y-4">
-            <div class="flex items-center space-x-6">
-                <img src="/img/logoalhikmah2.jpg" alt="Logo SMA" class="w-28 h-28 md:w-32 md:h-32 rounded-full shadow-lg">
+    <!-- Konten -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24
+                grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Kiri -->
+        <div class="space-y-6 text-center lg:text-left">
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+                <img src="/img/logoalhikmah2.jpg"
+                    class="w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36
+                           rounded-full shadow-xl bg-white"
+                    alt="Logo SMA">
+
                 <div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg">
+                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold drop-shadow-lg">
                         Selamat Datang
                     </h3>
-                    <p class="text-lg md:text-xl font-semibold drop-shadow-md">
+                    <p class="text-base sm:text-lg lg:text-xl font-semibold opacity-90">
                         Di SMA Al Hikmah Muncar
                     </p>
                 </div>
             </div>
 
-            <h2 class="text-2xl md:text-3xl font-bold leading-snug mt-6">
+            <h2 class="text-lg sm:text-xl lg:text-3xl font-bold leading-relaxed">
                 Generasi yang berkualitas <br>
-                <span class="text-sky-300">Unggul dibidang Alquran</span> <br>
+                <span class="text-sky-300">Unggul di bidang Al-Qur'an</span><br>
                 & <span class="text-sky-300">Ilmu Pengetahuan dan Teknologi</span>
             </h2>
+
         </div>
 
-        <!-- Kolom Kanan: Gambar -->
-        <div class="flex justify-center relative overflow-hidden">
-            <img src="/img/OIP.png" alt="Santri Berjajar" class="rounded-lg  w-full md:w-4/5 relative z-10 transform translate-x-full transition-transform duration-1000 ease-out"
-                onload="this.classList.remove('translate-x-full')">
-            <!-- Efek dekorasi lingkaran blur -->
+        <!-- Kanan -->
+        <div class="flex justify-center">
+            <img src="/img/OIP.png"
+                alt="Santri"
+                class="w-full max-w-xs sm:max-w-sm lg:max-w-md
+                       rounded-2xl shadow-2xl
+                       opacity-0 translate-y-6
+                       transition-all duration-1000 ease-out"
+                onload="this.classList.remove('opacity-0','translate-y-6')">
         </div>
+
     </div>
 </section>
+
+
 
 <!-- Video Section -->
 <section class="border-t border-gray-300 my-6">
@@ -57,7 +75,7 @@
         <div class="aspect-video">
             <iframe
                 id="yt-video"
-                src="https://www.youtube.com/embed/cZwITusqJXQ?enablejsapi=1&mute=1"
+                src="https://www.youtube.com/embed/KROLa7Ols50?si=SzRphSAFSqqTx4JS"
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -95,23 +113,28 @@
 <!-- Sambutan Section -->
 <section id="profil" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Sambutan</h2>
+        <h2 class="text-3xl font-bold text-center mb-8">{{ $tentangkami->judul ?? 'Tentang Kami' }}</h2>
         <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
-            <!-- Gambar Kepala Sekolah -->
+            <!-- Gambar -->
             <div class="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
-                <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full shadow-lg">
-                    <img src="/img/KEPSEK.jpg" alt="Kepala Sekolah" class="w-full h-full object-cover">
+                @if($tentangkami && $tentangkami->image)
+                <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden  shadow-lg">
+                    <img src="{{ asset('storage/' . $tentangkami->image) }}" alt="{{ $tentangkami->judul }}" class="w-full h-full object-cover">
                 </div>
-                <p class="text-center font-semibold mt-4">Saiin, S.Pd. (Kepala Sekolah)</p>
+                @else
+                <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full shadow-lg bg-gray-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                @endif
+                <p class="text-center font-semibold mt-4">{{ $tentangkami->judul ?? 'SMA Al Hikmah' }}</p>
             </div>
-            <!-- Sambutan -->
+            <!-- Konten -->
             <div class="w-full md:w-2/3">
-                <p class="text-lg leading-relaxed text-justify">
-                    Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kehadirat Allah SWT atas rahmat dan
-                    karunia-Nya, kami bisa terus memberikan pendidikan terbaik bagi generasi muda Islam. Di SMA Al
-                    Hikmah, kami tidak hanya fokus pada akademik, tetapi juga pembentukan karakter Islami yang kuat,
-                    sehingga siswa siap menghadapi tantangan masa depan dengan iman dan ilmu.
-                </p>
+                <div class="text-lg leading-relaxed text-justify">
+                    {!! $tentangkami->isi ?? 'Konten tentang sekolah belum tersedia.' !!}
+                </div>
             </div>
         </div>
     </div>
@@ -231,70 +254,70 @@
 
 <section id="alumni" class="bg-green-500 w-full">
 
-    <div class="w-full  grid md:grid-cols-3  items-center">
+    <div class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         <!-- Gambar Utama Alumni -->
-        <div class="col-span-1 bg-white">
-            <img src="img/gambar_alumni.png" alt="Gambar Alumni" class="w-full rounded-lg shadow-lg">
+        <div class="w-full">
+            <img src="img/gambar_alumni.png" alt="Gambar Alumni"
+                class="w-full h-auto rounded-lg shadow-lg object-cover">
         </div>
 
         <!-- Paragraf Penjelasan Utama -->
-        <div class=" ml-3 px-6 col-span-2 items-start"> <!-- Tambah items-start untuk rata atas vertikal -->
-            <h2 class="text-3xl text-center font-bold mb-8">Alumni Kami</h2> <!-- Ganti text-center ke text-left jika ingin rata kiri -->
-            <p class="text-justify leading-relaxed my-1"> <!-- Ganti flex justify-between ke text-justify untuk rata kiri-kanan -->
+        <div class="md:col-span-2">
+            <h2 class="text-3xl font-bold mb-6 text-left md:text-left text-center">Alumni Kami</h2>
+            <p class="text-justify leading-relaxed mb-6">
                 SMA Al Hikmah Muncar bangga memiliki jaringan alumni yang kuat dan berprestasi di berbagai bidang. Kami tidak hanya sukses dalam karir profesional, tetapi juga aktif berkontribusi dalam
                 masyarakat dan menjaga nilai-nilai Islami yang diajarkan selama di sekolah. Kami terus mendukung
                 perkembangan alumni melalui berbagai program dan kegiatan, serta menjalin hubungan erat untuk
                 menciptakan komunitas yang saling mendukung.
             </p>
 
-            <!-- Alumni Cards: Gambar dan Penjelasan Sejajar -->
-            <div class="grid md:grid-cols-2 mt-2 gap-8 items-start"> <!-- Tambah items-start untuk rata atas di grid -->
-
-                <!-- Card Alumni 1 -->
+            <!-- Alumni Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @foreach ($alumni as $a)
-                <div class="bg-white p-4 rounded-lg grid grid-cols-3 gap-4 items-start border border-gray-100">
+                <a href="{{ route('informasi.alumni.show', $a->id) }}" class="block hover:scale-[1.01] transition duration-200">
+                    <div class="bg-white p-4 rounded-lg grid grid-cols-3 gap-4 items-start border border-gray-100 hover:shadow-md">
 
-                    <div class="col-span-1">
-
-                        @if ($a->foto)
-                        {{-- KONDISI 1: FOTO ADA --}}
-                        <img src="{{ asset('storage/' . $a->foto) }}"
-                            alt="Foto {{ $a->nama }}"
-                            class="w-16 h-16 rounded-full object-cover shadow-sm">
-                        @else
-                        {{-- KONDISI 2: FOTO TIDAK ADA, TAMPILKAN ICON SVG sebagai placeholder --}}
-                        <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center shadow-sm">
-                            {{-- Ikon SVG (ukuran diperbesar agar terlihat jelas, w-8) --}}
-                            <svg class="w-8 h-8 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        @endif
-                    </div>
-
-                    <div class="col-span-2">
-                        <div class="text-sm font-semibold text-gray-800">{{ $a->nama }}</div>
-                        <p class="text-xs text-gray-600 mt-0.5">
-                            Angkatan {{ $a->tahun_lulus }}
-                            @if ($a->pekerjaan)
-                            , {{ $a->pekerjaan }} di {{ $a->tempat_kerja }}
+                        <div class="col-span-1">
+                            @if ($a->foto)
+                            <img src="{{ asset('storage/' . $a->foto) }}"
+                                alt="Foto {{ $a->nama }}"
+                                class="w-16 h-16 rounded-full object-cover shadow-sm">
+                            @else
+                            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center shadow-sm">
+                                <svg class="w-8 h-8 text-gray-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
                             @endif
-                        </p>
+                        </div>
+
+                        <div class="col-span-2">
+                            <div class="text-sm font-semibold text-gray-800">{{ $a->nama }}</div>
+                            <p class="text-xs text-gray-600 mt-0.5">
+                                Angkatan {{ $a->tahun_lulus }}
+                                @if ($a->pekerjaan)
+                                , {{ $a->pekerjaan }} di {{ $a->tempat_kerja }}
+                                @endif
+                            </p>
+                        </div>
+
                     </div>
-                </div>
+                </a>
                 @endforeach
-
-
-
             </div>
+
             <a href="{{ route('informasi.alumni') }}"
                 class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition">
                 Lihat Semua Alumni
             </a>
         </div>
-
     </div>
 </section>
+
 <!-- FAQ Section -->
 <section class="py-16 bg-gray-300">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">FAQ</h2>

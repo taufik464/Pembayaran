@@ -22,7 +22,7 @@ class InformasiController extends Controller
 
     public function byKategori($slug, Request $request)
     {
-       
+
         $kategori = Category::where('name', $slug)->firstOrFail();
         $keyword = $request->input('keyword');
         $informasi = Information::with('galleryInformasis')
@@ -55,10 +55,16 @@ class InformasiController extends Controller
         return view('informasi.gallery', compact('galleries'));
     }
 
-   
+
     public function alumni(Request $request)
     {
         $alumni = alumni::paginate(20);
         return view('informasi.alumni', compact('alumni'));
-    }   
+    }
+
+    public function alumniShow($id)
+    {
+        $alumni = alumni::findOrFail($id);
+        return view('informasi.show_alumni', compact('alumni'));
+    }
 }

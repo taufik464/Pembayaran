@@ -2,11 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BerandaController;
-use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\EkstrakurikulerController;
-use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\PPDBController;
-use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\ppdbController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileSekolahController;
@@ -16,12 +12,9 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\admin\informasi\kategoriController;
 use App\Http\Controllers\admin\informasi\informationController;
 use App\Http\Controllers\admin\ProfileController;
+use App\Http\Controllers\admin\ppdb\PpdbControlController;
 
-use App\Http\Controllers\admin\ekstrakurikuler\ekstraController;
 use App\Http\Controllers\Admin\ProfilSekolah\ProfilSekolahController;
-use App\Http\Controllers\admin\News\NewsController;
-use App\Http\Controllers\sarprasController;
-use App\Http\Controllers\Admin\Achive\AchiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,16 +51,21 @@ Route::get('informasis/{slug}', [InformasiController::class, 'byKategori'])->nam
 Route::get('informasi/gallery', [InformasiController::class, 'gallery'])->name('informasi.gallery');
 Route::get('informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
 Route::get('informasi/', [InformasiController::class, 'alumni'])->name('informasi.alumni');
-
-
+Route::get('informasi/alumni/{id}', [InformasiController::class, 'alumniShow'])->name('informasi.alumni.show');
 Route::get('/informasi/{slug}', [InformasiController::class, 'byKategori'])->name('informasi.kategori');
-Route::get('/informasi/gallery', [InformasiController::class, 'gallery'])->name('informasi.gallery');
 
 
 // ==================== LAYANAN ====================
 Route::prefix('layanan')->group(function () {
     Route::get('/kontak', [LayananController::class, 'kontak'])->name('kontak');
 });
+
+Route::get('/ppdb', [ppdbController::class, 'landingpage'])->name('ppdb');
+Route::get('/ppdb/form', [ppdbController::class, 'index'])->name('ppdb.form');
+Route::post('/ppdb', [ppdbController::class, 'store'])->name('ppdb.store');
+Route::get('/ppdb/success', [ppdbController::class, 'success'])->name('ppdb.success');
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\admin\dashboard::class, 'index'])->name('dashboard');
@@ -87,7 +85,7 @@ Route::middleware(['isSuperadmin', 'verified'])->group(function () {
 // ==================== DASHBOARD ADMIN ====================
 Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     // Route Admin User
-    
+
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -147,4 +145,12 @@ Route::middleware(['isSuperadminOrStaff',  'verified'])->group(function () {
     Route::get('/admin/faq/{id}/edit', [\App\Http\Controllers\admin\faq\faqController::class, 'edit'])->name('admin.faq.edit');
     Route::put('/admin/faq/{id}', [\App\Http\Controllers\admin\faq\faqController::class, 'update'])->name('admin.faq.update');
     Route::delete('/admin/faq/{id}', [\App\Http\Controllers\admin\faq\faqController::class, 'destroy'])->name('admin.faq.destroy');
+
+    // Route Control PPDB
+    Route::get('/admin/ppdb/dashboard', [PpdbControlController::class, 'index'])->name('admin.ppdb.dashboard');
+    Route::post('/admin/control/update', [PpdbControlController::class, 'updateControl'])->name('admin.control.update');
+    Route::get('/admin/ppdb/list', [PpdbControlController::class, 'list'])->name('admin.ppdb.list');
+    Route::get('/admin/ppdb/export', [PpdbControlController::class, 'downloadZip'])->name('ppdb.export');
+    
+    Route::get('/admin/ppdb/applicant/{id}', [PpdbControlController::class, 'showApplicant'])->name('admin.ppdb.show');
 });

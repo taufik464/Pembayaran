@@ -7,14 +7,16 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+
 
 class ProfileUpdateRequestTest extends TestCase
 {
     use RefreshDatabase;
 
-  
 
-    /** @test */
+
+    #[test]
     public function it_requires_unique_email()
     {
         $existingUser = User::factory()->create([

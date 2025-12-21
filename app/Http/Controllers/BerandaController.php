@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin\ProfilSekolah;
+use App\Models\ProfileSekolah;
 use App\Models\Berita;
 use App\Models\Ekstrakurikuler;
 use App\Models\faq;
@@ -35,7 +35,7 @@ class BerandaController extends Controller
                 ->take(6)
                 ->where('category_id', $kategoriEkstra->id)->get();
         }
-        $sambuatan = ProfilSekolah::where('kategori', 'Sambutan')->first();
+        $tentangkami = ProfileSekolah::where('kategori', 'tentang kami')->first();
         
         $alumni = alumni::latest()->take(4)->get();
        
@@ -44,7 +44,7 @@ class BerandaController extends Controller
             'title' => 'Beranda',
             
             'ekstra' => $ekstra,
-            'sambutan' => $sambuatan,
+            'tentangkami' => $tentangkami,
             'berita' => $berita,
             'faqs' => $faqs,
             'alumni' => $alumni
@@ -59,7 +59,7 @@ class BerandaController extends Controller
 
     public function tentang()
     {
-        $tentang = ProfilSekolah::where('kategori', 'tentang kami')->first();
+        $tentang = ProfileSekolah::where('kategori', 'tentang kami')->first();
         return view('tentang.index', ['tentang' => $tentang],); // BUKAN 'beranda.tentang'
     }
 
@@ -67,6 +67,8 @@ class BerandaController extends Controller
     {
         return route('/informasi/kategori/');
     }
+
+    
 
 
    

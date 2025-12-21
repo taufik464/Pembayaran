@@ -9,23 +9,33 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use App\Models\Information;
 
+use Illuminate\Support\Facades\Storage;
+
+
+
+
+
 class KategoriInformasiTest extends TestCase
 {
     use RefreshDatabase;
 
     protected $staff;
-
+    
     protected function setUp(): void
     {
         parent::setUp();
+      
 
         // Buat user role staff
         $this->staff = User::factory()->create([
             'role' => 'staff'
         ]);
+
+       
+        
     }
 
-   #[Test]
+    #[Test]
     public function staff_tidak_dapat_melihat_daftar_kategori_jika_belum_login()
     {
         Category::factory()->create(['name' => 'Berita']);
@@ -95,7 +105,7 @@ class KategoriInformasiTest extends TestCase
         $response->assertSee('Judul Berita 2');
     }
 
-  
+
 
 
     #[Test]

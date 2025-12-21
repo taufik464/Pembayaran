@@ -2,7 +2,9 @@
 @section('title', 'Alumni')
 @section('content')
 <div class="container mt-5 mb-5">
-    <h2 class="mb-4 text-center">Data Alumni</h2>
+    <h2 class="text-3xl font-bold text-center mb-12">
+        Daftar Alumni
+    </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($alumni as $item)
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -38,7 +40,7 @@
                 </div>
 
                 {{-- Tautan Baca Selengkapnya --}}
-                <a href="{{ route('informasi.show', $item->id) }}"
+                <a href="{{ route('informasi.alumni.show', $item->id) }}"
                     class="text-blue-600 hover:underline">Baca Selengkapnya</a>
             </div>
         </div>

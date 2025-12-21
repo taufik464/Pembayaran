@@ -154,4 +154,5 @@ class informationController extends Controller
         $informasi->delete();
         return redirect()->route('admin.informasi')->with('success', 'Informasi berhasil dihapus.');
     }
+    
 }

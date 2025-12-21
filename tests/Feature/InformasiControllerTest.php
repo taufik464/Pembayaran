@@ -8,6 +8,7 @@ use App\Models\GalleryInformasi;
 use App\Models\Alumni;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class InformasiControllerTest extends TestCase
 {
@@ -51,7 +52,7 @@ class InformasiControllerTest extends TestCase
             });
     } */
 
-    /** @test */
+    #[Test]
     public function it_can_show_information_detail()
     {
         $information = Information::factory()->create();

@@ -6,12 +6,13 @@ use App\Models\Category;
 use App\Models\Information;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class CategoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_create_category()
     {
         $category = Category::create([
@@ -23,7 +24,7 @@ class CategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_has_correct_fillable_fields()
     {
         $category = new Category();
@@ -33,7 +34,7 @@ class CategoryTest extends TestCase
         ], $category->getFillable());
     }
 
-    /** @test */
+    #[Test]
     public function it_has_many_informations()
     {
         $category = Category::create([

@@ -9,8 +9,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Http\UploadedFile;
+use App\Models\GalleryInformasi;
 
-/**
+
+/** 
  * Tes fungsional untuk pengelolaan informasi sekolah di halaman admin.
  * Menggantikan sintaks Pest dengan sintaks PHPUnit standar.
  */
@@ -177,7 +180,7 @@ class InformasiSekolahTest extends TestCase
             'id' => $informasiToDelete->id,
         ]);
     }
-   #[Test]
+    #[Test]
     public function bisa_filter_informasi_berdasarkan_title()
     {
         $user = User::factory()->create(['role' => 'staff']);
@@ -203,13 +206,50 @@ class InformasiSekolahTest extends TestCase
         // Yang tidak muncul
         $response->assertDontSee('Pengumuman Libur');
     }
+    
+    public function dapat_menampilkan_informasi_berdasarkan_kategori()
+    {
+        // ✅ Buat 2 kategori
+        $kategoriA = Category::create([
+            'nama' => 'Pengumuman'
+        ]);
 
+        $kategoriB = Category::create([
+            'nama' => 'Berita'
+        ]);
+
+        // ✅ Buat data informasi dari masing-masing kategori
+        $info1 = Information::create([
+            'title' => 'Pengumuman Libur',
+            'content' => 'Libur nasional',
+            'category_id' => $kategoriA->id,
+        ]);
+
+        $info2 = Information::create([
+            'title' => 'Berita Sekolah',
+            'content' => 'Update kegiatan',
+            'category_id' => $kategoriB->id,
+        ]);
+
+        // ✅ Kirim request dengan filter category_id = kategoriA
+        $response = $this->get('/admin/informasi?category_id=' . $kategoriA->id);
+
+        // ✅ Status harus 200 (berhasil)
+        $response->assertStatus(200);
+
+        // ✅ Data dari kategori A tampil
+        $response->assertSee($info1->title);
+
+        // ✅ Data dari kategori B tidak tampil
+        $response->assertDontSee($info2->title);
+    }
+    #[test]
     public function bisa_filter_informasi_berdasarkan_kategori()
     {
         $user = User::factory()->create(['role' => 'staff']);
 
-        $category1 = Category::factory()->create(['name' => 'Berita']);
-        $category2 = Category::factory()->create(['name' => 'Pengumuman']);
+        $category1 = Category::factory()->create();
+        $category2 = Category::factory()->create();
 
         // Data kategori 1
         Information::factory()->create([
@@ -223,14 +263,16 @@ class InformasiSekolahTest extends TestCase
             'category_id' => $category2->id,
         ]);
 
-        // Request dengan filter category_id
         $response = $this->actingAs($user)
-            ->get("/admin/informasi?kategori_id={$category1->id}");
+            ->get("/admin/informasi?category_id={$category1->id}");
 
         $response->assertStatus(200);
 
-        // Yang muncul hanya kategori 1
+        // Yang ditampilkan
         $response->assertSee('Agenda Sekolah');
+
+        // Yang disembunyikan
         $response->assertDontSee('Pengumuman Libur');
     }
+    
 }

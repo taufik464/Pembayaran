@@ -121,7 +121,7 @@
              </div>
 
              <!-- PPDB (menu utama baru) -->
-             <a href="https://ppdb.smaalhikmah.sch.id/" target="_blank"
+             <a href="{{ route('ppdb') }}" target="_blank"
                  class="px-4 py-2 text-center bg-white text-green-600 border-2 border-white rounded-full font-bold shadow-md transition hover:bg-green-600 hover:text-white">
                  PPDB Online
              </a>

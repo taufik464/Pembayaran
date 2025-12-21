@@ -1,7 +1,7 @@
 @extends('layouts.web')
 @section('title', 'FAQs')
 @section('content')
-<section class="faq-section pt-120 pb-120">
+<section class="faq-section pt-12 pb-12">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">

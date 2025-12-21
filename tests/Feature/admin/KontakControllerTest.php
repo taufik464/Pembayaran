@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class KontakControllerTest extends TestCase
 {
@@ -21,7 +22,7 @@ class KontakControllerTest extends TestCase
         // Create a user for actingAs
         $this->user = User::factory()->create(['role' => 'superadmin']);    }
 
-    /** @test */
+    #[Test]
     public function index_page_can_be_loaded()
     {
         $response = $this->actingAs($this->user)
@@ -31,7 +32,7 @@ class KontakControllerTest extends TestCase
         $response->assertViewIs('admin.kontak.index');
     }
 
-    /** @test */
+    #[Test]
     public function create_page_can_be_loaded()
     {
         $response = $this->actingAs($this->user)
@@ -41,7 +42,7 @@ class KontakControllerTest extends TestCase
         $response->assertViewIs('admin.kontak.create');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_store_kontak_with_image_and_link()
     {
         Storage::fake('public');
@@ -65,7 +66,7 @@ class KontakControllerTest extends TestCase
         $response->assertRedirect(route('admin.kontak'));
     }
 
-    /** @test */
+    #[Test]
     public function it_requires_link_or_nomor()
     {
         $response = $this->actingAs($this->user)
@@ -76,7 +77,7 @@ class KontakControllerTest extends TestCase
         $response->assertSessionHasErrors(['link', 'nomor']);
     }
 
-    /** @test */
+    #[Test]
     public function edit_page_can_be_loaded()
     {
         Storage::fake('public');
@@ -101,7 +102,7 @@ class KontakControllerTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_kontak_and_replace_image()
     {
         Storage::fake('public');
@@ -137,8 +138,8 @@ class KontakControllerTest extends TestCase
 
         $response->assertRedirect(route('admin.kontak'));
     }
-   
-    /** @test */
+
+    #[Test]
     public function it_can_delete_kontak_and_image()
     {
         Storage::fake('public');

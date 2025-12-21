@@ -6,12 +6,14 @@ use App\Models\GalleryInformasi;
 use App\Models\Information;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+
 
 class GalleryInformasiTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+   
 
     protected function setUp(): void
     {
@@ -45,7 +47,7 @@ class GalleryInformasiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[test]
     public function it_belongs_to_information()
     {
         $information = Information::first();
@@ -61,7 +63,7 @@ class GalleryInformasiTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_has_correct_fillable_fields()
     {
         $gallery = new GalleryInformasi();

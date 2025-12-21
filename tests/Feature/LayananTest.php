@@ -6,12 +6,13 @@ use App\Models\Kontak;
 use App\Models\IdentitasSekolah;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LayananTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function kontak_page_can_be_loaded()
     {
         // Buat data dummy
